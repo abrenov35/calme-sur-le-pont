@@ -809,6 +809,7 @@ function deleteHistory(i) {
 // ══════════════════════════════════════════════
 function parseResult(text) {
   const blocks = [];
+  if (!text || !text.trim()) return blocks;
 
   // Mapping sous-titres → types
   const SECTION_TYPES = {
@@ -821,50 +822,36 @@ function parseResult(text) {
     'transmission':                  {type:'encadre', title:'Transmission'}
   };
 
-  // Découpe le texte par sections ## Titre
-  const sectionRegex = /^##\s+(.+)$/gm;
-  const sections = [];
-  let lastIdx = 0, m;
-
-  // Texte avant le premier ##
-  const firstMatch = text.search(/^##\s+/m);
-  if (firstMatch > 0) {
-    const before = text.substring(0, firstMatch).trim();
-    if (before) sections.push({title: null, content: before});
-  }
-
-  while ((m = sectionRegex.exec(text)) !== null) {
-    const title = m[1].trim();
-    const start = m.index + m[0].length;
-    const nextMatch = text.search(new RegExp('^##\\s+', 'm').source ? /^## /m : /^## /m);
-    sections.push({title, start, rawStart: m.index});
-  }
-
-  // Re-découpe proprement
   const lines = text.split('\n');
   let currentTitle = null;
   let currentLines = [];
 
   function flushSection(title, linesArr) {
+    // Nettoyer les lignes vides en début/fin
+    while (linesArr.length && !linesArr[0].trim()) linesArr.shift();
+    while (linesArr.length && !linesArr[linesArr.length-1].trim()) linesArr.pop();
     const content = linesArr.join('\n').trim();
     if (!content && !title) return;
+
     const key = title ? title.toLowerCase() : null;
     const stype = key ? SECTION_TYPES[key] : null;
 
-    if (!title) {
-      content.split('\n\n').filter(p=>p.trim()).forEach(p => blocks.push({type:'p', text:p.trim()}));
-      return;
-    }
-
-    if (!stype) {
-      // Sous-titre inconnu → encadré générique
-      if (content) blocks.push({type:'encadre', title, text: content});
+    if (!title || !stype) {
+      // Texte libre — split par paragraphe (double saut de ligne OU ligne vide)
+      const paras = content.split(/\n\s*\n/).filter(p => p.trim());
+      if (paras.length > 0) {
+        if (title && !stype) {
+          // Sous-titre inconnu → part tag + paragraphes
+          blocks.push({type:'part', text: title});
+        }
+        paras.forEach(p => blocks.push({type:'p', text: p.replace(/\n/g, ' ').trim()}));
+      }
       return;
     }
 
     if (stype.type === 'enseignements') {
-      const items = content.split('\n').filter(l=>l.trim());
-      blocks.push({type:'enseignements', lines: items});
+      const items = content.split('\n').filter(l=>l.trim().replace(/^[-•*]\s*/,''));
+      blocks.push({type:'enseignements', lines: items.map(l=>l.replace(/^[-•*]\s*/,''))});
     } else if (stype.type === 'question') {
       blocks.push({type:'question', text: content});
     } else if (stype.type === 'citation') {
@@ -877,9 +864,11 @@ function parseResult(text) {
   }
 
   for (const line of lines) {
-    if (/^\*\*(.+)\*\*$/.test(line.trim()) || /^#{1,4}\s+/.test(line.trim())) {
+    const trimmed = line.trim();
+    // Détecter sous-titre : ## Titre, ### Titre, ou **Titre** seul sur sa ligne
+    if (/^#{1,4}\s+/.test(trimmed) || /^\*\*[^*]+\*\*$/.test(trimmed)) {
       flushSection(currentTitle, currentLines);
-      currentTitle = line.trim().replace(/^#{1,4}\s+/, '').replace(/^\*\*|\*\*$/g, '').trim();
+      currentTitle = trimmed.replace(/^#{1,4}\s+/, '').replace(/^\*\*|\*\*$/g, '').trim();
       currentLines = [];
     } else {
       currentLines.push(line);
