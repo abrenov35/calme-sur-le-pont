@@ -398,14 +398,8 @@
       </div>
 
       <!-- HISTORIQUE -->
-      <div class="history-block">
-        <div class="history-title" style="display:flex;align-items:center;justify-content:space-between">
-        <span>Historique des modifications</span>
-        <button class="btn btn-small" style="background:#162D49;color:#C8A464;border:1px solid #C8A464;font-size:10px;letter-spacing:1px" onclick="exportSave()">💾 Sauvegarder</button>
-      </div>
-        <div id="historyList">
-          <div style="font-size:12px;color:#bbb;font-style:italic;text-align:center;padding:16px">Aucune modification enregistrée</div>
-        </div>
+      <div class="history-block" id="historyBlock" style="display:none">
+        <div id="historyList"></div>
       </div>
 
     </div>
@@ -595,12 +589,15 @@ function onChapterChange() {
   if (!currentChapter) {
     document.getElementById('previewChapterName').textContent = '— Sélectionner un chapitre —';
     document.getElementById('bookPreview').innerHTML = `<div class="empty-state"><div class="es-icon">⚓</div><p>Sélectionnez un chapitre dans l'atelier<br/>pour voir son contenu apparaître ici.</p></div>`;
+    document.getElementById('historyBlock').style.display = 'none';
     return;
   }
   document.getElementById('previewChapterName').textContent = CHAPTER_NAMES[currentChapter];
   document.getElementById('promptSection').style.display = 'none';
   document.getElementById('resultSection').style.display = 'none';
   renderPreview();
+  renderHistory();
+  document.getElementById('historyBlock').style.display = 'block';
 }
 
 function generatePrompt() {
@@ -874,11 +871,14 @@ function renderPreview() {
 // ══════════════════════════════════════════════
 function renderHistory() {
   const container = document.getElementById('historyList');
-  if (history.length === 0) {
-    container.innerHTML = '<div style="font-size:12px;color:#bbb;font-style:italic;text-align:center;padding:16px">Aucune modification enregistrée</div>';
+  const filtered = currentChapter
+    ? history.map((h, i) => ({...h, _i: i})).filter(h => h.chapterId === currentChapter)
+    : history.map((h, i) => ({...h, _i: i}));
+  if (filtered.length === 0) {
+    container.innerHTML = '<div style="font-size:12px;color:#bbb;font-style:italic;text-align:center;padding:16px">Aucune modification pour ce chapitre</div>';
     return;
   }
-  container.innerHTML = history.map((h, i) => `
+  container.innerHTML = filtered.map((h) => { const i = h._i; return `
     <div class="history-item">
       <div class="h-date" style="display:flex;justify-content:space-between;align-items:center">
         <span>${h.vnum ? '<b>V2.' + h.vnum + '</b> — ' : ''}${h.date}</span>
@@ -891,7 +891,7 @@ function renderHistory() {
         <button class="btn btn-small" style="background:#f5f0ea;color:#666;border:1px solid #ddd" onclick="previewVersion(${i})">👁 Voir</button>
       </div>
     </div>
-  `).join('');
+  `; }).join('');
 }
 
 function restoreVersion(i) {
