@@ -308,6 +308,18 @@
         </div>
       </div>
 
+      <!-- REMPLACEMENT DE TEXTE -->
+      <div class="form-section" id="replaceSection" style="display:none">
+        <label>5 — Rechercher / Remplacer dans V2</label>
+        <textarea id="searchInput" rows="2" placeholder="Colle ici le texte à remplacer…" style="margin-bottom:8px"></textarea>
+        <textarea id="replaceInput" rows="2" placeholder="Texte de remplacement…" style="margin-bottom:10px"></textarea>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-primary" onclick="applyReplace()">✓ Remplacer</button>
+          <button class="btn btn-outline btn-small" onclick="clearReplace()">Effacer</button>
+        </div>
+        <div id="replaceStatus" style="font-size:11px;margin-top:8px;color:#888;min-height:16px"></div>
+      </div>
+
       <!-- HISTORIQUE par chapitre -->
       <div class="history-block" id="historyBlock" style="display:none">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
@@ -488,12 +500,14 @@ function onChapterChange() {
     document.getElementById('promptSection').style.display = 'none';
     document.getElementById('resultSection').style.display = 'none';
     document.getElementById('historyBlock').style.display = 'none';
+    document.getElementById('replaceSection').style.display = 'none';
     return;
   }
 
   document.getElementById('previewChapterName').textContent = CHAPTER_NAMES[currentChapter];
   document.getElementById('ideaSection').style.display = 'block';
   document.getElementById('resultSection').style.display = 'block';
+  document.getElementById('replaceSection').style.display = 'block';
   document.getElementById('promptSection').style.display = 'none';
   document.getElementById('validateBtns').style.display = 'none';
   document.getElementById('previewStatus').textContent = '';
@@ -567,6 +581,60 @@ function copyPrompt() {
   const btn = document.querySelector('.copy-small');
   btn.textContent = 'Copié ✓';
   setTimeout(() => btn.textContent = 'Copier', 2000);
+}
+
+function applyReplace() {
+  const search = document.getElementById('searchInput').value;
+  const replace = document.getElementById('replaceInput').value;
+  const status = document.getElementById('replaceStatus');
+
+  if (!search) { status.textContent = 'Aucun texte à rechercher.'; status.style.color = '#c0392b'; return; }
+  if (!currentChapter) { status.textContent = 'Sélectionnez un chapitre.'; status.style.color = '#c0392b'; return; }
+
+  const v2 = v2data[currentChapter] || [];
+  if (v2.length === 0) { status.textContent = 'Aucun enrichissement V2 à modifier.'; status.style.color = '#c0392b'; return; }
+
+  let count = 0;
+  const updated = v2.map(block => {
+    const b = {...block};
+    if (b.text && b.text.includes(search)) {
+      b.text = b.text.split(search).join(replace);
+      count++;
+    }
+    if (b.title && b.title.includes(search)) {
+      b.title = b.title.split(search).join(replace);
+      count++;
+    }
+    if (b.lines) {
+      b.lines = b.lines.map(l => {
+        if (l.includes(search)) { count++; return l.split(search).join(replace); }
+        return l;
+      });
+    }
+    return b;
+  });
+
+  if (count === 0) {
+    status.textContent = 'Texte introuvable dans la V2.';
+    status.style.color = '#c0392b';
+    return;
+  }
+
+  pushHistory('Remplacement : "' + search.substring(0,30) + (search.length>30?'…':'') + '"');
+  v2data[currentChapter] = updated;
+  saveState();
+  renderPreview();
+  renderHistory();
+  status.textContent = count + ' remplacement(s) effectué(s).';
+  status.style.color = '#2a6e3a';
+  document.getElementById('searchInput').value = '';
+  document.getElementById('replaceInput').value = '';
+}
+
+function clearReplace() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('replaceInput').value = '';
+  document.getElementById('replaceStatus').textContent = '';
 }
 
 function clearResult() {
@@ -736,9 +804,9 @@ function parseResult(text) {
   }
 
   for (const line of lines) {
-    if (/^##\s+/.test(line)) {
+    if (/^\*\*(.+)\*\*$/.test(line.trim())) {
       flushSection(currentTitle, currentLines);
-      currentTitle = line.replace(/^##\s+/, '').trim();
+      currentTitle = line.trim().replace(/^\*\*|\*\*$/g, '').trim();
       currentLines = [];
     } else {
       currentLines.push(line);
