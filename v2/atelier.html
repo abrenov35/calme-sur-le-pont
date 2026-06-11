@@ -417,6 +417,10 @@
       <span class="preview-label">Aperçu V2</span>
       <span class="preview-chapter" id="previewChapterName">— Sélectionner un chapitre —</span>
       <span class="status" id="previewStatus"></span>
+      <div id="validateBtns" style="display:none;gap:6px;margin-left:auto">
+        <button class="btn btn-small" style="background:#2a6e3a;color:#fff;border:none;font-size:10px" onclick="validateVersion()">✓ Valider</button>
+        <button class="btn btn-small btn-outline" style="font-size:10px" onclick="revertLast()">↩ Annuler</button>
+      </div>
     </div>
     <div class="preview-body">
       <div class="book-preview" id="bookPreview">
@@ -556,6 +560,20 @@ function loadState() {
     const savedH = localStorage.getItem('csp_v2_history');
     if (savedH) history = JSON.parse(savedH);
   } catch(e) {}
+  // Nettoyer intro si elle contient le prompt directeur (texte parasite)
+  if (chapters.intro) {
+    const flat = chapters.intro.map(b=>b.text||'').join(' ');
+    if (flat.includes('PROMPT DIRECTEUR') || flat.includes('VERSION 2 ÉDITION GRAND PUBLIC') || flat.includes('Transformer le manuscrit')) {
+      delete chapters.intro;
+      saveState();
+    }
+  }
+}
+
+// Numéro de version global
+function getNextVersionNum() {
+  const nums = history.map(h => h.vnum || 0);
+  return nums.length ? Math.max(...nums) + 1 : 1;
 }
 
 function saveState() {
@@ -648,14 +666,16 @@ function integrateResult() {
 
   // Add to history
   const now = new Date();
+  const vnum = getNextVersionNum();
   history.unshift({
+    vnum,
     date: now.toLocaleDateString('fr-FR') + ' ' + now.toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'}),
     chapter: CHAPTER_NAMES[currentChapter],
     chapterId: currentChapter,
     summary: idea || 'Modification sans description',
     snapshot: JSON.parse(JSON.stringify(chapters[currentChapter]))
   });
-  if (history.length > 20) history = history.slice(0, 20);
+  if (history.length > 30) history = history.slice(0, 30);
 
   saveState();
   renderPreview();
@@ -663,7 +683,8 @@ function integrateResult() {
 
   document.getElementById('resultInput').value = '';
   document.getElementById('ideaInput').value = '';
-  document.getElementById('previewStatus').textContent = 'Mis à jour à ' + now.toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'});
+  document.getElementById('previewStatus').textContent = 'V2.' + vnum + ' — ' + now.toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'});
+  document.getElementById('validateBtns').style.display = 'flex';
 }
 
 function syncResult() {
@@ -701,7 +722,34 @@ function syncResult() {
   renderHistory();
   document.getElementById('resultInput').value = '';
   document.getElementById('ideaInput').value = '';
-  document.getElementById('previewStatus').textContent = 'Synchronisé à ' + now.toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'});
+  document.getElementById('previewStatus').textContent = 'V2.' + history[0].vnum + ' — Synchronisé à ' + now.toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'});
+  document.getElementById('validateBtns').style.display = 'flex';
+}
+
+function validateVersion() {
+  document.getElementById('validateBtns').style.display = 'none';
+  const msg = document.getElementById('previewStatus');
+  msg.textContent = '✓ Version validée';
+  setTimeout(() => msg.textContent = '', 3000);
+}
+
+function revertLast() {
+  if (!currentChapter) return;
+  const last = history.find(h => h.chapterId === currentChapter);
+  if (!last) { alert('Aucune version précédente.'); return; }
+  if (!confirm('Revenir à la version précédente ?')) return;
+  chapters[currentChapter] = JSON.parse(JSON.stringify(last.snapshot));
+  saveState();
+  renderPreview();
+  document.getElementById('validateBtns').style.display = 'none';
+  document.getElementById('previewStatus').textContent = 'Version précédente restaurée';
+}
+
+function deleteHistory(i) {
+  if (!confirm('Supprimer cette entrée de l'historique ?')) return;
+  history.splice(i, 1);
+  saveState();
+  renderHistory();
 }
 
 function exportSave() {
@@ -826,7 +874,10 @@ function renderHistory() {
   }
   container.innerHTML = history.map((h, i) => `
     <div class="history-item">
-      <div class="h-date">${h.date}</div>
+      <div class="h-date" style="display:flex;justify-content:space-between;align-items:center">
+        <span>${h.vnum ? '<b>V2.' + h.vnum + '</b> — ' : ''}${h.date}</span>
+        <button onclick="deleteHistory(${i})" style="background:none;border:none;color:#ccc;cursor:pointer;font-size:14px;line-height:1" title="Supprimer">✕</button>
+      </div>
       <div class="h-chapter">${h.chapter}</div>
       <div class="h-summary">${h.summary}</div>
       <div class="h-actions">
