@@ -207,7 +207,7 @@
     }
     .book-preview .note-de-bord {
       background: var(--navy); color: white;
-      padding: 22px 26px; margin: 24px 0; border-radius: 4px;
+      padding: 20px 24px; margin: 28px 0; border-radius: 4px;
     }
     .book-preview .note-de-bord .ndb-label {
       font-family: 'Helvetica Neue', sans-serif;
@@ -215,17 +215,24 @@
       color: var(--gold); margin-bottom: 10px;
     }
     .book-preview .note-de-bord p { color: #c8d8e8; font-size: 14px; margin-bottom: 0; }
+
+    /* Blocs V2 — sans fond, séparés par un filet */
     .book-preview .encadre {
-      background: white; border: 1px solid var(--border);
-      border-left: 4px solid var(--gold);
-      padding: 16px 20px; margin: 20px 0; border-radius: 0 4px 4px 0;
+      background: transparent;
+      border: none;
+      border-top: 1px solid var(--border);
+      padding: 20px 0 4px;
+      margin: 24px 0 8px;
     }
     .book-preview .encadre .enc-label {
       font-family: 'Helvetica Neue', sans-serif;
-      font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 10px;
+      font-size: 13px; font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 12px;
+      letter-spacing: 0;
+      text-transform: none;
     }
-    .book-preview .encadre p { font-size: 13px; color: #444; }
+    .book-preview .encadre p { font-size: 15px; color: #2a2a2a; line-height: 1.9; }
     .book-preview .illus { margin: 28px 0; text-align: center; }
     .book-preview .illus img { width: 100%; max-width: 520px; border: 1px solid #d0c8c0; }
     .book-preview .empty-state { text-align: center; padding: 60px 20px; color: #bbb; }
@@ -831,15 +838,15 @@ function renderBlocksHTML(blocks) {
     } else if (block.type === 'note') {
       html += `<div class="note-de-bord"><div class="ndb-label">Note de bord</div><p>${block.text}</p></div>`;
     } else if (block.type === 'citation') {
-      html += `<blockquote style="border-left:3px solid var(--gold);padding:16px 20px;margin:20px 0;background:rgba(200,164,100,0.07);font-style:italic;font-size:16px;color:var(--navy)">"${block.text}"</blockquote>`;
+      html += `<div style="border-top:1px solid var(--border);padding:20px 0 4px;margin:24px 0 8px"><div style="font-family:Helvetica Neue,sans-serif;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px">Citation du Capitaine</div><p style="font-style:italic;font-size:16px;color:var(--navy);line-height:1.8">"${block.text}"</p></div>`;
     } else if (block.type === 'encadre') {
       html += `<div class="encadre"><div class="enc-label">${block.title || 'Encadré'}</div><p>${block.text}</p></div>`;
     } else if (block.type === 'question') {
       const lines = block.text.split('\n').filter(l=>l.trim()).map(l=>`<p style="font-style:italic;color:var(--gold);margin:6px 0">${l.trim()}</p>`).join('');
-      html += `<div style="border-left:3px solid var(--gold);padding:14px 18px;margin:20px 0;background:rgba(200,164,100,0.07);border-radius:0 8px 8px 0"><div style="font-size:9px;letter-spacing:2px;color:var(--gold);font-weight:700;margin-bottom:10px">QUESTIONS AU LECTEUR</div>${lines}</div>`;
+      html += `<div style="border-top:1px solid var(--border);padding:20px 0 4px;margin:24px 0 8px"><div style="font-family:Helvetica Neue,sans-serif;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px">Question au lecteur</div>${lines}</div>`;
     } else if (block.type === 'enseignements') {
       const items = (block.lines || []).map(l=>`<li style="margin-bottom:8px;line-height:1.7">${l.replace(/^[-•*\d.]+\s*/,'')}</li>`).join('');
-      html += `<div style="background:white;border:1px solid var(--border);border-left:4px solid var(--gold);padding:16px 20px;margin:20px 0;border-radius:0 4px 4px 0"><div style="font-size:9px;letter-spacing:2px;color:var(--gold);font-weight:700;margin-bottom:12px">CE QUE LE VOYAGE NOUS ENSEIGNE</div><ul style="padding-left:18px;font-size:14px;color:#444">${items}</ul></div>`;
+      html += `<div style="border-top:1px solid var(--border);padding:20px 0 4px;margin:24px 0 8px"><div style="font-family:Helvetica Neue,sans-serif;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px">Ce que le voyage nous enseigne</div><ul style="padding-left:18px;font-size:15px;color:#2a2a2a;line-height:1.9">${items}</ul></div>`;
     }
   });
   return html;
