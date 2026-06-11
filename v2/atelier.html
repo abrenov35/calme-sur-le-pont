@@ -520,47 +520,38 @@ function autoGeneratePrompt() {
 CHAPITRE : ${chName}
 THÈME : ${theme}
 
-TEXTE ORIGINAL V1 (ne pas modifier, enrichir seulement) :
+TEXTE ORIGINAL V1 (ne pas modifier) :
 ${v1text}
 
-${idea ? `DEMANDE SPÉCIFIQUE : ${idea}\n\n` : ''}MISSION : Enrichir ce chapitre avec des contenus complémentaires pour une édition grand public. Le texte V1 reste intact. Tu rédiges uniquement les enrichissements V2, à placer APRÈS le texte original.
+${idea ? `DEMANDE SPÉCIFIQUE : ${idea}\n\n` : ''}MISSION : Rédige les enrichissements V2 de ce chapitre pour une édition grand public. Le texte V1 reste intact. Tu rédiges uniquement le contenu complémentaire.
 
-RUBRIQUES À DÉVELOPPER (toutes si pertinentes) :
+STRUCTURE ATTENDUE — utilise ces sous-titres exacts, dans cet ordre (omets ceux qui ne s'appliquent pas) :
 
-1. CARNET DE BORD DU CAPITAINE
+## Carnet de bord du Capitaine
 Réflexion intime, quelques paragraphes, ton personnel, expérience acquise.
 
-2. L'HISTOIRE DERRIÈRE L'HISTOIRE
+## L'histoire derrière l'histoire
 Anecdote concrète (maritime, professionnelle ou humaine) pour illustrer le message.
 
-3. CE QUE LE VOYAGE NOUS ENSEIGNE
-3 à 5 enseignements simples, sans jargon, sans ton professoral.
+## Ce que le voyage nous enseigne
+3 à 5 enseignements simples sous forme de liste, sans jargon.
 
-4. QUESTION AU LECTEUR
+## Question au lecteur
 1 ou 2 questions ouvertes pour créer une réflexion personnelle.
 
-5. CITATION DU CAPITAINE (si forte)
-Une phrase mémorable, facile à retenir.
+## Citation du Capitaine
+Une phrase mémorable, entre guillemets.
 
-6. NOTE DE BORD (si pertinent)
+## Note de bord
 Conseil court, application immédiate.
 
-7. TRANSMISSION (si pertinent)
+## Transmission
 Leçon transmise entre un ancien marin et un plus jeune.
 
-8. ANECDOTE DE NAVIGATION (si pertinent)
-Événement réel ou vraisemblable illustrant le message du chapitre.
-
-FORMAT DE RÉPONSE — utilise ces balises :
-[CARNET] ... [/CARNET]
-[ANECDOTE] ... [/ANECDOTE]
-[ENSEIGNEMENTS] ... [/ENSEIGNEMENTS]
-[QUESTION] ... [/QUESTION]
-[CITATION] ... [/CITATION]
-[NOTE] ... [/NOTE]
-[TRANSMISSION] ... [/TRANSMISSION]
-
-Rédige uniquement les enrichissements, sans introduction ni commentaire.`;
+CONSIGNES :
+- Ton sobre, phrases courtes, métaphore maritime cohérente
+- Pas d'introduction, pas de commentaire, commence directement par le premier sous-titre
+- Rédige en français`;
 
   document.getElementById('promptOutput').value = prompt;
   document.getElementById('promptSection').style.display = 'block';
@@ -677,58 +668,83 @@ function deleteHistory(i) {
 // ══════════════════════════════════════════════
 function parseResult(text) {
   const blocks = [];
-  const tagRegex = /\[CARNET\]([\s\S]*?)\[\/CARNET\]|\[ANECDOTE\]([\s\S]*?)\[\/ANECDOTE\]|\[ENSEIGNEMENTS\]([\s\S]*?)\[\/ENSEIGNEMENTS\]|\[QUESTION\]([\s\S]*?)\[\/QUESTION\]|\[CITATION\]([\s\S]*?)\[\/CITATION\]|\[NOTE\]([\s\S]*?)\[\/NOTE\]|\[TRANSMISSION\]([\s\S]*?)\[\/TRANSMISSION\]|\[ENCADRE(?:\s+titre="([^"]*)")?\s*\]([\s\S]*?)\[\/ENCADRE\]/g;
 
-  // Aussi supporter les anciennes balises
-  const oldTagRegex = /\[SCENE\]([\s\S]*?)\[\/SCENE\]|\[INTROSPECTION\]([\s\S]*?)\[\/INTROSPECTION\]|\[ECHO\]([\s\S]*?)\[\/ECHO\]/g;
-
-  let match;
-  let lastIndex = 0;
-  let hasTag = false;
-
-  const labels = ['CARNET','ANECDOTE','ENSEIGNEMENTS','QUESTION','CITATION','NOTE','TRANSMISSION'];
-  const labelNames = {
-    CARNET: 'Carnet de bord du Capitaine',
-    ANECDOTE: "L'histoire derrière l'histoire",
-    ENSEIGNEMENTS: 'Ce que le voyage nous enseigne',
-    QUESTION: 'Question au lecteur',
-    CITATION: 'Citation du Capitaine',
-    NOTE: 'Note de bord',
-    TRANSMISSION: 'Transmission'
+  // Mapping sous-titres → types
+  const SECTION_TYPES = {
+    'carnet de bord du capitaine':  {type:'encadre', title:'Carnet de bord du Capitaine'},
+    "l'histoire derrière l'histoire": {type:'encadre', title:"L'histoire derrière l'histoire"},
+    'ce que le voyage nous enseigne': {type:'enseignements'},
+    'question au lecteur':           {type:'question'},
+    'citation du capitaine':         {type:'citation'},
+    'note de bord':                  {type:'note'},
+    'transmission':                  {type:'encadre', title:'Transmission'}
   };
 
-  while ((match = tagRegex.exec(text)) !== null) {
-    hasTag = true;
-    const before = text.substring(lastIndex, match.index).trim();
-    if (before) before.split('\n\n').filter(p=>p.trim()).forEach(p => blocks.push({type:'p', text:p.trim()}));
-    lastIndex = match.index + match[0].length;
+  // Découpe le texte par sections ## Titre
+  const sectionRegex = /^##\s+(.+)$/gm;
+  const sections = [];
+  let lastIdx = 0, m;
 
-    if (match[1] !== undefined) {
-      blocks.push({type:'encadre', title: labelNames.CARNET, text: match[1].trim()});
-    } else if (match[2] !== undefined) {
-      blocks.push({type:'encadre', title: labelNames.ANECDOTE, text: match[2].trim()});
-    } else if (match[3] !== undefined) {
-      const lines = match[3].trim().split('\n').filter(l=>l.trim());
-      blocks.push({type:'enseignements', lines});
-    } else if (match[4] !== undefined) {
-      blocks.push({type:'question', text: match[4].trim()});
-    } else if (match[5] !== undefined) {
-      blocks.push({type:'citation', text: match[5].trim()});
-    } else if (match[6] !== undefined) {
-      blocks.push({type:'note', text: match[6].trim()});
-    } else if (match[7] !== undefined) {
-      blocks.push({type:'encadre', title: labelNames.TRANSMISSION, text: match[7].trim()});
-    } else if (match[9] !== undefined) {
-      blocks.push({type:'encadre', title: match[8] || 'Encadré', text: match[9].trim()});
+  // Texte avant le premier ##
+  const firstMatch = text.search(/^##\s+/m);
+  if (firstMatch > 0) {
+    const before = text.substring(0, firstMatch).trim();
+    if (before) sections.push({title: null, content: before});
+  }
+
+  while ((m = sectionRegex.exec(text)) !== null) {
+    const title = m[1].trim();
+    const start = m.index + m[0].length;
+    const nextMatch = text.search(new RegExp('^##\\s+', 'm').source ? /^## /m : /^## /m);
+    sections.push({title, start, rawStart: m.index});
+  }
+
+  // Re-découpe proprement
+  const lines = text.split('\n');
+  let currentTitle = null;
+  let currentLines = [];
+
+  function flushSection(title, linesArr) {
+    const content = linesArr.join('\n').trim();
+    if (!content && !title) return;
+    const key = title ? title.toLowerCase() : null;
+    const stype = key ? SECTION_TYPES[key] : null;
+
+    if (!title) {
+      content.split('\n\n').filter(p=>p.trim()).forEach(p => blocks.push({type:'p', text:p.trim()}));
+      return;
+    }
+
+    if (!stype) {
+      // Sous-titre inconnu → encadré générique
+      if (content) blocks.push({type:'encadre', title, text: content});
+      return;
+    }
+
+    if (stype.type === 'enseignements') {
+      const items = content.split('\n').filter(l=>l.trim());
+      blocks.push({type:'enseignements', lines: items});
+    } else if (stype.type === 'question') {
+      blocks.push({type:'question', text: content});
+    } else if (stype.type === 'citation') {
+      blocks.push({type:'citation', text: content.replace(/^["«\s]+|["»\s]+$/g, '').trim()});
+    } else if (stype.type === 'note') {
+      blocks.push({type:'note', text: content});
+    } else if (stype.type === 'encadre') {
+      blocks.push({type:'encadre', title: stype.title, text: content});
     }
   }
 
-  const after = text.substring(lastIndex).trim();
-  if (after) after.split('\n\n').filter(p=>p.trim()).forEach(p => blocks.push({type:'p', text:p.trim()}));
-
-  if (!hasTag) {
-    text.split('\n\n').filter(p=>p.trim()).forEach(p => blocks.push({type:'p', text:p.trim()}));
+  for (const line of lines) {
+    if (/^##\s+/.test(line)) {
+      flushSection(currentTitle, currentLines);
+      currentTitle = line.replace(/^##\s+/, '').trim();
+      currentLines = [];
+    } else {
+      currentLines.push(line);
+    }
   }
+  flushSection(currentTitle, currentLines);
 
   return blocks;
 }
