@@ -391,8 +391,8 @@
         <label>4 — Résultat IA</label>
         <textarea id="resultInput" rows="8" placeholder="Colle ici le résultat obtenu depuis Claude ou ChatGPT…"></textarea>
         <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
-          <button class="btn btn-gold" onclick="integrateResult()">+ Ajouter au chapitre</button>
-          <button class="btn" style="background:#1e3d61;color:#fff;border:none" onclick="syncResult()">↺ Synchroniser (remplacer)</button>
+          <button class="btn btn-gold" onclick="syncResult()">↺ Créer nouvelle version</button>
+          <button class="btn" style="background:#1e3d61;color:#fff;border:none" onclick="integrateResult()">+ Ajouter à la suite</button>
           <button class="btn btn-outline btn-small" onclick="clearResult()">Effacer</button>
         </div>
       </div>
@@ -772,7 +772,7 @@ function parseResult(text) {
   const blocks = [];
 
   // Regex qui capture les balises dans l'ordre d'apparition
-  const tagRegex = /\[SCENE\]([\s\S]*?)\[\/SCENE\]|\[INTROSPECTION\]([\s\S]*?)\[\/INTROSPECTION\]|\[ECHO\]([\s\S]*?)\[\/ECHO\]|\[NOTE\]([\s\S]*?)\[\/NOTE\]|\[ENCADRE(?:\s+titre="([^"]*)")?\s*\]([\s\S]*?)\[\/ENCADRE\]/g;
+  const tagRegex = /\[SCENE\]([\s\S]*?)\[\/SCENE\]|\[INTROSPECTION\]([\s\S]*?)\[\/INTROSPECTION\]|\[ECHO\]([\s\S]*?)\[\/ECHO\]|\[NOTE\]([\s\S]*?)\[\/NOTE\]|\[ENCADRE(?:\s+titre="([^"]*)")?\s*\]([\s\S]*?)\[\/ENCADRE\]|\[QUESTION\]([\s\S]*?)\[\/QUESTION\]/g;
 
   let match;
   let lastIndex = 0;
@@ -809,6 +809,9 @@ function parseResult(text) {
       // [ENCADRE titre="..."]
       const title = match[5] || 'Encadré';
       blocks.push({type:'encadre', title: title, text: match[6].trim()});
+    } else if (match[7] !== undefined) {
+      // [QUESTION]
+      blocks.push({type:'question', text: match[7].trim()});
     }
   }
 
@@ -853,6 +856,9 @@ function renderPreview() {
       html += `<div class="note-de-bord"><div class="ndb-label">Note de bord</div><p>${block.text}</p></div>`;
     } else if (block.type === 'encadre') {
       html += `<div class="encadre"><div class="enc-label">${block.title || 'Encadré'}</div><p>${block.text}</p></div>`;
+    } else if (block.type === 'question') {
+      const lines = block.text.split('\n').filter(l => l.trim()).map(l => `<p style="font-style:italic;color:var(--gold);margin:6px 0">${l.trim()}</p>`).join('');
+      html += `<div style="border-left:3px solid var(--gold);padding:14px 18px;margin:20px 0;background:rgba(200,164,100,0.07);border-radius:0 8px 8px 0"><div style="font-size:9px;letter-spacing:2px;color:var(--gold);font-weight:700;margin-bottom:10px">QUESTIONS AU LECTEUR</div>${lines}</div>`;
     }
   });
 
