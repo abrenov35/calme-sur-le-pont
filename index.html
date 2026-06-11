@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Le Calme sur le Pont — Hub de travail</title>
+  <style>
+    :root {
+      --navy: #162D49;
+      --beige: #F3EAE2;
+      --gold: #C8A464;
+      --dark: #1a1a1a;
+      --mid: #555555;
+      --light: #f9f5f0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background: var(--light);
+      color: var(--dark);
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--navy);
+      color: white;
+      padding: 40px 24px 32px;
+      text-align: center;
+      border-bottom: 3px solid var(--gold);
+    }
+    header .eyebrow {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    header h1 {
+      font-size: clamp(22px, 5vw, 38px);
+      font-weight: normal;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+    header .subtitle {
+      font-style: italic;
+      font-size: 14px;
+      color: #c8c0b8;
+      margin-bottom: 6px;
+    }
+    header .author {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 12px;
+      color: #a0a8b0;
+    }
+
+    /* MAIN */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+    }
+
+    /* SECTION TITLES */
+    .section-title {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #d8cfc6;
+    }
+
+    /* VERSION CARDS */
+    .versions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+    @media (max-width: 600px) { .versions { grid-template-columns: 1fr; } }
+
+    .version-card {
+      background: white;
+      border: 1px solid #e0d8d0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .version-card .card-header {
+      background: var(--navy);
+      color: white;
+      padding: 16px 20px;
+    }
+    .version-card .card-header .label {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .version-card .card-header h2 {
+      font-size: 16px;
+      font-weight: normal;
+    }
+    .version-card .card-body {
+      padding: 20px;
+    }
+    .version-card .card-body p {
+      font-size: 13px;
+      color: var(--mid);
+      line-height: 1.7;
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: var(--navy);
+      color: white;
+      text-decoration: none;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 12px;
+      letter-spacing: 1px;
+      border-radius: 3px;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #1e3d61; }
+    .btn.outline {
+      background: transparent;
+      border: 1px solid var(--navy);
+      color: var(--navy);
+    }
+    .btn.outline:hover { background: var(--navy); color: white; }
+    .btn.disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    /* STRUCTURE */
+    .structure {
+      margin-bottom: 48px;
+    }
+
+    .chapter-list {
+      background: white;
+      border: 1px solid #e0d8d0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .chapter-row {
+      display: grid;
+      grid-template-columns: 100px 1fr 120px 120px;
+      align-items: center;
+      padding: 14px 20px;
+      border-bottom: 1px solid #f0e8e0;
+      gap: 12px;
+    }
+    .chapter-row:last-child { border-bottom: none; }
+    .chapter-row.header {
+      background: #f5f0ea;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--mid);
+      padding: 10px 20px;
+    }
+    @media (max-width: 600px) {
+      .chapter-row { grid-template-columns: 80px 1fr; }
+      .chapter-row .v1-status, .chapter-row .v2-status { display: none; }
+      .chapter-row.header .v1-col, .chapter-row.header .v2-col { display: none; }
+    }
+
+    .chapter-num {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+    .chapter-name {
+      font-size: 14px;
+      color: var(--dark);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.5px;
+      text-align: center;
+    }
+    .badge.done { background: #e8f4e8; color: #2a6a2a; }
+    .badge.wip  { background: #fff3e0; color: #c07000; }
+    .badge.todo { background: #f0f0f0; color: #888; }
+
+    /* HOW WE WORK */
+    .method {
+      background: white;
+      border: 1px solid #e0d8d0;
+      border-radius: 4px;
+      padding: 28px;
+      margin-bottom: 48px;
+    }
+    .method h3 {
+      font-size: 15px;
+      font-weight: normal;
+      margin-bottom: 20px;
+      color: var(--navy);
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+    }
+    .step {
+      text-align: center;
+      padding: 16px 12px;
+      background: var(--beige);
+      border-radius: 4px;
+    }
+    .step .num {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .step p {
+      font-size: 12px;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+
+    /* V2 STRUCTURE */
+    .v2-structure {
+      background: white;
+      border: 1px solid #e0d8d0;
+      border-radius: 4px;
+      padding: 28px;
+      margin-bottom: 48px;
+    }
+    .v2-structure h3 {
+      font-size: 15px;
+      font-weight: normal;
+      margin-bottom: 20px;
+      color: var(--navy);
+    }
+    .parts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .part {
+      border-left: 3px solid var(--gold);
+      padding: 12px 16px;
+      background: #faf7f4;
+    }
+    .part .part-num {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .part .part-title {
+      font-size: 13px;
+      font-weight: bold;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .part .part-desc {
+      font-size: 12px;
+      color: var(--mid);
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 11px;
+      color: #aaa;
+      border-top: 1px solid #e0d8d0;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Hub de travail</div>
+  <h1>LE CALME SUR LE PONT</h1>
+  <p class="subtitle">Chroniques maritimes sur le bruit du monde et la sérénité des horizons</p>
+  <p class="author">Younès Belgnaoui</p>
+</header>
+
+<main>
+
+  <!-- VERSIONS -->
+  <div class="section-title">Les versions</div>
+  <div class="versions">
+
+    <div class="version-card">
+      <div class="card-header">
+        <div class="label">Version 1 — Complète</div>
+        <h2>L'édition originale</h2>
+      </div>
+      <div class="card-body">
+        <p>Le livret illustré original — 25 pages, 8 illustrations gravure, prêt à imprimer chez Bookelis.</p>
+        <a href="output/Le_Calme_sur_le_Pont_IMPRESSION.pdf" class="btn" target="_blank">📄 Lire la V1</a>
+      </div>
+    </div>
+
+    <div class="version-card">
+      <div class="card-header">
+        <div class="label">Version 2 — En cours</div>
+        <h2>L'édition enrichie</h2>
+      </div>
+      <div class="card-body">
+        <p>Chaque chapitre développé en 4 parties : La Scène, L'Introspection, L'Écho, La Note de Bord.</p>
+        <a href="#" class="btn disabled">📄 Lire la V2 — bientôt</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- STRUCTURE -->
+  <div class="structure">
+    <div class="section-title">Structure du livre</div>
+    <div class="chapter-list">
+      <div class="chapter-row header">
+        <span></span>
+        <span>Titre</span>
+        <span class="v1-col">V1</span>
+        <span class="v2-col">V2</span>
+      </div>
+      <div class="chapter-row">
+        <span class="chapter-num">PRÉAMBULE</span>
+        <span class="chapter-name">L'Héritage du Large</span>
+        <span class="v1-status"><span class="badge done">✓ Terminé</span></span>
+        <span class="v2-status"><span class="badge todo">À faire</span></span>
+      </div>
+      <div class="chapter-row">
+        <span class="chapter-num">CHAPITRE 1</span>
+        <span class="chapter-name">Le Don du Capitaine</span>
+        <span class="v1-status"><span class="badge done">✓ Terminé</span></span>
+        <span class="v2-status"><span class="badge todo">À faire</span></span>
+      </div>
+      <div class="chapter-row">
+        <span class="chapter-num">CHAPITRE 2</span>
+        <span class="chapter-name">Le Calme sur le Pont</span>
+        <span class="v1-status"><span class="badge done">✓ Terminé</span></span>
+        <span class="v2-status"><span class="badge todo">À faire</span></span>
+      </div>
+      <div class="chapter-row">
+        <span class="chapter-num">CHAPITRE 3</span>
+        <span class="chapter-name">Le Bruit de Fond</span>
+        <span class="v1-status"><span class="badge done">✓ Terminé</span></span>
+        <span class="v2-status"><span class="badge todo">À faire</span></span>
+      </div>
+      <div class="chapter-row">
+        <span class="chapter-num">CHAPITRE 4</span>
+        <span class="chapter-name">Les Instruments de Bord</span>
+        <span class="v1-status"><span class="badge done">✓ Terminé</span></span>
+        <span class="v2-status"><span class="badge todo">À faire</span></span>
+      </div>
+      <div class="chapter-row">
+        <span class="chapter-num">CHAPITRE 5</span>
+        <span class="chapter-name">Le Vent Contraire</span>
+        <span class="v1-status"><span class="badge done">✓ Terminé</span></span>
+        <span class="v2-status"><span class="badge todo">À faire</span></span>
+      </div>
+      <div class="chapter-row">
+        <span class="chapter-num">CHAPITRE 6</span>
+        <span class="chapter-name">Le Long Cours</span>
+        <span class="v1-status"><span class="badge done">✓ Terminé</span></span>
+        <span class="v2-status"><span class="badge todo">À faire</span></span>
+      </div>
+      <div class="chapter-row">
+        <span class="chapter-num">ÉPILOGUE</span>
+        <span class="chapter-name">Le Port</span>
+        <span class="v1-status"><span class="badge done">✓ Terminé</span></span>
+        <span class="v2-status"><span class="badge todo">À faire</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- V2 STRUCTURE -->
+  <div class="v2-structure">
+    <div class="section-title">Structure de chaque chapitre V2</div>
+    <h3>Chaque chapitre se développe en 4 parties</h3>
+    <div class="parts">
+      <div class="part">
+        <div class="part-num">Partie 1</div>
+        <div class="part-title">La Scène</div>
+        <div class="part-desc">Une situation de navigation concrète — le texte original de la V1 enrichi et développé.</div>
+      </div>
+      <div class="part">
+        <div class="part-num">Partie 2</div>
+        <div class="part-title">L'Introspection</div>
+        <div class="part-desc">Le Capitaine se retire dans sa cabine pour retrouver sa clarté et sa posture.</div>
+      </div>
+      <div class="part">
+        <div class="part-num">Partie 3</div>
+        <div class="part-title">L'Écho</div>
+        <div class="part-desc">Une interaction avec l'équipage — ancre le récit dans des problématiques humaines.</div>
+      </div>
+      <div class="part">
+        <div class="part-num">Partie 4</div>
+        <div class="part-title">La Note de Bord</div>
+        <div class="part-desc">Une maxime courte et actionnable. Ce que le lecteur emporte avec lui.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW WE WORK -->
+  <div class="method">
+    <div class="section-title">Comment on travaille</div>
+    <h3>À chaque session avec Claude</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <p>Tu envoies le lien GitHub à Claude</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <p>Claude fetch les fichiers et reprend où on s'est arrêtés</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <p>On travaille un chapitre V2 ensemble</p>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <p>Claude génère le nouveau PDF V2</p>
+      </div>
+      <div class="step">
+        <div class="num">5</div>
+        <p>Tu pushs sur GitHub — la page se met à jour</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  Le Calme sur le Pont — Younès Belgnaoui — Hub de travail privé
+</footer>
+
+</body>
+</html>
