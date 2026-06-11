@@ -565,6 +565,7 @@ Leçon transmise entre un ancien marin et un plus jeune.
 CONSIGNES :
 - Ton sobre, phrases courtes, métaphore maritime cohérente
 - Pas d'introduction, pas de commentaire, commence directement par le premier sous-titre
+- N'utilise JAMAIS les caractères # ou ## ou ### pour les titres — utilise uniquement le texte en gras **comme ceci**
 - Rédige en français`;
 
   document.getElementById('promptOutput').value = prompt;
@@ -804,9 +805,9 @@ function parseResult(text) {
   }
 
   for (const line of lines) {
-    if (/^\*\*(.+)\*\*$/.test(line.trim())) {
+    if (/^\*\*(.+)\*\*$/.test(line.trim()) || /^#{1,4}\s+/.test(line.trim())) {
       flushSection(currentTitle, currentLines);
-      currentTitle = line.trim().replace(/^\*\*|\*\*$/g, '').trim();
+      currentTitle = line.trim().replace(/^#{1,4}\s+/, '').replace(/^\*\*|\*\*$/g, '').trim();
       currentLines = [];
     } else {
       currentLines.push(line);
