@@ -746,7 +746,7 @@ function revertLast() {
 }
 
 function deleteHistory(i) {
-  if (!confirm('Supprimer cette entrée de l'historique ?')) return;
+  if (!confirm('Supprimer cette entrée de l\'historique ?')) return;
   history.splice(i, 1);
   saveState();
   renderHistory();
