@@ -330,8 +330,12 @@
       <!-- HISTORIQUE par chapitre -->
       <div class="history-block" id="historyBlock" style="display:none">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-          <span style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold)">Historique V2</span>
-          <button class="btn btn-small" style="background:transparent;border:1px solid #ddd;color:#999;font-size:10px" onclick="resetChapterV2()" title="Effacer tous les enrichissements V2 de ce chapitre">🗑 Réinitialiser V2</button>
+          <span style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold)">Historique V2 <span id="save-dot" style="display:none;color:#e67e22" title="Modifications non exportées">●</span></span>
+          <div style="display:flex;gap:6px;align-items:center">
+            <span id="autosave-status" style="font-size:10px;color:var(--gold);opacity:.7"></span>
+            <button class="btn btn-small" style="background:#162D49;color:#C8A464;border:1px solid #C8A464;font-size:10px" onclick="exportSave()">💾 Exporter</button>
+            <button class="btn btn-small" style="background:transparent;border:1px solid #ddd;color:#999;font-size:10px" onclick="resetChapterV2()" title="Effacer tous les enrichissements V2 de ce chapitre">🗑 Réinit.</button>
+          </div>
         </div>
         <div id="historyList"></div>
       </div>
@@ -942,6 +946,71 @@ function restoreVersion(i) {
   if (currentChapter === h.chapterId) renderPreview();
   renderHistory();
 }
+
+function markSaved() {
+  unsavedChanges = false;
+  const dot = document.getElementById('save-dot');
+  if (dot) dot.style.display = 'none';
+}
+
+function exportSave() {
+  const data = {
+    version: 'csp_v2',
+    date: new Date().toISOString(),
+    v2data,
+    history
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'calme-sur-le-pont-v2-' + new Date().toISOString().slice(0,10) + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  markSaved();
+  const status = document.getElementById('autosave-status');
+  if (status) {
+    status.textContent = '✓ Exporté';
+    setTimeout(() => status.textContent = '', 3000);
+  }
+}
+
+// ══════════════════════════════════════════════
+// AUTO-SAVE + PROTECTION FERMETURE
+// ══════════════════════════════════════════════
+
+let unsavedChanges = false;
+
+// Marquer les changements non sauvegardés
+const _origSaveState = saveState;
+function saveState() {
+  _origSaveState();
+  unsavedChanges = true;
+  const dot = document.getElementById('save-dot');
+  if (dot) dot.style.display = 'inline';
+}
+
+// Auto-save toutes les 30 secondes si modifications
+setInterval(() => {
+  if (unsavedChanges) {
+    localStorage.setItem('csp_v2_enrich', JSON.stringify(v2data));
+    localStorage.setItem('csp_v2_history', JSON.stringify(history));
+    markSaved();
+    const status = document.getElementById('autosave-status');
+    if (status) {
+      status.textContent = '💾 Sauvegardé ' + new Date().toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'});
+      setTimeout(() => status.textContent = '', 3000);
+    }
+  }
+}, 30000);
+
+// Avertissement avant fermeture si modifications non exportées
+window.addEventListener('beforeunload', e => {
+  if (unsavedChanges) {
+    e.preventDefault();
+    e.returnValue = 'Des modifications non exportées seront perdues. Utilisez 💾 Sauvegarder avant de quitter.';
+  }
+});
 
 // ══════════════════════════════════════════════
 // INIT
