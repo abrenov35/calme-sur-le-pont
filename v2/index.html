@@ -14,62 +14,65 @@
     .topnav .sep { color:#2a4060; }
     .topnav .current { color:var(--gold); }
     .badge-v2 { background:rgba(255,160,0,0.15); color:#c07000; font-family:'Helvetica Neue',sans-serif; font-size:10px; letter-spacing:2px; padding:3px 10px; border-radius:20px; border:1px solid rgba(200,130,0,0.3); margin-left:auto; }
-    .book { max-width:680px; margin:0 auto; padding:60px 32px 80px; }
-    .wip-banner { background:#fff8e0; border:1px solid #f0cc60; border-radius:4px; padding:16px 20px; margin-bottom:48px; font-family:'Helvetica Neue',sans-serif; font-size:12px; color:#7a5a00; line-height:1.6; }
-    .wip-banner strong { display:block; margin-bottom:4px; font-size:13px; }
+    .main { max-width:680px; margin:0 auto; padding:48px 24px 80px; }
+    .hero { text-align:center; margin-bottom:48px; }
+    .hero .eyebrow { font-family:'Helvetica Neue',sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+    .hero h1 { font-size:28px; font-weight:normal; letter-spacing:1px; margin-bottom:10px; }
+    .hero p { font-size:13px; color:#666; font-style:italic; line-height:1.7; }
+    .divider { width:40px; height:1px; background:var(--gold); margin:24px auto; }
 
-    /* PROGRESS */
-    .progress-block { margin-bottom:56px; }
-    .progress-title { font-family:'Helvetica Neue',sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:16px; }
+    .atelier-card { background:var(--navy); border-radius:6px; padding:28px; margin-bottom:36px; text-align:center; }
+    .atelier-card .ac-label { font-family:'Helvetica Neue',sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
+    .atelier-card h2 { font-size:20px; font-weight:normal; color:white; margin-bottom:10px; }
+    .atelier-card p { font-size:13px; color:#8a9db0; line-height:1.7; margin-bottom:20px; }
+    .atelier-card a { display:inline-block; padding:13px 32px; background:var(--gold); color:white; text-decoration:none; font-family:'Helvetica Neue',sans-serif; font-size:13px; letter-spacing:1px; border-radius:3px; }
+    .atelier-card a:hover { background:#b8944a; }
+
+    .progress-block { margin-bottom:48px; }
+    .progress-title { font-family:'Helvetica Neue',sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:16px; padding-bottom:8px; border-bottom:1px solid #d8cfc6; }
     .progress-grid { display:flex; flex-direction:column; gap:8px; }
     .progress-row { display:flex; align-items:center; gap:14px; padding:12px 16px; background:white; border:1px solid #e0d8d0; border-radius:3px; }
-    .progress-row .num { font-family:'Helvetica Neue',sans-serif; font-size:10px; color:var(--gold); width:90px; flex-shrink:0; letter-spacing:1px; }
+    .progress-row .num { font-family:'Helvetica Neue',sans-serif; font-size:10px; color:var(--gold); width:100px; flex-shrink:0; letter-spacing:1px; }
     .progress-row .name { font-size:13px; flex:1; }
     .badge { display:inline-block; padding:3px 10px; border-radius:20px; font-family:'Helvetica Neue',sans-serif; font-size:10px; }
     .badge.done { background:#e8f4e8; color:#2a6a2a; }
     .badge.wip  { background:#fff3e0; color:#c07000; }
     .badge.todo { background:#f0f0f0; color:#888; }
 
-    /* CHAPTERS */
-    .chapter { margin-bottom:72px; padding-bottom:72px; border-bottom:1px solid #d8cfc6; }
-    .chapter:last-child { border-bottom:none; }
-    .chapter-label { font-family:'Helvetica Neue',sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
-    .chapter-title { font-size:clamp(18px,3vw,26px); font-weight:normal; letter-spacing:1px; margin-bottom:24px; }
-    .divider { width:40px; height:1px; background:var(--gold); margin-bottom:28px; }
-    .part-label { font-family:'Helvetica Neue',sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:#aaa; margin:28px 0 10px; padding:8px 12px; background:#f5f0ea; border-left:3px solid var(--gold); }
-    p { font-size:15px; line-height:1.9; color:#2a2a2a; margin-bottom:14px; text-align:justify; }
-    .note-de-bord { background:var(--navy); color:white; padding:24px 28px; margin:28px 0; border-radius:4px; }
-    .note-de-bord .note-label { font-family:'Helvetica Neue',sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
-    .note-de-bord p { color:#c8d8e8; font-size:14px; margin-bottom:0; }
-    .illus { margin:36px 0; text-align:center; }
-    .illus img { width:100%; max-width:580px; border:1px solid #d0c8c0; }
-
-    /* COMING SOON */
-    .coming-soon { text-align:center; padding:48px 24px; background:white; border:1px dashed #d0c8c0; border-radius:4px; margin-bottom:48px; }
-    .coming-soon .cs-label { font-family:'Helvetica Neue',sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#bbb; margin-bottom:12px; }
-    .coming-soon .cs-title { font-size:16px; color:#aaa; font-weight:normal; }
+    .method { background:white; border:1px solid #e0d8d0; border-radius:4px; padding:24px; }
+    .method h3 { font-size:14px; font-weight:normal; color:var(--navy); margin-bottom:16px; }
+    .step-list { display:flex; flex-direction:column; gap:10px; }
+    .step-item { display:flex; gap:14px; align-items:flex-start; }
+    .step-num { background:var(--navy); color:var(--gold); font-family:'Helvetica Neue',sans-serif; font-size:11px; font-weight:bold; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
+    .step-text { font-size:13px; color:#444; line-height:1.6; }
   </style>
 </head>
 <body>
-
 <nav class="topnav">
   <a href="../index.html">Accueil</a>
   <span class="sep">›</span>
   <span class="current">Version 2</span>
   <span class="badge-v2">✍️ En chantier</span>
 </nav>
+<div class="main">
+  <div class="hero">
+    <div class="eyebrow">Version 2</div>
+    <h1>L'édition enrichie</h1>
+    <p>Chaque chapitre se construit progressivement, session par session,<br/>dans l'atelier éditorial interactif.</p>
+  </div>
+  <div class="divider"></div>
 
-<div class="book">
-
-  <div class="wip-banner">
-    <strong>Version 2 — Travail en cours</strong>
-    Cette version est en chantier. Chaque chapitre se construit progressivement, session par session. Les chapitres terminés apparaissent en texte complet. Les chapitres à venir sont indiqués ci-dessous.
+  <div class="atelier-card">
+    <div class="ac-label">Outil de travail</div>
+    <h2>⚓ Ouvrir l'Atelier éditorial</h2>
+    <p>Sélectionnez un chapitre, décrivez votre idée, générez un prompt,<br/>collez le résultat et visualisez le livre se construire en direct.</p>
+    <a href="atelier.html">Ouvrir l'Atelier →</a>
   </div>
 
-  <!-- PROGRESS -->
   <div class="progress-block">
-    <div class="progress-title">Avancement</div>
+    <div class="progress-title">Avancement V2</div>
     <div class="progress-grid">
+      <div class="progress-row"><span class="num">INTRODUCTION</span><span class="name">L'Art de tenir la barre</span><span class="badge todo">À faire</span></div>
       <div class="progress-row"><span class="num">PRÉAMBULE</span><span class="name">L'Héritage du Large</span><span class="badge todo">À faire</span></div>
       <div class="progress-row"><span class="num">CHAPITRE 1</span><span class="name">Le Don du Capitaine</span><span class="badge todo">À faire</span></div>
       <div class="progress-row"><span class="num">CHAPITRE 2</span><span class="name">Le Calme sur le Pont</span><span class="badge todo">À faire</span></div>
@@ -81,12 +84,18 @@
     </div>
   </div>
 
-  <!-- CHAPITRES À VENIR -->
-  <div class="coming-soon">
-    <div class="cs-label">Prochaine session</div>
-    <div class="cs-title">Les chapitres V2 apparaîtront ici au fil du travail</div>
+  <div class="method">
+    <h3>Comment travailler — le processus session par session</h3>
+    <div class="step-list">
+      <div class="step-item"><div class="step-num">1</div><div class="step-text">Ouvrir l'atelier et choisir un chapitre</div></div>
+      <div class="step-item"><div class="step-num">2</div><div class="step-text">Décrire l'idée à développer dans le champ libre</div></div>
+      <div class="step-item"><div class="step-num">3</div><div class="step-text">Cliquer "Générer le prompt" — le système le structure automatiquement</div></div>
+      <div class="step-item"><div class="step-num">4</div><div class="step-text">Copier le prompt et l'utiliser dans Claude ou ChatGPT</div></div>
+      <div class="step-item"><div class="step-num">5</div><div class="step-text">Coller le résultat dans la zone "Résultat IA"</div></div>
+      <div class="step-item"><div class="step-num">6</div><div class="step-text">Cliquer "Intégrer au chapitre" — l'aperçu se met à jour immédiatement</div></div>
+      <div class="step-item"><div class="step-num">7</div><div class="step-text">Chaque modification est sauvegardée avec date, résumé et possibilité de restaurer</div></div>
+    </div>
   </div>
-
 </div>
 </body>
 </html>
