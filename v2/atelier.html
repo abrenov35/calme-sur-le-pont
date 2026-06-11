@@ -390,15 +390,19 @@
       <div class="form-section" id="resultSection" style="display:none">
         <label>4 — Résultat IA</label>
         <textarea id="resultInput" rows="8" placeholder="Colle ici le résultat obtenu depuis Claude ou ChatGPT…"></textarea>
-        <div style="display:flex;gap:8px;margin-top:10px">
-          <button class="btn btn-gold" onclick="integrateResult()">✓ Intégrer au chapitre</button>
+        <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+          <button class="btn btn-gold" onclick="integrateResult()">+ Ajouter au chapitre</button>
+          <button class="btn" style="background:#1e3d61;color:#fff;border:none" onclick="syncResult()">↺ Synchroniser (remplacer)</button>
           <button class="btn btn-outline btn-small" onclick="clearResult()">Effacer</button>
         </div>
       </div>
 
       <!-- HISTORIQUE -->
       <div class="history-block">
-        <div class="history-title">Historique des modifications</div>
+        <div class="history-title" style="display:flex;align-items:center;justify-content:space-between">
+        <span>Historique des modifications</span>
+        <button class="btn btn-small" style="background:#162D49;color:#C8A464;border:1px solid #C8A464;font-size:10px;letter-spacing:1px" onclick="exportSave()">💾 Sauvegarder</button>
+      </div>
         <div id="historyList">
           <div style="font-size:12px;color:#bbb;font-style:italic;text-align:center;padding:16px">Aucune modification enregistrée</div>
         </div>
@@ -660,6 +664,60 @@ function integrateResult() {
   document.getElementById('resultInput').value = '';
   document.getElementById('ideaInput').value = '';
   document.getElementById('previewStatus').textContent = 'Mis à jour à ' + now.toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'});
+}
+
+function syncResult() {
+  const result = document.getElementById('resultInput').value.trim();
+  const idea = document.getElementById('ideaInput').value.trim();
+  if (!result) { alert('Aucun résultat à synchroniser.'); return; }
+  if (!currentChapter) { alert('Sélectionnez un chapitre.'); return; }
+  if (!confirm('Remplacer le contenu actuel du chapitre par ce nouveau texte ?')) return;
+
+  // Snapshot avant remplacement
+  const now = new Date();
+  if (!chapters[currentChapter]) chapters[currentChapter] = [...getChapterContent(currentChapter)];
+  history.unshift({
+    date: now.toLocaleDateString('fr-FR') + ' ' + now.toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'}),
+    chapter: CHAPTER_NAMES[currentChapter],
+    chapterId: currentChapter,
+    summary: (idea || 'Synchronisation') + ' [avant remplacement]',
+    snapshot: JSON.parse(JSON.stringify(chapters[currentChapter]))
+  });
+
+  const blocks = parseResult(result);
+  chapters[currentChapter] = blocks;
+
+  history.unshift({
+    date: now.toLocaleDateString('fr-FR') + ' ' + now.toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'}),
+    chapter: CHAPTER_NAMES[currentChapter],
+    chapterId: currentChapter,
+    summary: idea || 'Synchronisation (remplacement)',
+    snapshot: JSON.parse(JSON.stringify(chapters[currentChapter]))
+  });
+  if (history.length > 30) history = history.slice(0, 30);
+
+  saveState();
+  renderPreview();
+  renderHistory();
+  document.getElementById('resultInput').value = '';
+  document.getElementById('ideaInput').value = '';
+  document.getElementById('previewStatus').textContent = 'Synchronisé à ' + now.toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'});
+}
+
+function exportSave() {
+  const data = {
+    version: 'csp_v2',
+    date: new Date().toISOString(),
+    chapters,
+    history
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'calme-sur-le-pont-sauvegarde-' + new Date().toISOString().slice(0,10) + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
 function parseResult(text) {
