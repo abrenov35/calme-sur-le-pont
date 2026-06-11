@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prompts — Le Calme sur le Pont</title>
+  <style>
+    :root { --navy:#162D49; --gold:#C8A464; --beige:#F3EAE2; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:Georgia,serif; background:var(--beige); color:#1a1a1a; }
+    .topnav { background:var(--navy); padding:12px 24px; display:flex; align-items:center; gap:16px; }
+    .topnav a { color:#8a9db0; text-decoration:none; font-family:'Helvetica Neue',sans-serif; font-size:11px; letter-spacing:1px; }
+    .topnav a:hover { color:var(--gold); }
+    .topnav .sep { color:#2a4060; }
+    .topnav .current { color:var(--gold); }
+    .main { max-width:800px; margin:0 auto; padding:48px 24px 80px; }
+    h1 { font-size:26px; font-weight:normal; letter-spacing:1px; margin-bottom:8px; }
+    .intro { font-size:13px; color:#666; font-style:italic; margin-bottom:48px; line-height:1.7; }
+
+    /* CATEGORY */
+    .category { margin-bottom:48px; }
+    .cat-header { display:flex; align-items:center; gap:12px; margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid #d0c8c0; }
+    .cat-icon { font-size:18px; }
+    .cat-title { font-family:'Helvetica Neue',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); }
+    .cat-count { font-family:'Helvetica Neue',sans-serif; font-size:10px; color:#aaa; margin-left:auto; }
+
+    /* PROMPT CARD */
+    .prompt-card { background:white; border:1px solid #e0d8d0; border-radius:4px; margin-bottom:14px; overflow:hidden; }
+    .prompt-card .card-top { display:flex; align-items:center; gap:12px; padding:14px 18px; cursor:pointer; }
+    .prompt-card .card-top:hover { background:#faf7f4; }
+    .prompt-card .p-label { font-family:'Helvetica Neue',sans-serif; font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--gold); flex-shrink:0; width:110px; }
+    .prompt-card .p-title { font-size:13px; color:#1a1a1a; flex:1; }
+    .prompt-card .p-toggle { color:#aaa; font-size:12px; font-family:'Helvetica Neue',sans-serif; }
+    .prompt-card .card-body { padding:0 18px 18px; border-top:1px solid #f0e8e0; display:none; }
+    .prompt-card .card-body.open { display:block; }
+    .prompt-card .card-body pre { margin-top:14px; white-space:pre-wrap; font-family:'Helvetica Neue',sans-serif; font-size:12px; line-height:1.7; color:#333; background:#f8f4f0; padding:16px; border-radius:3px; border-left:3px solid var(--gold); }
+    .prompt-card .card-body .copy-btn { display:inline-block; margin-top:10px; padding:6px 14px; background:var(--navy); color:white; font-family:'Helvetica Neue',sans-serif; font-size:11px; border:none; border-radius:3px; cursor:pointer; }
+    .prompt-card .card-body .copy-btn:hover { background:#1e3d61; }
+  </style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="../index.html">Accueil</a>
+  <span class="sep">›</span>
+  <span class="current">Prompts</span>
+</nav>
+
+<div class="main">
+  <h1>Bibliothèque des prompts</h1>
+  <p class="intro">Tous les prompts utilisés pour le projet — illustrations, corrections, mise en page, évolutions V2. Cliquez sur un prompt pour le voir et le copier.</p>
+
+  <!-- ILLUSTRATIONS -->
+  <div class="category">
+    <div class="cat-header">
+      <span class="cat-icon">🎨</span>
+      <span class="cat-title">Prompts illustrations</span>
+      <span class="cat-count">10 prompts</span>
+    </div>
+
+    <div class="prompt-card">
+      <div class="card-top" onclick="toggle(this)">
+        <span class="p-label">Base</span>
+        <span class="p-title">Prompt de style commun à toutes les illustrations</span>
+        <span class="p-toggle">▼</span>
+      </div>
+      <div class="card-body">
+        <pre>Black and white ink engraving illustration, highly detailed cross-hatching and fine line work, 19th century book illustration style. Set inside or around a traditional wooden sailing ship. Dramatic chiaroscuro lighting from a single oil lantern. Extreme attention to texture : visible wood grain on planks and crates, twisted rope details, worn fabric. Deep shadows with rich blacks, bright highlights on key elements. No color whatsoever, pure black ink on white paper. Horizontal format, slightly wider than tall.</pre>
+        <button class="copy-btn" onclick="copyText(this)">Copier</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="card-top" onclick="toggle(this)">
+        <span class="p-label">Page de titre</span>
+        <span class="p-title">Capitaine à la barre, navire fantôme, lumière solaire</span>
+        <span class="p-toggle">▼</span>
+      </div>
+      <div class="card-body">
+        <pre>[PROMPT BASE] + A young captain stands at the helm of a sailing ship, looking at the horizon at dawn. Behind him, the ghost silhouette of a larger, older ship fades into the morning mist. Mood: transition, inheritance, a new beginning.</pre>
+        <button class="copy-btn" onclick="copyText(this)">Copier</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="card-top" onclick="toggle(this)">
+        <span class="p-label">Art de la barre</span>
+        <span class="p-title">Mains sur la barre, mer en fond</span>
+        <span class="p-toggle">▼</span>
+      </div>
+      <div class="card-body">
+        <pre>[PROMPT BASE] + Close-up of a ship's large wooden helm wheel, two weathered hands gripping it firmly and confidently. Dramatic side lighting, deep shadows. The open sea is visible in the blurred background. Mood: control, calm determination, quiet strength.</pre>
+        <button class="copy-btn" onclick="copyText(this)">Copier</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="card-top" onclick="toggle(this)">
+        <span class="p-label">Préambule</span>
+        <span class="p-title">Jeune capitaine à la barre, vieux navire dans la brume</span>
+        <span class="p-toggle">▼</span>
+      </div>
+      <div class="card-body">
+        <pre>[PROMPT BASE] + A young captain stands at the helm of a sailing ship, looking at the horizon at dawn. Behind him, the ghost silhouette of a larger, older ship fades into the morning mist. Mood: transition, inheritance, a new beginning. Same style as previous illustrations.</pre>
+        <button class="copy-btn" onclick="copyText(this)">Copier</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="card-top" onclick="toggle(this)">
+        <span class="p-label">Chapitre 1</span>
+        <span class="p-title">Main sur une caisse dans la cale</span>
+        <span class="p-toggle">▼</span>
+      </div>
+      <div class="card-body">
+        <pre>[PROMPT BASE] + A weathered captain's hand resting firmly on a wooden crate inside a ship's dark hold. Ropes, barrels and other crates visible in the background. A single lantern hangs from a beam, casting dramatic light. The gesture is calm, deliberate, decisive.</pre>
+        <button class="copy-btn" onclick="copyText(this)">Copier</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="card-top" onclick="toggle(this)">
+        <span class="p-label">Chapitre 2</span>
+        <span class="p-title">Pont vide, mer calme, capitaine immobile</span>
+        <span class="p-toggle">▼</span>
+      </div>
+      <div class="card-body">
+        <pre>[PROMPT BASE] + The empty deck of a sailing ship on a perfectly calm sea. Sails perfectly set, ropes motionless. The captain stands alone near the helm, hands relaxed at his sides, looking at the still water. Golden midday light reflects on the glassy sea surface.</pre>
+        <button class="copy-btn" onclick="copyText(this)">Copier</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="card-top" onclick="toggle(this)">
+        <span class="p-label">Chapitre 3</span>
+        <span class="p-title">Marins qui discutent, voile qui pend</span>
+        <span class="p-toggle">▼</span>
+      </div>
+      <div class="card-body">
+        <pre>[PROMPT BASE] + A group of sailors gathered on deck, talking and gesturing animatedly among themselves. In the background, a single sail hangs slightly loose from its rigging. The captain watches from a distance, calm and observant.</pre>
+        <button class="copy-btn" onclick="copyText(this)">Copier</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="card-top" onclick="toggle(this)">
+        <span class="p-label">Chapitre 4</span>
+        <span class="p-title">Table de navigation, compas, instruments</span>
+        <span class="p-toggle">▼</span>
+      </div>
+      <div class="card-body">
+        <pre>[PROMPT BASE] + Close-up of a ship's compass and an open nautical chart spread on a wooden table. A captain's hand hovers above the compass needle without touching it. A lantern illuminates the scene. Fog visible through a small porthole in the background.</pre>
+        <button class="copy-btn" onclick="copyText(this)">Copier</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="card-top" onclick="toggle(this)">
+        <span class="p-label">Chapitre 5</span>
+        <span class="p-title">Vent contraire, capitaine calme à la barre</span>
+        <span class="p-toggle">▼</span>
+      </div>
+      <div class="card-body">
+        <pre>[PROMPT BASE] + Same black and white ink engraving style. Keep the captain at the helm scene, but tone down the storm significantly. The sea should be rough but not violent — choppy waves, sails straining sideways, the ship leaning slightly. No dramatic crashing waves. The mood is one of patience and resistance, not danger. The captain holds the wheel firmly but calmly.</pre>
+        <button class="copy-btn" onclick="copyText(this)">Copier</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="card-top" onclick="toggle(this)">
+        <span class="p-label">Chapitre 6</span>
+        <span class="p-title">Capitaine descend à la cabine, équipage sur le pont</span>
+        <span class="p-toggle">▼</span>
+      </div>
+      <div class="card-body">
+        <pre>[PROMPT BASE] + A captain descends alone the steps from the deck to his cabin below, his hand resting on the wooden railing. Through a porthole, the night sea is visible. The crew continues working on deck above. Mood: trust, letting go, rest after long duty.</pre>
+        <button class="copy-btn" onclick="copyText(this)">Copier</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="card-top" onclick="toggle(this)">
+        <span class="p-label">Épilogue</span>
+        <span class="p-title">Navire amarré au coucher du soleil</span>
+        <span class="p-toggle">▼</span>
+      </div>
+      <div class="card-body">
+        <pre>[PROMPT BASE] + A sailing ship moored quietly at a stone dock at sunset. Sails folded, ropes at rest, the deck empty and silent. The captain stands on the dock looking back at his ship one last time. Long shadows, warm golden light fading on the water. A mood of quiet accomplishment.</pre>
+        <button class="copy-btn" onclick="copyText(this)">Copier</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CORRECTIONS -->
+  <div class="category">
+    <div class="cat-header">
+      <span class="cat-icon">✏️</span>
+      <span class="cat-title">Prompts corrections illustrations</span>
+      <span class="cat-count">1 prompt</span>
+    </div>
+    <div class="prompt-card">
+      <div class="card-top" onclick="toggle(this)">
+        <span class="p-label">Générique</span>
+        <span class="p-title">Modifier une illustration en gardant le style</span>
+        <span class="p-toggle">▼</span>
+      </div>
+      <div class="card-body">
+        <pre>Modify the previous illustration while keeping exactly the same style : black and white ink engraving, cross-hatching, 19th century book illustration, dramatic chiaroscuro lighting. Only change the following : [DÉCRIRE ICI CE QU'ON VEUT MODIFIER]. Keep all other elements identical — composition, texture, atmosphere, format.</pre>
+        <button class="copy-btn" onclick="copyText(this)">Copier</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MISE EN PAGE -->
+  <div class="category">
+    <div class="cat-header">
+      <span class="cat-icon">📐</span>
+      <span class="cat-title">Prompts mise en page</span>
+      <span class="cat-count">1 prompt</span>
+    </div>
+    <div class="prompt-card">
+      <div class="card-top" onclick="toggle(this)">
+        <span class="p-label">PDF V1</span>
+        <span class="p-title">Régénérer le PDF imprimable A5</span>
+        <span class="p-toggle">▼</span>
+      </div>
+      <div class="card-body">
+        <pre>Regenerate the PDF using generate_book.py from the GitHub repo abrenov35/calme-sur-le-pont. Format A5, Garamond/Helvetica, images from assets/images/, output to assets/pdf/. Keep all chapter numbering: Préambule, Ch1-Ch6, Épilogue.</pre>
+        <button class="copy-btn" onclick="copyText(this)">Copier</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- V2 -->
+  <div class="category">
+    <div class="cat-header">
+      <span class="cat-icon">✍️</span>
+      <span class="cat-title">Prompts rédaction V2</span>
+      <span class="cat-count">1 prompt</span>
+    </div>
+    <div class="prompt-card">
+      <div class="card-top" onclick="toggle(this)">
+        <span class="p-label">Structure</span>
+        <span class="p-title">Structure de chaque chapitre V2</span>
+        <span class="p-toggle">▼</span>
+      </div>
+      <div class="card-body">
+        <pre>Pour chaque chapitre V2, développer en 4 parties :
+1. LA SCÈNE — Le texte original V1 enrichi et développé. Narration maritime concrète.
+2. L'INTROSPECTION — Le Capitaine se retire dans sa cabine. Sa posture intérieure face à la situation.
+3. L'ÉCHO — Une interaction avec un membre de l'équipage. Ancrage humain, problématique universelle (angoisse, délégation, bruit de fond…).
+4. LA NOTE DE BORD — Une maxime courte et actionnable. Ce que le lecteur emporte.
+
+Ton : poétique pour l'immersion, clinique pour le développement personnel. Style sobre, phrases courtes, pas de jargon.</pre>
+        <button class="copy-btn" onclick="copyText(this)">Copier</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function toggle(el) {
+  const body = el.nextElementSibling;
+  const arrow = el.querySelector('.p-toggle');
+  body.classList.toggle('open');
+  arrow.textContent = body.classList.contains('open') ? '▲' : '▼';
+}
+function copyText(btn) {
+  const pre = btn.previousElementSibling;
+  navigator.clipboard.writeText(pre.textContent.trim());
+  btn.textContent = 'Copié ✓';
+  setTimeout(() => btn.textContent = 'Copier', 2000);
+}
+</script>
+</body>
+</html>

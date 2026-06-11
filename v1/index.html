@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>V1 — Le Calme sur le Pont</title>
+  <style>
+    :root { --navy:#162D49; --gold:#C8A464; --beige:#F3EAE2; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:Georgia,serif; background:var(--beige); color:#1a1a1a; }
+
+    /* TOP NAV */
+    .topnav { background:var(--navy); padding:12px 24px; display:flex; align-items:center; gap:16px; position:sticky; top:0; z-index:100; }
+    .topnav a { color:#8a9db0; text-decoration:none; font-family:'Helvetica Neue',sans-serif; font-size:11px; letter-spacing:1px; }
+    .topnav a:hover { color:var(--gold); }
+    .topnav .sep { color:#2a4060; }
+    .topnav .current { color:var(--gold); }
+    .badge-v1 { background:rgba(200,164,100,0.2); color:var(--gold); font-family:'Helvetica Neue',sans-serif; font-size:10px; letter-spacing:2px; padding:3px 10px; border-radius:20px; border:1px solid rgba(200,164,100,0.3); margin-left:auto; }
+
+    /* BOOK */
+    .book { max-width:680px; margin:0 auto; padding:60px 32px 80px; }
+
+    /* COVER PAGE */
+    .cover { text-align:center; padding:60px 0 40px; border-bottom:1px solid #d8cfc6; margin-bottom:60px; }
+    .cover-img { width:min(420px,100%); margin-bottom:40px; }
+    .cover h1 { font-size:clamp(22px,4vw,34px); font-weight:normal; letter-spacing:3px; margin-bottom:10px; }
+    .cover .sub { font-style:italic; font-size:14px; color:#666; margin-bottom:6px; line-height:1.7; }
+    .cover .author { font-family:'Helvetica Neue',sans-serif; font-size:13px; color:#444; margin-top:16px; }
+    .cover .collab { font-family:'Helvetica Neue',sans-serif; font-size:11px; color:#888; font-style:italic; margin-top:6px; }
+    .cover .quote-block { margin:32px auto 0; max-width:400px; font-style:italic; font-size:13px; color:#666; line-height:1.8; }
+    .cover .quote-attr { font-family:'Helvetica Neue',sans-serif; font-size:11px; color:#888; margin-top:8px; }
+
+    /* CHAPTER */
+    .chapter { margin-bottom:72px; padding-bottom:72px; border-bottom:1px solid #d8cfc6; }
+    .chapter:last-child { border-bottom:none; }
+    .chapter-label { font-family:'Helvetica Neue',sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+    .chapter-title { font-size:clamp(18px,3vw,26px); font-weight:normal; letter-spacing:1px; margin-bottom:24px; }
+    .divider { width:40px; height:1px; background:var(--gold); margin-bottom:28px; }
+    p { font-size:15px; line-height:1.9; color:#2a2a2a; margin-bottom:14px; text-align:justify; }
+    .closing { font-style:italic; font-size:16px; text-align:center; color:#444; margin:32px 0; }
+
+    /* ILLUSTRATION */
+    .illus { margin:36px 0; text-align:center; }
+    .illus img { width:100%; max-width:580px; border:1px solid #d0c8c0; }
+
+    /* BACK COVER */
+    .back { background:white; border:1px solid #d8cfc6; border-radius:4px; padding:36px; margin-top:60px; }
+    .back h2 { font-size:18px; font-weight:normal; letter-spacing:1px; margin-bottom:20px; text-align:center; }
+    .back p { font-size:14px; }
+    .back .back-author { text-align:center; margin-top:24px; font-family:'Helvetica Neue',sans-serif; font-weight:bold; font-size:13px; }
+
+    /* PDF LINK */
+    .pdf-link { text-align:center; margin-bottom:48px; }
+    .pdf-link a { display:inline-block; padding:12px 28px; background:var(--navy); color:white; text-decoration:none; font-family:'Helvetica Neue',sans-serif; font-size:12px; letter-spacing:1px; border-radius:3px; }
+    .pdf-link a:hover { background:#1e3d61; }
+  </style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="../index.html">Accueil</a>
+  <span class="sep">›</span>
+  <span class="current">Version 1</span>
+  <span class="badge-v1">V1 — Édition finale</span>
+</nav>
+
+<div class="book">
+
+  <!-- COVER -->
+  <div class="cover">
+    <img src="../assets/images/cover.jpeg" class="cover-img" alt="Couverture"/>
+    <h1>LE CALME SUR LE PONT</h1>
+    <p class="sub">Chroniques maritimes sur le bruit du monde<br/>et la sérénité des horizons</p>
+    <p class="author">Younès Belgnaoui</p>
+    <p class="collab">Coécrit au fil d'un voyage avec Claude, Gemini et ChatGPT.</p>
+    <div class="quote-block">
+      « Tout marin, pour dompter les vents et les courants,<br/>
+      met tour à tour le cap sur des points différents. »
+      <div class="quote-attr">— Victor Hugo</div>
+    </div>
+  </div>
+
+  <!-- PDF -->
+  <div class="pdf-link">
+    <a href="../assets/pdf/Le_Calme_sur_le_Pont_IMPRESSION.pdf" target="_blank">⬇ Télécharger le PDF imprimable</a>
+  </div>
+
+  <!-- L'ART DE TENIR LA BARRE -->
+  <div class="chapter">
+    <div class="chapter-label">Introduction</div>
+    <div class="chapter-title">L'ART DE TENIR LA BARRE</div>
+    <div class="divider"></div>
+    <p>Bien avant que le navire ne prenne le large, il faut comprendre une chose essentielle : le Capitaine n'est pas un individu seul, mais une fonction. C'est une part de nous-mêmes, un état d'esprit que l'on enfile comme une vareuse lorsque les vents forcent ou, plus difficilement, lorsque la mer devient d'huile.</p>
+    <p>Sur ce navire, le rôle du Capitaine n'est pas de tout diriger, mais de savoir protéger la « cabine ». C'est cet endroit — réel ou symbolique — où l'on se réfugie pour préserver sa clarté, pour anticiper les courants plutôt que de subir chaque clapotis, et pour ne pas laisser le tumulte du pont dicter la route.</p>
+    <p>Certains d'entre nous sont des Capitaines nés : ils excellent dans l'action brute, là où la tempête exige des décisions immédiates. Ils sont les rois du large, les maîtres des manœuvres complexes. Pourtant, ces mêmes Capitaines se trouvent parfois démunis face au calme plat, là où l'absence d'urgence devient, paradoxalement, une source d'angoisse.</p>
+    <p>Ce livre n'est pas le récit d'une personne en particulier, mais le voyage d'une conscience. Il explore cette quête permanente : comment rester maître de son cap, que l'on soit en pleine tempête ou dans le silence trompeur des jours sans vent.</p>
+    <p>À travers ces chroniques, le Capitaine observe, prépare, protège et veille. Mais il découvre surtout que le véritable leadership ne consiste pas à être le plus fort dans la tourmente, mais à être celui qui, par sa seule présence apaisée, permet à tout l'équipage de naviguer avec sérénité.</p>
+    <p>Peu importe qui tient la barre, ce qui compte, c'est de savoir quand se retirer dans sa cabine, quand écouter le bruit de fond, et quand décider, en toute conscience, que le navire est prêt à affronter l'océan.</p>
+    <p class="closing">Embarquez. Vous y reconnaîtrez peut-être le Capitaine qui sommeille en vous.</p>
+    <div class="illus"><img src="../assets/images/art_barre.jpeg" alt="L'Art de tenir la barre"/></div>
+  </div>
+
+  <!-- PRÉAMBULE -->
+  <div class="chapter">
+    <div class="chapter-label">Préambule</div>
+    <div class="chapter-title">L'HÉRITAGE DU LARGE</div>
+    <div class="divider"></div>
+    <p>Bien avant que notre Capitaine ne tienne la barre, un autre navire ouvrait la route.</p>
+    <p>C'était un bâtiment imposant, connu de tous les marins de la région. Lorsque les vents forçaient ou que les brumes recouvraient la mer, sa simple présence suffisait souvent à rassurer les autres équipages.</p>
+    <p>Pendant des années, il traversa les saisons sans jamais quitter sa mission.</p>
+    <p>Puis vint le jour où il prit la direction du large.</p>
+    <p>Sa silhouette s'éloigna peu à peu jusqu'à disparaître derrière l'horizon.</p>
+    <p>La mer resta la même. Les vents continuèrent de souffler. Les étoiles poursuivirent leur course au-dessus des mâts.</p>
+    <p>Mais pour ceux qui restaient, quelque chose avait changé.</p>
+    <p>Les navires durent apprendre à poursuivre leur route sans ce repère familier.</p>
+    <p>Parmi eux se trouvait un jeune capitaine.</p>
+    <p>Il n'avait ni l'expérience ni la renommée de son prédécesseur. Pourtant, il possédait une qualité particulière : il observait.</p>
+    <p>Il remarquait les détails que d'autres laissaient passer. Une voile légèrement détendue. Un cordage usé. Un changement de vent presque imperceptible. Une réserve qui diminuait plus vite que prévu.</p>
+    <p>Avec les années, cette attention constante devint une habitude.</p>
+    <p>Chaque soir, il préparait le lendemain. Chaque traversée commençait bien avant le départ.</p>
+    <p>Peu à peu, les marins apprirent à lui faire confiance.</p>
+    <p>Et lorsqu'ils regardaient sa manière de tenir le cap, certains retrouvaient parfois quelque chose de familier.</p>
+    <p>Comme un sillage ancien qui continuait d'avancer sous la surface.</p>
+    <p>Comme un héritage transmis par la mer elle-même.</p>
+    <div class="illus"><img src="../assets/images/preambule.jpeg" alt="L'Héritage du Large"/></div>
+  </div>
+
+  <!-- CHAPITRE 1 -->
+  <div class="chapter">
+    <div class="chapter-label">Chapitre 1</div>
+    <div class="chapter-title">LE DON DU CAPITAINE</div>
+    <div class="divider"></div>
+    <p>Le soleil n'était pas encore levé lorsque le Capitaine monta sur le pont.</p>
+    <p>Une légère brume flottait au-dessus de l'eau. Le port sommeillait encore tandis que les derniers préparatifs du départ s'achevaient dans le calme.</p>
+    <p>Comme avant chaque traversée, il parcourut lentement le navire.</p>
+    <p>Il observa les amarres. Examina les voiles. Inspecta les cales. Vérifia les réserves.</p>
+    <p>Ce rituel pouvait sembler excessif. Pourtant, il remarquait souvent ce que personne d'autre n'avait vu.</p>
+    <p>Ce matin-là, une caisse de matériel avait été arrimée du mauvais côté de la cale.</p>
+    <p>L'erreur paraissait insignifiante. Elle fut simplement déplacée.</p>
+    <p>Quelques heures plus tard, la mer se forma davantage que prévu. Le navire prit de la gîte. Plusieurs chargements glissèrent légèrement sous l'effet du roulis.</p>
+    <p>Tous, sauf celui qui avait été corrigé avant le départ.</p>
+    <p>La traversée se poursuivit sans incident.</p>
+    <p>Au fil de la journée, le Capitaine fit également remplacer une poulie qui commençait à fatiguer, vérifier les réserves d'eau douce et renforcer un cordage dont les fibres montraient des signes d'usure.</p>
+    <p>Rien d'extraordinaire. Seulement une succession d'ajustements modestes.</p>
+    <p>Lorsque le soleil commença à disparaître derrière l'horizon, le navire poursuivait sa route avec la même régularité qu'au matin.</p>
+    <p>Le Capitaine tenait la barre en silence.</p>
+    <p>Au loin, quelques oiseaux tournaient lentement au-dessus des vagues. Il observa leur trajectoire et modifia légèrement le cap.</p>
+    <p>Personne ne posa de question.</p>
+    <p>À bord, chacun savait désormais que certaines difficultés étaient souvent résolues bien avant d'apparaître.</p>
+    <div class="illus"><img src="../assets/images/ch1.jpeg" alt="Le Don du Capitaine"/></div>
+  </div>
+
+  <!-- CHAPITRE 2 -->
+  <div class="chapter">
+    <div class="chapter-label">Chapitre 2</div>
+    <div class="chapter-title">LE CALME SUR LE PONT</div>
+    <div class="divider"></div>
+    <p>La mer était si calme que les nuages semblaient flotter à sa surface.</p>
+    <p>Depuis l'aube, le navire avançait sous un vent régulier. Les voiles étaient parfaitement établies. Les cordages demeuraient immobiles. Rien ne troublait la traversée.</p>
+    <p>Pourtant, le Capitaine continuait à parcourir le pont.</p>
+    <p>Il vérifiait les amarres. Puis les réserves. Puis les voiles. Puis les lanternes. Puis revenait vers les amarres.</p>
+    <p>Autour de lui, tout fonctionnait pourtant comme prévu. Les marins occupaient leurs postes. Le mécanicien entretenait son matériel. Les hommes de quart surveillaient l'horizon. Le navire avançait sans difficulté.</p>
+    <p>Au fil de la matinée, le Capitaine ralentit peu à peu son pas.</p>
+    <p>Il observa simplement le travail de l'équipage. Les gestes étaient précis. Les habitudes bien installées. Le bateau semblait connaître sa route autant que ceux qui le dirigeaient.</p>
+    <p>Alors, pour une fois, il s'accorda quelques instants de repos près de la barre.</p>
+    <p>Le soleil poursuivit sa course. La mer demeura paisible. Personne ne courut. Personne n'éleva la voix. Le navire continua son voyage avec la même assurance.</p>
+    <p>Au coucher du soleil, le Capitaine regarda les voiles teintées d'or.</p>
+    <p>Il réalisa que le navire avait parfaitement poursuivi sa route sans qu'il ait eu besoin d'intervenir à chaque instant.</p>
+    <p>Les marins avaient accompli leur travail. Les voiles avaient porté le bâtiment. Le vent avait soufflé comme prévu.</p>
+    <p>Et la mer semblait savoir exactement ce qu'elle avait à faire.</p>
+    <div class="illus"><img src="../assets/images/ch2.jpeg" alt="Le Calme sur le Pont"/></div>
+  </div>
+
+  <!-- CHAPITRE 3 -->
+  <div class="chapter">
+    <div class="chapter-label">Chapitre 3</div>
+    <div class="chapter-title">LE BRUIT DE FOND</div>
+    <div class="divider"></div>
+    <p>La journée avait commencé comme beaucoup d'autres. Un vent léger soufflait du large. Le ciel était dégagé. Le navire avançait régulièrement.</p>
+    <p>Au milieu de la matinée, une voile se coinça légèrement dans un cordage usé.</p>
+    <p>L'incident était mineur. Le bateau poursuivait sa route. Le vent restait favorable. Le cap ne changeait pas.</p>
+    <p>Pourtant, l'information circula rapidement d'un bout à l'autre du navire.</p>
+    <p>À mesure qu'elle se propageait, chacun y ajoutait ses suppositions. On évoqua des retards. Des complications. D'autres problèmes qui pourraient survenir.</p>
+    <p>Le sujet occupa bientôt davantage les conversations que la navigation elle-même.</p>
+    <p>Pendant ce temps, la voile restait exactement dans le même état. Ni plus ni moins.</p>
+    <p>Finalement, le vieux maître d'équipage examina le cordage. La partie usée fut remplacée. Quelques minutes plus tard, tout fonctionnait de nouveau parfaitement.</p>
+    <p>L'incident était terminé. Le navire poursuivit sa route.</p>
+    <p>Le soir venu, tandis que le soleil descendait lentement vers l'horizon, la traversée semblait n'avoir connu aucun événement particulier.</p>
+    <p>La voile était réparée. Le vent soufflait toujours. La mer demeurait calme.</p>
+    <p>Seul le bruit qui avait entouré le problème avait été plus important que le problème lui-même.</p>
+    <p>Au large, les vagues continuaient de naître puis de disparaître. Comme elles l'avaient toujours fait.</p>
+    <div class="illus"><img src="../assets/images/ch3.jpeg" alt="Le Bruit de Fond"/></div>
+  </div>
+
+  <!-- CHAPITRE 4 -->
+  <div class="chapter">
+    <div class="chapter-label">Chapitre 4</div>
+    <div class="chapter-title">LES INSTRUMENTS DE BORD</div>
+    <div class="divider"></div>
+    <p>Depuis plusieurs jours, le navire naviguait sous un ciel changeant.</p>
+    <p>Les vents restaient favorables, mais une légère brume apparaissait régulièrement à l'horizon. Rien d'inquiétant. Rien d'exceptionnel. Seulement cette fine couche grise qui effaçait parfois les repères les plus lointains.</p>
+    <p>Le Capitaine connaissait bien ces conditions. Dans ce genre de traversée, l'œil seul ne suffisait plus toujours. Il fallait faire confiance aux instruments.</p>
+    <p>Le compas indiquait le cap. Les cartes confirmaient la route. Les relevés correspondaient aux prévisions. Tout était cohérent.</p>
+    <p>Pourtant, le Capitaine revenait régulièrement consulter les mêmes informations. Il vérifiait une première fois. Puis une seconde. Puis encore une autre.</p>
+    <p>Chaque contrôle confirmait exactement la même chose. Le navire suivait sa route.</p>
+    <p>Les jours passèrent ainsi. Chaque matin, les instruments donnaient les mêmes indications. Chaque soir, le navire se trouvait exactement là où il devait être.</p>
+    <p>Peu à peu, le Capitaine commença à observer autre chose. Il remarqua le calme des marins. La confiance du maître d'équipage. La précision des hommes de quart.</p>
+    <p>Personne ne semblait inquiet. Personne ne remettait constamment en question la direction prise. Tous accomplissaient simplement leur tâche. Comme si la route était déjà connue.</p>
+    <p>Un matin, alors que la brume recouvrait encore la mer, le Capitaine resta quelques instants immobile devant le compas.</p>
+    <p>L'aiguille indiquait le nord. Comme elle l'avait fait la veille. Comme elle le ferait probablement le lendemain.</p>
+    <p>Ce jour-là, il referma la carte un peu plus tôt que d'habitude.</p>
+    <p>Non parce qu'il cessait d'être prudent. Non parce qu'il abandonnait sa vigilance. Simplement parce que tout ce qui devait être vérifié l'avait déjà été.</p>
+    <p>Le navire poursuivit sa route. Les voiles restèrent bien orientées. Le vent demeura constant. Les instruments continuèrent silencieusement leur travail.</p>
+    <p>À la tombée du jour, la brume se dissipa peu à peu. L'horizon réapparut.</p>
+    <p>Le Capitaine regarda longtemps la ligne claire où le ciel rejoignait la mer.</p>
+    <p>Il comprit alors qu'il n'était pas seul à guider le voyage. Les cartes étaient là. Les instruments aussi. L'équipage également. Tout un ensemble de repères veillait déjà sur la traversée.</p>
+    <p>La nuit tomba lentement sur l'océan. Le compas continuait de pointer sa direction avec la même discrétion qu'au premier jour.</p>
+    <p>Et le navire avançait toujours.</p>
+    <div class="illus"><img src="../assets/images/ch4.jpeg" alt="Les Instruments de Bord"/></div>
+  </div>
+
+  <!-- CHAPITRE 5 -->
+  <div class="chapter">
+    <div class="chapter-label">Chapitre 5</div>
+    <div class="chapter-title">LE VENT CONTRAIRE</div>
+    <div class="divider"></div>
+    <p>La traversée avait été préparée avec soin.</p>
+    <p>Les cartes avaient été vérifiées. Les réserves chargées. Les voiles inspectées. Les cordages remplacés lorsque cela était nécessaire. Rien n'avait été laissé au hasard.</p>
+    <p>Le matin du départ, la mer était calme. Le vent soufflait dans la bonne direction. L'horizon était dégagé. Tout semblait promettre une traversée paisible.</p>
+    <p>Durant les premiers jours, le navire avança exactement comme prévu. Les milles défilaient. Les quarts s'enchaînaient. Le voyage suivait la route tracée sur les cartes.</p>
+    <p>Puis, un matin, le vent changea.</p>
+    <p>Rien de spectaculaire. Aucun grain à l'horizon. Aucune tempête. Simplement un vent qui décida de souffler autrement.</p>
+    <p>Les voiles furent ajustées. Le navire ralentit. La progression devint moins directe. Il fallut modifier l'allure. Rechercher d'autres angles. Composer avec la mer.</p>
+    <p>Le Capitaine consulta les cartes. Elles étaient exactes. Il vérifia les instruments. Ils fonctionnaient parfaitement. Il observa les voiles. Elles étaient correctement réglées. Tout était en ordre.</p>
+    <p>Et pourtant, le vent demeurait contraire.</p>
+    <p>Pendant plusieurs jours, la situation resta la même. Le navire avançait toujours. Mais moins vite. Chaque mille parcouru demandait davantage de patience.</p>
+    <p>Certains marins regardaient régulièrement l'horizon en espérant voir le vent tourner. D'autres calculaient le retard accumulé. Le Capitaine observait simplement la mer.</p>
+    <p>Il existe des traversées où rien n'est cassé. Rien n'est perdu. Rien n'est mal préparé. Et pourtant, le voyage devient plus difficile. La mer possède parfois ses propres intentions.</p>
+    <p>Au fil des jours, le Capitaine comprit une chose que les cartes ne mentionnaient jamais.</p>
+    <p>Préparer parfaitement un voyage ne donne pas le pouvoir de choisir le vent.</p>
+    <p>Aucun marin ne commande les courants. Aucun capitaine ne décide de la météo. Tout ce qu'il peut faire est préparer son navire du mieux possible lorsque la mer est calme. Puis poursuivre sa route lorsque les conditions changent.</p>
+    <p>Un soir, alors que le soleil disparaissait derrière les vagues, le vent commença enfin à tourner. D'abord légèrement. Puis davantage. Les voiles retrouvèrent progressivement leur pleine puissance. Le navire reprit de la vitesse. L'équipage retrouva le sourire.</p>
+    <p>Le vent n'avait pas toujours soufflé dans la direction espérée. La route n'avait pas toujours été celle qui figurait sur les cartes.</p>
+    <p>Et pourtant, le navire avançait toujours.</p>
+    <p>Devant lui, l'horizon s'ouvrait de nouveau. Comme il l'avait toujours fait.</p>
+    <div class="illus"><img src="../assets/images/ch5_vent_contraire.jpeg" alt="Le Vent Contraire"/></div>
+  </div>
+
+  <!-- CHAPITRE 6 -->
+  <div class="chapter">
+    <div class="chapter-label">Chapitre 6</div>
+    <div class="chapter-title">LE LONG COURS</div>
+    <div class="divider"></div>
+    <p>Le voyage durait depuis de nombreuses semaines.</p>
+    <p>Les ports visités commençaient à se mélanger dans les souvenirs. Certaines escales semblaient proches. D'autres appartenaient déjà à une autre saison.</p>
+    <p>Le Capitaine avait connu des mers calmes. Des vents contraires. Des journées lumineuses. Quelques nuits plus difficiles. Comme tous les marins qui naviguent longtemps.</p>
+    <p>Avec les années, il avait compris une chose que les jeunes capitaines découvrent rarement dès leurs premières traversées.</p>
+    <p>Un océan ne se franchit pas en une journée.</p>
+    <p>Il ne se franchit pas non plus en restant continuellement debout à surveiller chaque vague.</p>
+    <p>La mer est patiente. Le voyage aussi.</p>
+    <p>Certains matins, le vent pousse naturellement le navire. D'autres jours, il faut accepter d'avancer plus lentement. Parfois, il suffit simplement de tenir le cap.</p>
+    <p>Au fil du temps, le Capitaine apprit à respecter ce rythme. Il continua à observer. À préparer. À anticiper. Mais il apprit aussi à s'économiser. À laisser l'équipage prendre le quart. À partager certaines responsabilités. À accepter que chaque instant ne dépende pas uniquement de lui.</p>
+    <p>Un soir d'été, alors que la mer était particulièrement calme, il resta longtemps à regarder le soleil disparaître derrière l'horizon.</p>
+    <p>Les voiles se découpaient en ombres noires sur le ciel rougeoyant. Le navire avançait paisiblement. Les hommes occupaient leurs postes. Tout semblait à sa place.</p>
+    <p>Pour la première fois depuis longtemps, le Capitaine quitta le pont avant la tombée complète de la nuit.</p>
+    <p>Il descendit lentement vers sa cabine.</p>
+    <p>Derrière lui, rien ne s'arrêta. Le vent continua de souffler. Les vagues continuèrent de porter le navire. Les marins poursuivirent leur veille. La traversée continua.</p>
+    <p>Quelques heures plus tard, lorsqu'il remonta sur le pont, les premières lueurs de l'aube apparaissaient déjà à l'est.</p>
+    <p>Le navire avait parcouru plusieurs milles. La route était bonne. Le cap était maintenu. L'océan s'étendait toujours devant eux.</p>
+    <p>Le Capitaine observa l'horizon puis esquissa un léger sourire.</p>
+    <p>La mer n'avait pas eu besoin de lui pendant chaque minute de la nuit.</p>
+    <p>Et pourtant, le voyage avançait toujours.</p>
+    <p>Le navire poursuivait sa route vers le large. Comme il l'avait toujours fait. Comme il continuerait encore longtemps à le faire.</p>
+    <div class="illus"><img src="../assets/images/ch6_long_cours.jpeg" alt="Le Long Cours"/></div>
+  </div>
+
+  <!-- ÉPILOGUE -->
+  <div class="chapter">
+    <div class="chapter-label">Épilogue</div>
+    <div class="chapter-title">LE PORT</div>
+    <div class="divider"></div>
+    <p>Le soleil descendait lentement derrière les quais.</p>
+    <p>Le navire était amarré depuis plusieurs heures. Les voiles avaient été pliées. Les cordages reposaient sans tension. L'équipage avait quitté le pont depuis longtemps.</p>
+    <p>Quelques mouettes tournaient encore au-dessus du port.</p>
+    <p>Le Capitaine resta seul quelques instants à observer la mer. Au loin, l'horizon se confondait avec le ciel du soir.</p>
+    <p>Il repensa aux traversées passées. Aux vents favorables. Aux tempêtes. Aux longues nuits de veille. Aux routes parcourues.</p>
+    <p>Le navire avait changé. L'équipage aussi. Et lui également.</p>
+    <p>Il y avait eu un temps où il croyait devoir surveiller chaque corde, chaque voile et chaque mouvement de la mer.</p>
+    <p>Aujourd'hui, le bateau reposait paisiblement contre le quai. Solide. Fiable. Prêt pour d'autres voyages.</p>
+    <p>Le Capitaine regarda une dernière fois l'horizon.</p>
+    <p>Puis il quitta le pont.</p>
+    <p>Derrière lui, le navire demeura immobile.</p>
+    <p>Comme s'il lui rappelait doucement qu'il savait désormais tenir la mer lui aussi.</p>
+    <p class="closing">« Le sillage était toujours là. »</p>
+    <div class="illus"><img src="../assets/images/epilogue.jpeg" alt="Le Port"/></div>
+  </div>
+
+  <!-- QUATRIÈME DE COUVERTURE -->
+  <div class="back">
+    <h2>LE CALME SUR LE PONT</h2>
+    <p>Au large, les tempêtes ne sont pas toujours celles que l'on croit.</p><br/>
+    <p>À travers les chroniques d'un Capitaine et de son équipage, ce livre raconte des histoires simples de navigation : une voile qui se bloque, une mer soudainement calme, un instrument que l'on consulte trop souvent, un vent qui change de direction ou un horizon que l'on peine à distinguer.</p><br/>
+    <p>Au fil des traversées, le Capitaine observe, anticipe, protège et veille sur son navire. Mais la mer lui enseigne parfois que les plus longues routes ne se parcourent pas seul, que certains vents ne se commandent pas et que même les bâtiments les mieux préparés doivent apprendre à composer avec l'océan.</p><br/>
+    <p>Entre récits maritimes, souvenirs du large et horizons lointains, <em>Le Calme sur le Pont</em> est une invitation à embarquer pour un voyage où chacun reconnaîtra peut-être une part de sa propre traversée.</p>
+    <div class="back-author">Younès Belgnaoui</div>
+  </div>
+
+</div>
+</body>
+</html>
