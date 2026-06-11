@@ -871,9 +871,8 @@ function renderPreview() {
 // ══════════════════════════════════════════════
 function renderHistory() {
   const container = document.getElementById('historyList');
-  const filtered = currentChapter
-    ? history.map((h, i) => ({...h, _i: i})).filter(h => h.chapterId === currentChapter)
-    : history.map((h, i) => ({...h, _i: i}));
+  const all = history.map((h, i) => ({...h, _i: i}));
+  const filtered = currentChapter ? all.filter(h => h.chapterId === currentChapter) : all;
   if (filtered.length === 0) {
     container.innerHTML = '<div style="font-size:12px;color:#bbb;font-style:italic;text-align:center;padding:16px">Aucune modification pour ce chapitre</div>';
     return;
