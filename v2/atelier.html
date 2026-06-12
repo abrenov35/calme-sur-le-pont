@@ -687,6 +687,7 @@ function normalizeForSearch(s) {
   return s
     .replace(/[\u2018\u2019\u02BC\uFF07]/g, "'")
     .replace(/[\u201C\u201D]/g, '"')
+    .replace(/\*/g, '')
     .replace(/\s+/g, ' ')
     .trim();
 }
@@ -705,6 +706,7 @@ function findFuzzy(str, search) {
   for (let i = 0; i < str.length; i++) {
     let ch = str[i];
     ch = ch.replace(/[\u2018\u2019\u02BC\uFF07]/g, "'").replace(/[\u201C\u201D]/g, '"');
+    if (ch === '*') continue;
     if (/\s/.test(ch)) {
       if (lastWasSpace) continue;
       norm += ' '; map.push(i); lastWasSpace = true;
@@ -770,9 +772,7 @@ function applyReplace() {
   });
 
   if (count === 0) {
-    const sample = v2.map(b => b.title || b.text || (b.lines && b.lines[0]) || '').filter(Boolean).slice(0,1)[0] || '';
-    console.log('DEBUG v2 blocks:', JSON.parse(JSON.stringify(v2)));
-    status.textContent = 'Texte introuvable dans la V2. (1er bloc: "' + sample.substring(0,40) + '...")';
+    status.textContent = 'Texte introuvable dans la V2.';
     status.style.color = '#c0392b';
     return;
   }
