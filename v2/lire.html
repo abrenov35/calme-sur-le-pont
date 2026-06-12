@@ -305,6 +305,21 @@ const V1_TEXTS = {
   ]
 };
 
+function mergeParagraphs(blocks) {
+  const merged = [];
+  let buffer = [];
+  blocks.forEach(b => {
+    if (b.type === 'p') {
+      buffer.push(b.text);
+    } else {
+      if (buffer.length) { merged.push({type:'p', text: buffer.join(' ')}); buffer = []; }
+      merged.push(b);
+    }
+  });
+  if (buffer.length) merged.push({type:'p', text: buffer.join(' ')});
+  return merged;
+}
+
 function renderBlocksHTML(blocks) {
   let html = '';
   blocks.forEach(block => {
@@ -349,7 +364,7 @@ function renderPreview(chapterId) {
     <div class="ch-divider"></div>
   `;
 
-  html += `<div class="v1-zone">${renderBlocksHTML(v1)}</div>`;
+  html += `<div class="v1-zone">${renderBlocksHTML(mergeParagraphs(v1))}</div>`;
 
   if (v2.length > 0) {
     html += `<div class="v2-separator">
