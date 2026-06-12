@@ -23,9 +23,23 @@
     .nav-link .title { font-size:15px; color:white; }
     .nav-link .desc { font-size:11px; color:#607080; margin-top:2px; font-family:'Helvetica Neue',sans-serif; }
     footer { margin-top:48px; font-family:'Helvetica Neue',sans-serif; font-size:10px; color:#3a5060; text-align:center; letter-spacing:1px; }
+    .topnav { background:var(--navy); padding:12px 24px; display:flex; align-items:center; gap:16px; position:fixed; top:0; left:0; right:0; z-index:100; }
+    .topnav a, .topnav .current { color:#8a9db0; text-decoration:none; font-family:'Helvetica Neue',sans-serif; font-size:11px; letter-spacing:1px; }
+    .topnav a:hover { color:var(--gold); }
+    .topnav .sep { color:#2a4060; }
+    .topnav .current { color:var(--gold); }
   </style>
 </head>
 <body>
+  <nav class="topnav">
+    <span class="current">Accueil</span>
+    <span class="sep">›</span>
+    <a href="v1/index.html">Version 1</a>
+    <span class="sep">›</span>
+    <a href="v2/index.html">Version 2</a>
+    <span class="sep">›</span>
+    <a href="v2/atelier.html">Atelier</a>
+  </nav>
   <img src="assets/images/cover.jpeg" class="cover-img" alt="Le Calme sur le Pont"/>
   <div class="title-block">
     <div class="eyebrow">Younès Belgnaoui</div>
