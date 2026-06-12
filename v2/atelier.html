@@ -678,6 +678,60 @@ function copyPrompt() {
   setTimeout(() => btn.textContent = 'Copier', 2000);
 }
 
+function normalizeForSearch(s) {
+  return s
+    .replace(/[\u2018\u2019\u02BC\uFF07]/g, "'")
+    .replace(/[\u201C\u201D]/g, '"')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+// Trouve la première occurrence de `search` dans `str` en ignorant les différences
+// d'espaces/apostrophes, et renvoie les indices [start, end] dans `str` d'origine.
+function findFuzzy(str, search) {
+  const normSearch = normalizeForSearch(search);
+  if (!normSearch) return null;
+  const searchTokens = normSearch.split(' ');
+
+  // Construit une version normalisée de str avec une table de correspondance d'indices
+  const map = []; // map[i] = index dans str d'origine
+  let norm = '';
+  let lastWasSpace = false;
+  for (let i = 0; i < str.length; i++) {
+    let ch = str[i];
+    ch = ch.replace(/[\u2018\u2019\u02BC\uFF07]/g, "'").replace(/[\u201C\u201D]/g, '"');
+    if (/\s/.test(ch)) {
+      if (lastWasSpace) continue;
+      norm += ' '; map.push(i); lastWasSpace = true;
+    } else {
+      norm += ch; map.push(i); lastWasSpace = false;
+    }
+  }
+  norm = norm.trim();
+  const trimOffset = str.search(/\S/);
+
+  const idx = norm.indexOf(normSearch);
+  if (idx === -1) return null;
+  const startOrig = map[idx];
+  const endOrig = map[idx + normSearch.length - 1] + 1;
+  return [startOrig, endOrig];
+}
+
+function replaceFuzzy(str, search, replace) {
+  let result = str;
+  let count = 0;
+  let pos = findFuzzy(result, search);
+  while (pos) {
+    result = result.slice(0, pos[0]) + replace + result.slice(pos[1]);
+    count++;
+    const rest = result.slice(pos[0] + replace.length);
+    const restPos = findFuzzy(rest, search);
+    if (!restPos) break;
+    pos = [restPos[0] + pos[0] + replace.length, restPos[1] + pos[0] + replace.length];
+  }
+  return [result, count];
+}
+
 function applyReplace() {
   const search = document.getElementById('searchInput').value;
   const replace = document.getElementById('replaceInput').value;
@@ -692,17 +746,18 @@ function applyReplace() {
   let count = 0;
   const updated = v2.map(block => {
     const b = {...block};
-    if (b.text && b.text.includes(search)) {
-      b.text = b.text.split(search).join(replace);
-      count++;
+    if (b.text) {
+      const [newText, n] = replaceFuzzy(b.text, search, replace);
+      if (n > 0) { b.text = newText; count += n; }
     }
-    if (b.title && b.title.includes(search)) {
-      b.title = b.title.split(search).join(replace);
-      count++;
+    if (b.title) {
+      const [newTitle, n] = replaceFuzzy(b.title, search, replace);
+      if (n > 0) { b.title = newTitle; count += n; }
     }
     if (b.lines) {
       b.lines = b.lines.map(l => {
-        if (l.includes(search)) { count++; return l.split(search).join(replace); }
+        const [newL, n] = replaceFuzzy(l, search, replace);
+        if (n > 0) { count += n; return newL; }
         return l;
       });
     }
