@@ -220,7 +220,6 @@
     .book-preview .encadre {
       background: transparent;
       border: none;
-      border-top: 1px solid var(--border);
       padding: 20px 0 4px;
       margin: 24px 0 8px;
     }
@@ -971,15 +970,15 @@ function renderBlocksHTML(blocks) {
     } else if (block.type === 'note') {
       html += `<div class="note-de-bord"><div class="ndb-label">Note de bord</div><p>${block.text}</p></div>`;
     } else if (block.type === 'citation') {
-      html += `<div style="border-top:1px solid var(--border);padding:20px 0 4px;margin:24px 0 8px"><div style="font-family:Helvetica Neue,sans-serif;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px">Citation du Capitaine</div><p style="font-style:italic;font-size:16px;color:var(--navy);line-height:1.8">"${block.text}"</p></div>`;
+      html += `<div style="padding:20px 0 4px;margin:24px 0 8px"><div style="font-family:Helvetica Neue,sans-serif;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px">Citation du Capitaine</div><p style="font-style:italic;font-size:16px;color:var(--navy);line-height:1.8">"${block.text}"</p></div>`;
     } else if (block.type === 'encadre') {
       html += `<div class="encadre"><div class="enc-label">${block.title || 'Encadré'}</div><p>${block.text}</p></div>`;
     } else if (block.type === 'question') {
       const lines = block.text.split('\n').filter(l=>l.trim()).map(l=>`<p style="font-style:italic;color:var(--gold);margin:6px 0">${l.trim()}</p>`).join('');
-      html += `<div style="border-top:1px solid var(--border);padding:20px 0 4px;margin:24px 0 8px"><div style="font-family:Helvetica Neue,sans-serif;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px">Question au lecteur</div>${lines}</div>`;
+      html += `<div style="padding:20px 0 4px;margin:24px 0 8px"><div style="font-family:Helvetica Neue,sans-serif;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px">Question au lecteur</div>${lines}</div>`;
     } else if (block.type === 'enseignements') {
       const items = (block.lines || []).map(l=>`<li style="margin-bottom:8px;line-height:1.7">${l.replace(/^[-•*\d.]+\s*/,'')}</li>`).join('');
-      html += `<div style="border-top:1px solid var(--border);padding:20px 0 4px;margin:24px 0 8px"><div style="font-family:Helvetica Neue,sans-serif;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px">Ce que le voyage nous enseigne</div><ul style="padding-left:18px;font-size:15px;color:#2a2a2a;line-height:1.9">${items}</ul></div>`;
+      html += `<div style="padding:20px 0 4px;margin:24px 0 8px"><div style="font-family:Helvetica Neue,sans-serif;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px">Ce que le voyage nous enseigne</div><ul style="padding-left:18px;font-size:15px;color:#2a2a2a;line-height:1.9">${items}</ul></div>`;
     }
   });
   return html;
