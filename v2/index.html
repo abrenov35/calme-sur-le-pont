@@ -5,20 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>V2 — Le Calme sur le Pont</title>
   <style>
-    :root { --navy:#162D49; --gold:#C8A464; --beige:#F3EAE2; }
+    :root { --navy:#162D49; --gold:#C8A464; --beige:#0e1e2e; --dark:#e8e8e8; --mid:#8a9db0; --light:rgba(255,255,255,0.04); --border:#2a4060; }
     * { box-sizing:border-box; margin:0; padding:0; }
-    body { font-family:Georgia,serif; background:var(--beige); color:#1a1a1a; }
+    body { font-family:Georgia,serif; background:var(--beige); color:var(--dark); }
     .topnav { background:var(--navy); padding:12px 24px; display:flex; align-items:center; gap:16px; position:sticky; top:0; z-index:100; }
     .topnav a { color:#8a9db0; text-decoration:none; font-family:'Helvetica Neue',sans-serif; font-size:11px; letter-spacing:1px; }
     .topnav a:hover { color:var(--gold); }
     .topnav .sep { color:#2a4060; }
     .topnav .current { color:var(--gold); }
-    .badge-v2 { background:rgba(255,160,0,0.15); color:#c07000; font-family:'Helvetica Neue',sans-serif; font-size:10px; letter-spacing:2px; padding:3px 10px; border-radius:20px; border:1px solid rgba(200,130,0,0.3); margin-left:auto; }
+    .badge-v2 { background:rgba(255,160,0,0.15); color:#e0a050; font-family:'Helvetica Neue',sans-serif; font-size:10px; letter-spacing:2px; padding:3px 10px; border-radius:20px; border:1px solid rgba(200,130,0,0.3); margin-left:auto; }
     .main { max-width:680px; margin:0 auto; padding:48px 24px 80px; }
     .hero { text-align:center; margin-bottom:48px; }
     .hero .eyebrow { font-family:'Helvetica Neue',sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
     .hero h1 { font-size:28px; font-weight:normal; letter-spacing:1px; margin-bottom:10px; }
-    .hero p { font-size:13px; color:#666; font-style:italic; line-height:1.7; }
+    .hero p { font-size:13px; color:var(--mid); font-style:italic; line-height:1.7; }
     .divider { width:40px; height:1px; background:var(--gold); margin:24px auto; }
 
     .atelier-card { background:var(--navy); border-radius:6px; padding:28px; margin-bottom:36px; text-align:center; }
@@ -29,24 +29,24 @@
     .atelier-card a:hover { background:#b8944a; }
 
     .progress-block { margin-bottom:48px; }
-    .progress-title { font-family:'Helvetica Neue',sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:16px; padding-bottom:8px; border-bottom:1px solid #d8cfc6; }
+    .progress-title { font-family:'Helvetica Neue',sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:16px; padding-bottom:8px; border-bottom:1px solid var(--border); }
     .progress-grid { display:flex; flex-direction:column; gap:8px; }
-    .progress-row { display:flex; align-items:center; gap:14px; padding:12px 16px; background:white; border:1px solid #e0d8d0; border-radius:3px; }
+    .progress-row { display:flex; align-items:center; gap:14px; padding:12px 16px; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:3px; }
     .progress-row .num { font-family:'Helvetica Neue',sans-serif; font-size:10px; color:var(--gold); width:100px; flex-shrink:0; letter-spacing:1px; }
     .progress-row .name { font-size:13px; flex:1; }
     .badge { display:inline-block; padding:3px 10px; border-radius:20px; font-family:'Helvetica Neue',sans-serif; font-size:10px; }
-    .badge.done { background:#e8f4e8; color:#2a6a2a; }
-    .badge.wip  { background:#fff3e0; color:#c07000; }
+    .badge.done { background:rgba(74,122,90,0.12); color:#5cb878; }
+    .badge.wip  { background:rgba(255,160,0,0.12); color:#e0a050; }
     .progress-row .read-btn, .progress-row .edit-btn { text-decoration:none; font-size:16px; padding:4px 8px; border-radius:3px; flex-shrink:0; }
-    .progress-row .read-btn:hover, .progress-row .edit-btn:hover { background:#f0e8de; }
-    .badge.todo { background:#f0f0f0; color:#888; }
+    .progress-row .read-btn:hover, .progress-row .edit-btn:hover { background:rgba(255,255,255,0.06); }
+    .badge.todo { background:rgba(255,255,255,0.06); color:var(--mid); }
 
-    .method { background:white; border:1px solid #e0d8d0; border-radius:4px; padding:24px; }
+    .method { background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:4px; padding:24px; }
     .method h3 { font-size:14px; font-weight:normal; color:var(--navy); margin-bottom:16px; }
     .step-list { display:flex; flex-direction:column; gap:10px; }
     .step-item { display:flex; gap:14px; align-items:flex-start; }
     .step-num { background:var(--navy); color:var(--gold); font-family:'Helvetica Neue',sans-serif; font-size:11px; font-weight:bold; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
-    .step-text { font-size:13px; color:#444; line-height:1.6; }
+    .step-text { font-size:13px; color:var(--dark); line-height:1.6; }
   </style>
 </head>
 <body>
@@ -102,7 +102,7 @@
         badge.textContent = '✓ Rédigé';
         badge.classList.remove('todo');
         badge.style.background = 'rgba(42,110,58,0.12)';
-        badge.style.color = '#2a6e3a';
+        badge.style.color = '#5cb878';
       }
     });
   } catch(e) {}
