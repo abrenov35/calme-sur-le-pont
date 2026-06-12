@@ -47,6 +47,13 @@
       font-family: Georgia, serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
       color: var(--gold); padding: 0 20px 16px; border-bottom: 1px solid var(--border); margin-bottom: 8px;
     }
+    #chapterSelect {
+      display: block; width: calc(100% - 40px); margin: 0 20px;
+      padding: 10px 12px; font-family: 'Helvetica Neue', sans-serif; font-size: 13px;
+      color: var(--dark); background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border); border-radius: 4px; cursor: pointer;
+    }
+    #chapterSelect:focus { outline: none; border-color: var(--gold); }
     .chapter-link {
       display: flex; justify-content: space-between; align-items: flex-start;
       padding: 10px 20px; font-size: 13px; color: var(--dark);
@@ -223,7 +230,7 @@
 <div class="workspace">
   <div class="panel-left">
     <div class="ph-title">Sommaire</div>
-    <div id="chapterList"></div>
+    <select id="chapterSelect"></select>
   </div>
   <div class="panel-right">
     <div class="preview-body">
@@ -422,9 +429,8 @@ function renderPreview(chapterId) {
 
   document.getElementById('bookPreview').innerHTML = html;
 
-  document.querySelectorAll('.chapter-link').forEach(el => {
-    el.classList.toggle('active', el.dataset.ch === chapterId);
-  });
+  const sel = document.getElementById('chapterSelect');
+  if (sel && sel.value !== chapterId) sel.value = chapterId;
 
   const newUrl = new URL(window.location);
   newUrl.searchParams.set('ch', chapterId);
@@ -435,33 +441,19 @@ function renderPreview(chapterId) {
 
 function init() {
   loadState();
-  const list = document.getElementById('chapterList');
+  const select = document.getElementById('chapterSelect');
   Object.keys(CHAPTER_NAMES).forEach(ch => {
-    const a = document.createElement('a');
-    a.className = 'chapter-link';
-    a.dataset.ch = ch;
-    a.href = '#';
-    a.onclick = (e) => { e.preventDefault(); renderPreview(ch); };
-
-    const label = document.createElement('span');
-    label.innerHTML = `<span class="ch-num">${CHAPTER_NAMES[ch]}</span><br/><span class="ch-sub">${CHAPTER_SUBTITLES[ch]}</span>`;
-    a.appendChild(label);
-
-    const edit = document.createElement('a');
-    edit.className = 'edit-link';
-    edit.href = 'atelier.html?ch=' + ch;
-    edit.target = '_blank';
-    edit.title = "Ouvrir dans l'atelier";
-    edit.textContent = '✏️';
-    edit.onclick = (e) => e.stopPropagation();
-    a.appendChild(edit);
-
-    list.appendChild(a);
+    const opt = document.createElement('option');
+    opt.value = ch;
+    opt.textContent = CHAPTER_NAMES[ch] + ' — ' + CHAPTER_SUBTITLES[ch];
+    select.appendChild(opt);
   });
+  select.onchange = () => renderPreview(select.value);
 
   const params = new URLSearchParams(window.location.search);
   let ch = params.get('ch');
   if (!ch || !CHAPTER_NAMES[ch]) ch = Object.keys(CHAPTER_NAMES)[0];
+  select.value = ch;
   renderPreview(ch);
 }
 
