@@ -492,7 +492,7 @@ function loadState() {
   } catch(e) {}
 }
 
-function saveState() {
+function saveStateCore() {
   localStorage.setItem('csp_v2_enrich', JSON.stringify(v2data));
   localStorage.setItem('csp_v2_history', JSON.stringify(history));
 }
@@ -1159,9 +1159,8 @@ function exportSave() {
 let unsavedChanges = false;
 
 // Marquer les changements non sauvegardés
-const _origSaveState = saveState;
 function saveState() {
-  _origSaveState();
+  saveStateCore();
   unsavedChanges = true;
   const dot = document.getElementById('save-dot');
   if (dot) dot.style.display = 'inline';
