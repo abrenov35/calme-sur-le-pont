@@ -249,6 +249,7 @@ const CHAPTER_NAMES = {
   ch1: "Chapitre 1",
   ch2: "Chapitre 2",
   ch3: "Chapitre 3",
+  ch3bis: "Chapitre 3 bis",
   ch4: "Chapitre 4",
   ch5: "Chapitre 5",
   ch6: "Chapitre 6",
@@ -260,6 +261,7 @@ const CHAPTER_SUBTITLES = {
   ch1: "Le Don du Capitaine",
   ch2: "Le Calme sur le Pont",
   ch3: "Le Bruit de Fond",
+  ch3bis: "La Cabine",
   ch4: "Les Instruments de Bord",
   ch5: "Le Vent Contraire",
   ch6: "Le Long Cours",
@@ -267,19 +269,19 @@ const CHAPTER_SUBTITLES = {
 };
 const CHAPTER_LABELS = {
   intro:"Introduction", preambule:"Préambule",
-  ch1:"Chapitre 1", ch2:"Chapitre 2", ch3:"Chapitre 3",
+  ch1:"Chapitre 1", ch2:"Chapitre 2", ch3:"Chapitre 3", ch3bis:"Chapitre 3 bis",
   ch4:"Chapitre 4", ch5:"Chapitre 5", ch6:"Chapitre 6", epilogue:"Épilogue"
 };
 const CHAPTER_TITLES = {
   intro:"L'ART DE TENIR LA BARRE", preambule:"L'HÉRITAGE DU LARGE",
   ch1:"LE DON DU CAPITAINE", ch2:"LE CALME SUR LE PONT",
-  ch3:"LE BRUIT DE FOND", ch4:"LES INSTRUMENTS DE BORD",
+  ch3:"LE BRUIT DE FOND", ch3bis:"LA CABINE", ch4:"LES INSTRUMENTS DE BORD",
   ch5:"LE VENT CONTRAIRE", ch6:"LE LONG COURS", epilogue:"LE PORT"
 };
 const CHAPTER_IMAGES = {
   intro:"../assets/images/art_barre.jpeg", preambule:"../assets/images/preambule.jpeg",
   ch1:"../assets/images/ch1.jpeg", ch2:"../assets/images/ch2.jpeg",
-  ch3:"../assets/images/ch3.jpeg", ch4:"../assets/images/ch4.jpeg",
+  ch3:"../assets/images/ch3.jpeg", ch3bis:"../assets/images/ch3.jpeg", ch4:"../assets/images/ch4.jpeg",
   ch5:"../assets/images/ch5_vent_contraire.jpeg", ch6:"../assets/images/ch6_long_cours.jpeg",
   epilogue:"../assets/images/epilogue.jpeg"
 };
@@ -291,6 +293,7 @@ const CHAPTER_THEMES = {
   ch1: "La préparation avant le départ. Anticiper les problèmes avant qu'ils n'apparaissent. L'attention aux détails.",
   ch2: "Le calme comme force. Tenir la barre sans agitation. La confiance dans le navire et l'équipage.",
   ch3: "Le bruit de fond qui parasite le jugement. La différence entre le problème et le bruit autour du problème.",
+  ch3bis: "La cabine comme refuge intérieur. Entretenir sa propre clarté plutôt que de combattre la tempête. La sérénité comme exemple silencieux transmis aux autres.",
   ch4: "Les instruments de navigation comme guides. Faire confiance aux outils et à l'équipage. Ne pas tout contrôler seul.",
   ch5: "Le vent contraire comme réalité du voyage. S'adapter sans résister. Continuer malgré les obstacles.",
   ch6: "Le long cours : tenir dans la durée. La patience comme compétence. Lâcher prise sur la surveillance constante.",
@@ -330,6 +333,28 @@ const V1_TEXTS = {
     {type:'p', text:"Au milieu de la matinée, une voile se coinça légèrement dans un cordage usé."},
     {type:'p', text:"L'incident était mineur. Pourtant, l'information circula rapidement d'un bout à l'autre du navire."},
     {type:'p', text:"Seul le bruit qui avait entouré le problème avait été plus important que le problème lui-même."}
+  ],
+  ch3bis: [
+    {type:'p', text:"Avec les années, le Capitaine avait appris à reconnaître un piège discret."},
+    {type:'p', text:"Lorsque la mer devenait agitée, beaucoup de marins finissaient par croire qu'ils devaient porter la tempête en eux pour mieux la combattre. Ils surveillaient chaque vague, interprétaient chaque craquement du bois et guettaient le moindre changement de vent. Peu à peu, la mer entrait dans leur esprit avant même de monter sur le pont."},
+    {type:'p', text:"Le Capitaine avait découvert une autre manière de naviguer."},
+    {type:'p', text:"Derrière la porte de sa cabine, il ne cherchait pas à faire taire la tempête. Il se contentait d'entretenir la lampe."},
+    {type:'p', text:"La mer pouvait frapper la coque. Le vent pouvait secouer les haubans. Les embruns pouvaient blanchir les vitres du hublot. Pourtant, sur la table à cartes, la flamme demeurait stable."},
+    {type:'p', text:"Un soir d'hiver, alors qu'une houle lourde faisait gémir le navire depuis plusieurs heures, un jeune officier de quart s'acharnait sur la barre. À chaque vague, il corrigeait sa route. À chaque mouvement du bâtiment, il forçait davantage. Ses mains étaient crispées et son regard ne quittait plus les déferlantes."},
+    {type:'p', text:"Le vieux second l'observa longtemps sans intervenir."},
+    {type:'p', text:"Puis il s'approcha et posa devant lui une tasse encore fumante."},
+    {type:'p', text:"Le jeune homme leva les yeux, surpris."},
+    {type:'p', text:"Le second ne dit rien."},
+    {type:'p', text:"Il regarda simplement la surface du café."},
+    {type:'p', text:"Malgré les mouvements du navire, le liquide avait retrouvé son calme."},
+    {type:'p', text:"Le jeune officier suivit son regard."},
+    {type:'p', text:"Il observa la tasse."},
+    {type:'p', text:"Puis l'horizon."},
+    {type:'p', text:"Puis la tasse de nouveau."},
+    {type:'p', text:"Le vieux marin retourna à son poste sans un mot."},
+    {type:'p', text:"Longtemps après son départ, le jeune officier demeura immobile face à la nuit qui tombait sur la mer."},
+    {type:'p', text:"Cette nuit-là, personne ne sut exactement ce qu'il avait compris."},
+    {type:'p', text:"Mais ceux qui étaient de quart remarquèrent que, pour la première fois, il ne regardait plus chaque vague comme un ennemi."}
   ],
   ch4: [
     {type:'p', text:"Depuis plusieurs jours, le navire naviguait sous un ciel changeant."},
