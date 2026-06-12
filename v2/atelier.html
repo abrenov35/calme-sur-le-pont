@@ -256,7 +256,10 @@
     body.mode-lire .workspace { grid-template-columns: 1fr !important; }
     body.mode-lire .preview-header .status,
     body.mode-lire #validateBtns { display: none !important; }
-    body.mode-lire .preview-body { max-width: 680px; margin: 0 auto; }
+    body.mode-lire .preview-body { max-width: 680px; margin: 0 auto; overflow-y: visible; }
+    body.mode-lire .panel-right { overflow-y: visible; height: auto; }
+    body.mode-lire .workspace { height: auto; overflow: visible; }
+    body.mode-lire { overflow-y: auto; }
   </style>
 </head>
 <body>
