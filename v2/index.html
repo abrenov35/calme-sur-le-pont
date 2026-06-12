@@ -67,15 +67,15 @@
   <div class="progress-block">
     <div class="progress-title">Avancement V2</div>
     <div class="progress-grid">
-      <div class="progress-row"><span class="num">INTRODUCTION</span><span class="name">L'Art de tenir la barre</span><span class="badge todo">À faire</span></div>
-      <div class="progress-row"><span class="num">PRÉAMBULE</span><span class="name">L'Héritage du Large</span><span class="badge todo">À faire</span></div>
-      <div class="progress-row"><span class="num">CHAPITRE 1</span><span class="name">Le Don du Capitaine</span><span class="badge todo">À faire</span></div>
-      <div class="progress-row"><span class="num">CHAPITRE 2</span><span class="name">Le Calme sur le Pont</span><span class="badge todo">À faire</span></div>
-      <div class="progress-row"><span class="num">CHAPITRE 3</span><span class="name">Le Bruit de Fond</span><span class="badge todo">À faire</span></div>
-      <div class="progress-row"><span class="num">CHAPITRE 4</span><span class="name">Les Instruments de Bord</span><span class="badge todo">À faire</span></div>
-      <div class="progress-row"><span class="num">CHAPITRE 5</span><span class="name">Le Vent Contraire</span><span class="badge todo">À faire</span></div>
-      <div class="progress-row"><span class="num">CHAPITRE 6</span><span class="name">Le Long Cours</span><span class="badge todo">À faire</span></div>
-      <div class="progress-row"><span class="num">ÉPILOGUE</span><span class="name">Le Port</span><span class="badge todo">À faire</span></div>
+      <div class="progress-row" data-ch="intro"><span class="num">INTRODUCTION</span><span class="name">L'Art de tenir la barre</span><span class="badge todo">À faire</span></div>
+      <div class="progress-row" data-ch="preambule"><span class="num">PRÉAMBULE</span><span class="name">L'Héritage du Large</span><span class="badge todo">À faire</span></div>
+      <div class="progress-row" data-ch="ch1"><span class="num">CHAPITRE 1</span><span class="name">Le Don du Capitaine</span><span class="badge todo">À faire</span></div>
+      <div class="progress-row" data-ch="ch2"><span class="num">CHAPITRE 2</span><span class="name">Le Calme sur le Pont</span><span class="badge todo">À faire</span></div>
+      <div class="progress-row" data-ch="ch3"><span class="num">CHAPITRE 3</span><span class="name">Le Bruit de Fond</span><span class="badge todo">À faire</span></div>
+      <div class="progress-row" data-ch="ch4"><span class="num">CHAPITRE 4</span><span class="name">Les Instruments de Bord</span><span class="badge todo">À faire</span></div>
+      <div class="progress-row" data-ch="ch5"><span class="num">CHAPITRE 5</span><span class="name">Le Vent Contraire</span><span class="badge todo">À faire</span></div>
+      <div class="progress-row" data-ch="ch6"><span class="num">CHAPITRE 6</span><span class="name">Le Long Cours</span><span class="badge todo">À faire</span></div>
+      <div class="progress-row" data-ch="epilogue"><span class="num">ÉPILOGUE</span><span class="name">Le Port</span><span class="badge todo">À faire</span></div>
     </div>
   </div>
 
@@ -92,5 +92,49 @@
     </div>
   </div>
 </div>
+
+<!-- Popup d'ouverture -->
+<div id="welcomeModal" style="display:none;position:fixed;inset:0;background:rgba(22,45,73,0.55);z-index:200;align-items:center;justify-content:center;">
+  <div style="background:var(--beige);border-radius:6px;max-width:380px;width:90%;padding:32px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,0.2);">
+    <div style="font-family:'Helvetica Neue',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">Le Calme sur le Pont</div>
+    <h2 style="font-size:20px;font-weight:normal;margin-bottom:16px;color:var(--navy);">Bienvenue à bord</h2>
+    <p style="font-size:13px;color:#666;line-height:1.7;margin-bottom:24px;">Reprenez la traversée là où vous l'avez laissée, ou ouvrez l'atelier pour continuer la rédaction.</p>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <a href="atelier.html" style="background:var(--gold);color:var(--navy);text-decoration:none;font-family:'Helvetica Neue',sans-serif;font-size:12px;letter-spacing:1px;padding:12px;border-radius:3px;font-weight:bold;">📖 Lire le projet en cours</a>
+      <button onclick="document.getElementById('welcomeModal').style.display='none'" style="background:transparent;border:1px solid #d8cfc6;color:#888;font-family:'Helvetica Neue',sans-serif;font-size:12px;letter-spacing:1px;padding:12px;border-radius:3px;cursor:pointer;">Fermer</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Affiche le popup à l'ouverture
+  document.getElementById('welcomeModal').style.display = 'flex';
+
+  // Synchronise les badges avec l'état réel de l'atelier (localStorage)
+  try {
+    const s = localStorage.getItem('csp_v2_enrich');
+    const v2data = s ? JSON.parse(s) : {};
+    document.querySelectorAll('.progress-row').forEach(row => {
+      const ch = row.getAttribute('data-ch');
+      const blocks = v2data[ch];
+      const badge = row.querySelector('.badge');
+      if (blocks && blocks.length > 0) {
+        badge.textContent = '✓ Rédigé';
+        badge.classList.remove('todo');
+        badge.style.background = 'rgba(42,110,58,0.12)';
+        badge.style.color = '#2a6e3a';
+      }
+    });
+  } catch(e) {}
+
+  // Rend chaque ligne cliquable -> ouvre l'atelier sur ce chapitre
+  document.querySelectorAll('.progress-row').forEach(row => {
+    row.style.cursor = 'pointer';
+    row.addEventListener('click', () => {
+      const ch = row.getAttribute('data-ch');
+      window.location.href = 'atelier.html?ch=' + ch;
+    });
+  });
+</script>
 </body>
 </html>
