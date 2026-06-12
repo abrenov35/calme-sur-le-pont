@@ -48,11 +48,14 @@
       color: var(--gold); padding: 0 20px 16px; border-bottom: 1px solid var(--border); margin-bottom: 8px;
     }
     .chapter-link {
-      display: block; padding: 10px 20px; font-size: 13px; color: var(--dark);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 20px; font-size: 13px; color: var(--dark);
       text-decoration: none; border-left: 3px solid transparent; cursor: pointer;
     }
     .chapter-link:hover { background: var(--light); }
     .chapter-link.active { border-left-color: var(--gold); background: var(--light); color: var(--navy); font-weight: bold; }
+    .chapter-link .edit-link { text-decoration: none; font-size: 14px; flex-shrink: 0; padding-left: 8px; }
+    .chapter-link .edit-link:hover { opacity: 0.6; }
 
     .panel-right { background: var(--beige); }
     .preview-body { padding: 40px; }
@@ -363,8 +366,22 @@ function init() {
     const a = document.createElement('a');
     a.className = 'chapter-link';
     a.dataset.ch = ch;
-    a.textContent = CHAPTER_NAMES[ch];
+    a.href = '#';
     a.onclick = (e) => { e.preventDefault(); renderPreview(ch); };
+
+    const label = document.createElement('span');
+    label.textContent = CHAPTER_NAMES[ch];
+    a.appendChild(label);
+
+    const edit = document.createElement('a');
+    edit.className = 'edit-link';
+    edit.href = 'atelier.html?ch=' + ch;
+    edit.target = '_blank';
+    edit.title = "Ouvrir dans l'atelier";
+    edit.textContent = '✏️';
+    edit.onclick = (e) => e.stopPropagation();
+    a.appendChild(edit);
+
     list.appendChild(a);
   });
 
