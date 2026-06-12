@@ -9,16 +9,16 @@
       --navy: #162D49;
       --navy2: #1e3d61;
       --gold: #C8A464;
-      --beige: #F3EAE2;
-      --dark: #1a1a1a;
-      --mid: #666;
-      --light: #faf7f4;
-      --border: #e0d8d0;
-      --v1bg: #eee8e0;
-      --v2bg: #fffbf5;
+      --beige: #0e1e2e;
+      --dark: #e8e8e8;
+      --mid: #8a9db0;
+      --light: rgba(255,255,255,0.04);
+      --border: #2a4060;
+      --v1bg: rgba(255,255,255,0.03);
+      --v2bg: rgba(200,164,100,0.04);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #f0ebe4; color: var(--dark); min-height: 100vh; }
+    body { font-family: 'Helvetica Neue', Arial, sans-serif; background: var(--beige); color: var(--dark); min-height: 100vh; }
 
     .topnav {
       background: var(--navy);
@@ -39,7 +39,7 @@
     .workspace { display: grid; grid-template-columns: 260px 1fr; gap: 0; min-height: calc(100vh - 45px); }
 
     .panel-left {
-      background: white;
+      background: rgba(255,255,255,0.02);
       border-right: 1px solid var(--border);
       padding: 20px 0;
     }
@@ -53,7 +53,7 @@
       text-decoration: none; border-left: 3px solid transparent; cursor: pointer;
     }
     .chapter-link:hover { background: var(--light); }
-    .chapter-link.active { border-left-color: var(--gold); background: var(--light); color: var(--navy); font-weight: bold; }
+    .chapter-link.active { border-left-color: var(--gold); background: var(--light); color: var(--gold); font-weight: bold; }
     .chapter-link .ch-num {
       font-family: 'Helvetica Neue', sans-serif; font-size: 9px; letter-spacing: 2px;
       text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 2px;
@@ -69,7 +69,7 @@
     .book-preview .ch-label { font-family: 'Helvetica Neue', sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
     .book-preview .ch-title { font-size: 26px; font-weight: normal; letter-spacing: 1px; margin-bottom: 20px; color: var(--dark); }
     .book-preview .ch-divider { width: 40px; height: 1px; background: var(--gold); margin-bottom: 24px; }
-    .book-preview p { font-size: 15px; line-height: 1.9; color: #2a2a2a; margin-bottom: 14px; text-align: justify; }
+    .book-preview p { font-size: 15px; line-height: 1.9; color: var(--dark); margin-bottom: 14px; text-align: justify; }
 
     /* V1 ZONE — lecture seule */
     .v1-zone {
@@ -84,14 +84,14 @@
       display: inline-block;
       font-family: 'Helvetica Neue', sans-serif;
       font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
-      color: #888; background: #e0d8d0;
+      color: var(--mid); background: rgba(255,255,255,0.06);
       padding: 3px 10px; border-radius: 20px;
       margin-bottom: 16px;
     }
-    .v1-zone p { color: #3a3530; }
+    .v1-zone p { color: var(--mid); }
     .v1-lock {
       position: absolute; top: 12px; right: 14px;
-      font-size: 13px; color: #bbb; user-select: none;
+      font-size: 13px; color: var(--mid); user-select: none;
     }
 
     /* V2 ZONE */
@@ -111,7 +111,7 @@
       font-family: 'Helvetica Neue', sans-serif;
       font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
       color: #aaa; margin: 28px 0 10px; padding: 8px 12px;
-      background: #ede8e0; border-left: 3px solid var(--gold);
+      background: rgba(255,255,255,0.05); border-left: 3px solid var(--gold);
     }
     .book-preview .note-de-bord {
       background: var(--navy); color: white;
@@ -139,18 +139,18 @@
       letter-spacing: 0;
       text-transform: none;
     }
-    .book-preview .encadre p { font-size: 15px; color: #2a2a2a; line-height: 1.9; }
+    .book-preview .encadre p { font-size: 15px; color: var(--dark); line-height: 1.9; }
     .book-preview .illus { margin: 28px 0; text-align: center; }
-    .book-preview .illus img { width: 100%; max-width: 520px; border: 1px solid #d0c8c0; }
-    .book-preview .empty-state { text-align: center; padding: 60px 20px; color: #bbb; }
+    .book-preview .illus img { width: 100%; max-width: 520px; border: 1px solid var(--border); }
+    .book-preview .empty-state { text-align: center; padding: 60px 20px; color: var(--mid); }
     .book-preview .empty-state .es-icon { font-size: 40px; margin-bottom: 16px; }
     .book-preview .empty-state p { font-size: 13px; font-style: italic; }
 
     .v2-empty {
       font-family: 'Helvetica Neue', sans-serif;
-      font-size: 12px; color: #bbb; font-style: italic;
+      font-size: 12px; color: var(--mid); font-style: italic;
       text-align: center; padding: 20px;
-      border: 1px dashed #ddd; border-radius: 4px;
+      border: 1px dashed var(--border); border-radius: 4px;
     }
 
 
@@ -323,7 +323,7 @@ function renderBlocksHTML(blocks) {
       html += `<div style="padding:20px 0 4px;margin:24px 0 8px"><div style="font-family:Helvetica Neue,sans-serif;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px">Question au lecteur</div>${lines}</div>`;
     } else if (block.type === 'enseignements') {
       const items = (block.lines || []).map(l=>`<li style="margin-bottom:8px;line-height:1.7">${l.replace(/^[-•*\d.]+\s*/,'')}</li>`).join('');
-      html += `<div style="padding:20px 0 4px;margin:24px 0 8px"><div style="font-family:Helvetica Neue,sans-serif;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px">Ce que le voyage nous enseigne</div><ul style="padding-left:18px;font-size:15px;color:#2a2a2a;line-height:1.9">${items}</ul></div>`;
+      html += `<div style="padding:20px 0 4px;margin:24px 0 8px"><div style="font-family:Helvetica Neue,sans-serif;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px">Ce que le voyage nous enseigne</div><ul style="padding-left:18px;font-size:15px;color:var(--dark);line-height:1.9">${items}</ul></div>`;
     }
   });
   return html;
