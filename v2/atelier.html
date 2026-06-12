@@ -251,6 +251,12 @@
       .workspace { grid-template-columns: 1fr; height: auto; }
       .panel-right { min-height: 60vh; }
     }
+    body.mode-lire .panel-left,
+    body.mode-lire .nav-editor-extra { display: none !important; }
+    body.mode-lire .workspace { grid-template-columns: 1fr !important; }
+    body.mode-lire .preview-header .status,
+    body.mode-lire #validateBtns { display: none !important; }
+    body.mode-lire .preview-body { max-width: 680px; margin: 0 auto; }
   </style>
 </head>
 <body>
@@ -1197,6 +1203,9 @@ loadState();
       sel.value = ch;
       onChapterChange();
     }
+  }
+  if (params.get('mode') === 'lire') {
+    document.body.classList.add('mode-lire');
   }
 })();
 </script>
