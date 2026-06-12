@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>V1 — Le Calme sur le Pont</title>
   <style>
-    :root { --navy:#162D49; --gold:#C8A464; --beige:#F3EAE2; }
+    :root { --navy:#162D49; --gold:#C8A464; --beige:#0e1e2e; --dark:#e8e8e8; --mid:#8a9db0; --light:rgba(255,255,255,0.04); --border:#2a4060; }
     * { box-sizing:border-box; margin:0; padding:0; }
-    body { font-family:Georgia,serif; background:var(--beige); color:#1a1a1a; }
+    body { font-family:Georgia,serif; background:var(--beige); color:var(--dark); }
 
     /* TOP NAV */
     .topnav { background:var(--navy); padding:12px 24px; display:flex; align-items:center; gap:16px; position:sticky; top:0; z-index:100; }
@@ -21,30 +21,30 @@
     .book { max-width:680px; margin:0 auto; padding:60px 32px 80px; }
 
     /* COVER PAGE */
-    .cover { text-align:center; padding:60px 0 40px; border-bottom:1px solid #d8cfc6; margin-bottom:60px; }
+    .cover { text-align:center; padding:60px 0 40px; border-bottom:1px solid var(--border); margin-bottom:60px; }
     .cover-img { width:min(420px,100%); margin-bottom:40px; }
     .cover h1 { font-size:clamp(22px,4vw,34px); font-weight:normal; letter-spacing:3px; margin-bottom:10px; }
-    .cover .sub { font-style:italic; font-size:14px; color:#666; margin-bottom:6px; line-height:1.7; }
-    .cover .author { font-family:'Helvetica Neue',sans-serif; font-size:13px; color:#444; margin-top:16px; }
-    .cover .collab { font-family:'Helvetica Neue',sans-serif; font-size:11px; color:#888; font-style:italic; margin-top:6px; }
-    .cover .quote-block { margin:32px auto 0; max-width:400px; font-style:italic; font-size:13px; color:#666; line-height:1.8; }
-    .cover .quote-attr { font-family:'Helvetica Neue',sans-serif; font-size:11px; color:#888; margin-top:8px; }
+    .cover .sub { font-style:italic; font-size:14px; color:var(--mid); margin-bottom:6px; line-height:1.7; }
+    .cover .author { font-family:'Helvetica Neue',sans-serif; font-size:13px; color:var(--dark); margin-top:16px; }
+    .cover .collab { font-family:'Helvetica Neue',sans-serif; font-size:11px; color:var(--mid); font-style:italic; margin-top:6px; }
+    .cover .quote-block { margin:32px auto 0; max-width:400px; font-style:italic; font-size:13px; color:var(--mid); line-height:1.8; }
+    .cover .quote-attr { font-family:'Helvetica Neue',sans-serif; font-size:11px; color:var(--mid); margin-top:8px; }
 
     /* CHAPTER */
-    .chapter { margin-bottom:72px; padding-bottom:72px; border-bottom:1px solid #d8cfc6; }
+    .chapter { margin-bottom:72px; padding-bottom:72px; border-bottom:1px solid var(--border); }
     .chapter:last-child { border-bottom:none; }
     .chapter-label { font-family:'Helvetica Neue',sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
     .chapter-title { font-size:clamp(18px,3vw,26px); font-weight:normal; letter-spacing:1px; margin-bottom:24px; }
     .divider { width:40px; height:1px; background:var(--gold); margin-bottom:28px; }
-    p { font-size:15px; line-height:1.9; color:#2a2a2a; margin-bottom:14px; text-align:justify; }
-    .closing { font-style:italic; font-size:16px; text-align:center; color:#444; margin:32px 0; }
+    p { font-size:15px; line-height:1.9; color:var(--dark); margin-bottom:14px; text-align:justify; }
+    .closing { font-style:italic; font-size:16px; text-align:center; color:var(--dark); margin:32px 0; }
 
     /* ILLUSTRATION */
     .illus { margin:36px 0; text-align:center; }
-    .illus img { width:100%; max-width:580px; border:1px solid #d0c8c0; }
+    .illus img { width:100%; max-width:580px; border:1px solid var(--border); }
 
     /* BACK COVER */
-    .back { background:white; border:1px solid #d8cfc6; border-radius:4px; padding:36px; margin-top:60px; }
+    .back { background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:4px; padding:36px; margin-top:60px; }
     .back h2 { font-size:18px; font-weight:normal; letter-spacing:1px; margin-bottom:20px; text-align:center; }
     .back p { font-size:14px; }
     .back .back-author { text-align:center; margin-top:24px; font-family:'Helvetica Neue',sans-serif; font-weight:bold; font-size:13px; }
