@@ -48,12 +48,17 @@
       color: var(--gold); padding: 0 20px 16px; border-bottom: 1px solid var(--border); margin-bottom: 8px;
     }
     .chapter-link {
-      display: flex; justify-content: space-between; align-items: center;
+      display: flex; justify-content: space-between; align-items: flex-start;
       padding: 10px 20px; font-size: 13px; color: var(--dark);
       text-decoration: none; border-left: 3px solid transparent; cursor: pointer;
     }
     .chapter-link:hover { background: var(--light); }
     .chapter-link.active { border-left-color: var(--gold); background: var(--light); color: var(--navy); font-weight: bold; }
+    .chapter-link .ch-num {
+      font-family: 'Helvetica Neue', sans-serif; font-size: 9px; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 2px;
+    }
+    .chapter-link .ch-sub { font-size: 13px; }
     .chapter-link .edit-link { text-decoration: none; font-size: 14px; flex-shrink: 0; padding-left: 8px; }
     .chapter-link .edit-link:hover { opacity: 0.6; }
 
@@ -189,15 +194,26 @@
 <script>
 // ══════════════════════════════════════════════
 const CHAPTER_NAMES = {
-  intro: "Introduction — L'Art de tenir la barre",
-  preambule: "Préambule — L'Héritage du Large",
-  ch1: "Chapitre 1 — Le Don du Capitaine",
-  ch2: "Chapitre 2 — Le Calme sur le Pont",
-  ch3: "Chapitre 3 — Le Bruit de Fond",
-  ch4: "Chapitre 4 — Les Instruments de Bord",
-  ch5: "Chapitre 5 — Le Vent Contraire",
-  ch6: "Chapitre 6 — Le Long Cours",
-  epilogue: "Épilogue — Le Port"
+  intro: "Introduction",
+  preambule: "Préambule",
+  ch1: "Chapitre 1",
+  ch2: "Chapitre 2",
+  ch3: "Chapitre 3",
+  ch4: "Chapitre 4",
+  ch5: "Chapitre 5",
+  ch6: "Chapitre 6",
+  epilogue: "Épilogue"
+};
+const CHAPTER_SUBTITLES = {
+  intro: "L'Art de tenir la barre",
+  preambule: "L'Héritage du Large",
+  ch1: "Le Don du Capitaine",
+  ch2: "Le Calme sur le Pont",
+  ch3: "Le Bruit de Fond",
+  ch4: "Les Instruments de Bord",
+  ch5: "Le Vent Contraire",
+  ch6: "Le Long Cours",
+  epilogue: "Le Port"
 };
 const CHAPTER_LABELS = {
   intro:"Introduction", preambule:"Préambule",
@@ -370,7 +386,7 @@ function init() {
     a.onclick = (e) => { e.preventDefault(); renderPreview(ch); };
 
     const label = document.createElement('span');
-    label.textContent = CHAPTER_NAMES[ch];
+    label.innerHTML = `<span class="ch-num">${CHAPTER_NAMES[ch]}</span><br/><span class="ch-sub">${CHAPTER_SUBTITLES[ch]}</span>`;
     a.appendChild(label);
 
     const edit = document.createElement('a');
