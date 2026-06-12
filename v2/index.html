@@ -37,6 +37,8 @@
     .badge { display:inline-block; padding:3px 10px; border-radius:20px; font-family:'Helvetica Neue',sans-serif; font-size:10px; }
     .badge.done { background:#e8f4e8; color:#2a6a2a; }
     .badge.wip  { background:#fff3e0; color:#c07000; }
+    .progress-row .read-btn { text-decoration:none; font-size:16px; padding:4px 8px; border-radius:3px; flex-shrink:0; }
+    .progress-row .read-btn:hover { background:#f0e8de; }
     .badge.todo { background:#f0f0f0; color:#888; }
 
     .method { background:white; border:1px solid #e0d8d0; border-radius:4px; padding:24px; }
@@ -67,15 +69,15 @@
   <div class="progress-block">
     <div class="progress-title">Avancement V2</div>
     <div class="progress-grid">
-      <div class="progress-row" data-ch="intro"><span class="num">INTRODUCTION</span><span class="name">L'Art de tenir la barre</span><span class="badge todo">À faire</span></div>
-      <div class="progress-row" data-ch="preambule"><span class="num">PRÉAMBULE</span><span class="name">L'Héritage du Large</span><span class="badge todo">À faire</span></div>
-      <div class="progress-row" data-ch="ch1"><span class="num">CHAPITRE 1</span><span class="name">Le Don du Capitaine</span><span class="badge todo">À faire</span></div>
-      <div class="progress-row" data-ch="ch2"><span class="num">CHAPITRE 2</span><span class="name">Le Calme sur le Pont</span><span class="badge todo">À faire</span></div>
-      <div class="progress-row" data-ch="ch3"><span class="num">CHAPITRE 3</span><span class="name">Le Bruit de Fond</span><span class="badge todo">À faire</span></div>
-      <div class="progress-row" data-ch="ch4"><span class="num">CHAPITRE 4</span><span class="name">Les Instruments de Bord</span><span class="badge todo">À faire</span></div>
-      <div class="progress-row" data-ch="ch5"><span class="num">CHAPITRE 5</span><span class="name">Le Vent Contraire</span><span class="badge todo">À faire</span></div>
-      <div class="progress-row" data-ch="ch6"><span class="num">CHAPITRE 6</span><span class="name">Le Long Cours</span><span class="badge todo">À faire</span></div>
-      <div class="progress-row" data-ch="epilogue"><span class="num">ÉPILOGUE</span><span class="name">Le Port</span><span class="badge todo">À faire</span></div>
+      <div class="progress-row" data-ch="intro"><span class="num">INTRODUCTION</span><span class="name">L'Art de tenir la barre</span><span class="badge todo">À faire</span><a class="read-btn" data-ch="intro" href="atelier.html?ch=intro&mode=lire" target="_blank" title="Lire ce chapitre">👁</a></div>
+      <div class="progress-row" data-ch="preambule"><span class="num">PRÉAMBULE</span><span class="name">L'Héritage du Large</span><span class="badge todo">À faire</span><a class="read-btn" data-ch="preambule" href="atelier.html?ch=preambule&mode=lire" target="_blank" title="Lire ce chapitre">👁</a></div>
+      <div class="progress-row" data-ch="ch1"><span class="num">CHAPITRE 1</span><span class="name">Le Don du Capitaine</span><span class="badge todo">À faire</span><a class="read-btn" data-ch="ch1" href="atelier.html?ch=ch1&mode=lire" target="_blank" title="Lire ce chapitre">👁</a></div>
+      <div class="progress-row" data-ch="ch2"><span class="num">CHAPITRE 2</span><span class="name">Le Calme sur le Pont</span><span class="badge todo">À faire</span><a class="read-btn" data-ch="ch2" href="atelier.html?ch=ch2&mode=lire" target="_blank" title="Lire ce chapitre">👁</a></div>
+      <div class="progress-row" data-ch="ch3"><span class="num">CHAPITRE 3</span><span class="name">Le Bruit de Fond</span><span class="badge todo">À faire</span><a class="read-btn" data-ch="ch3" href="atelier.html?ch=ch3&mode=lire" target="_blank" title="Lire ce chapitre">👁</a></div>
+      <div class="progress-row" data-ch="ch4"><span class="num">CHAPITRE 4</span><span class="name">Les Instruments de Bord</span><span class="badge todo">À faire</span><a class="read-btn" data-ch="ch4" href="atelier.html?ch=ch4&mode=lire" target="_blank" title="Lire ce chapitre">👁</a></div>
+      <div class="progress-row" data-ch="ch5"><span class="num">CHAPITRE 5</span><span class="name">Le Vent Contraire</span><span class="badge todo">À faire</span><a class="read-btn" data-ch="ch5" href="atelier.html?ch=ch5&mode=lire" target="_blank" title="Lire ce chapitre">👁</a></div>
+      <div class="progress-row" data-ch="ch6"><span class="num">CHAPITRE 6</span><span class="name">Le Long Cours</span><span class="badge todo">À faire</span><a class="read-btn" data-ch="ch6" href="atelier.html?ch=ch6&mode=lire" target="_blank" title="Lire ce chapitre">👁</a></div>
+      <div class="progress-row" data-ch="epilogue"><span class="num">ÉPILOGUE</span><span class="name">Le Port</span><span class="badge todo">À faire</span><a class="read-btn" data-ch="epilogue" href="atelier.html?ch=epilogue&mode=lire" target="_blank" title="Lire ce chapitre">👁</a></div>
     </div>
   </div>
 
@@ -102,7 +104,8 @@
   // Rend chaque ligne cliquable -> ouvre l'atelier sur ce chapitre
   document.querySelectorAll('.progress-row').forEach(row => {
     row.style.cursor = 'pointer';
-    row.addEventListener('click', () => {
+    row.addEventListener('click', (e) => {
+      if (e.target.closest('.read-btn')) return;
       const ch = row.getAttribute('data-ch');
       window.location.href = 'atelier.html?ch=' + ch;
     });
