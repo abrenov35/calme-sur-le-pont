@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lecture — Le Calme sur le Pont</title>
+  <style>
+    :root {
+      --navy: #162D49;
+      --navy2: #1e3d61;
+      --gold: #C8A464;
+      --beige: #F3EAE2;
+      --dark: #1a1a1a;
+      --mid: #666;
+      --light: #faf7f4;
+      --border: #e0d8d0;
+      --v1bg: #eee8e0;
+      --v2bg: #fffbf5;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #f0ebe4; color: var(--dark); min-height: 100vh; }
+
+    .topnav {
+      background: var(--navy);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      border-bottom: 2px solid var(--gold);
+    }
+    .topnav a { color: #8a9db0; text-decoration: none; font-size: 11px; letter-spacing: 1px; }
+    .topnav a:hover { color: var(--gold); }
+    .topnav .sep { color: #2a4060; }
+    .topnav .current { color: var(--gold); font-size: 11px; }
+
+    .workspace { display: grid; grid-template-columns: 260px 1fr; gap: 0; min-height: calc(100vh - 45px); }
+
+    .panel-left {
+      background: white;
+      border-right: 1px solid var(--border);
+      padding: 20px 0;
+    }
+    .panel-left .ph-title {
+      font-family: Georgia, serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); padding: 0 20px 16px; border-bottom: 1px solid var(--border); margin-bottom: 8px;
+    }
+    .chapter-link {
+      display: block; padding: 10px 20px; font-size: 13px; color: var(--dark);
+      text-decoration: none; border-left: 3px solid transparent; cursor: pointer;
+    }
+    .chapter-link:hover { background: var(--light); }
+    .chapter-link.active { border-left-color: var(--gold); background: var(--light); color: var(--navy); font-weight: bold; }
+
+    .panel-right { background: var(--beige); }
+    .preview-body { padding: 40px; }
+
+    .book-preview { max-width: 580px; margin: 0 auto; font-family: Georgia, serif; }
+    .book-preview .ch-label { font-family: 'Helvetica Neue', sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .book-preview .ch-title { font-size: 26px; font-weight: normal; letter-spacing: 1px; margin-bottom: 20px; color: var(--dark); }
+    .book-preview .ch-divider { width: 40px; height: 1px; background: var(--gold); margin-bottom: 24px; }
+    .book-preview p { font-size: 15px; line-height: 1.9; color: #2a2a2a; margin-bottom: 14px; text-align: justify; }
+
+    /* V1 ZONE — lecture seule */
+    .v1-zone {
+      background: var(--v1bg);
+      border-radius: 6px;
+      padding: 22px 24px;
+      margin-bottom: 28px;
+      border: 1px solid #d5cdc4;
+      position: relative;
+    }
+    .v1-zone .v1-badge {
+      display: inline-block;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+      color: #888; background: #e0d8d0;
+      padding: 3px 10px; border-radius: 20px;
+      margin-bottom: 16px;
+    }
+    .v1-zone p { color: #3a3530; }
+    .v1-lock {
+      position: absolute; top: 12px; right: 14px;
+      font-size: 13px; color: #bbb; user-select: none;
+    }
+
+    /* V2 ZONE */
+    .v2-zone { margin-top: 8px; }
+    .v2-separator {
+      display: flex; align-items: center; gap: 12px;
+      margin: 28px 0 24px;
+    }
+    .v2-separator .v2-label {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); white-space: nowrap;
+    }
+    .v2-separator .v2-line { flex: 1; height: 1px; background: var(--gold); opacity: 0.4; }
+
+    .book-preview .part-tag {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+      color: #aaa; margin: 28px 0 10px; padding: 8px 12px;
+      background: #ede8e0; border-left: 3px solid var(--gold);
+    }
+    .book-preview .note-de-bord {
+      background: var(--navy); color: white;
+      padding: 20px 24px; margin: 28px 0; border-radius: 4px;
+    }
+    .book-preview .note-de-bord .ndb-label {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 10px;
+    }
+    .book-preview .note-de-bord p { color: #c8d8e8; font-size: 14px; margin-bottom: 0; }
+
+    /* Blocs V2 — sans fond, séparés par un filet */
+    .book-preview .encadre {
+      background: transparent;
+      border: none;
+      border-top: 1px solid var(--border);
+      padding: 20px 0 4px;
+      margin: 24px 0 8px;
+    }
+    .book-preview .encadre .enc-label {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 13px; font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 12px;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+    .book-preview .encadre p { font-size: 15px; color: #2a2a2a; line-height: 1.9; }
+    .book-preview .illus { margin: 28px 0; text-align: center; }
+    .book-preview .illus img { width: 100%; max-width: 520px; border: 1px solid #d0c8c0; }
+    .book-preview .empty-state { text-align: center; padding: 60px 20px; color: #bbb; }
+    .book-preview .empty-state .es-icon { font-size: 40px; margin-bottom: 16px; }
+    .book-preview .empty-state p { font-size: 13px; font-style: italic; }
+
+    .v2-empty {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 12px; color: #bbb; font-style: italic;
+      text-align: center; padding: 20px;
+      border: 1px dashed #ddd; border-radius: 4px;
+    }
+
+
+    @media (max-width: 768px) {
+      .workspace { grid-template-columns: 1fr; }
+      .panel-left { border-right: none; border-bottom: 1px solid var(--border); }
+      .preview-body { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="../index.html">Accueil</a>
+  <span class="sep">›</span>
+  <a href="../v1/index.html">Version 1</a>
+  <span class="sep">›</span>
+  <a href="index.html">Version 2</a>
+  <span class="sep">›</span>
+  <span class="current">Lecture</span>
+</nav>
+
+<div class="workspace">
+  <div class="panel-left">
+    <div class="ph-title">Sommaire</div>
+    <div id="chapterList"></div>
+  </div>
+  <div class="panel-right">
+    <div class="preview-body">
+      <div class="book-preview" id="bookPreview">
+        <div class="empty-state"><div class="es-icon">⚓</div><p>Sélectionnez un chapitre.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+const CHAPTER_NAMES = {
+  intro: "Introduction — L'Art de tenir la barre",
+  preambule: "Préambule — L'Héritage du Large",
+  ch1: "Chapitre 1 — Le Don du Capitaine",
+  ch2: "Chapitre 2 — Le Calme sur le Pont",
+  ch3: "Chapitre 3 — Le Bruit de Fond",
+  ch4: "Chapitre 4 — Les Instruments de Bord",
+  ch5: "Chapitre 5 — Le Vent Contraire",
+  ch6: "Chapitre 6 — Le Long Cours",
+  epilogue: "Épilogue — Le Port"
+};
+const CHAPTER_LABELS = {
+  intro:"Introduction", preambule:"Préambule",
+  ch1:"Chapitre 1", ch2:"Chapitre 2", ch3:"Chapitre 3",
+  ch4:"Chapitre 4", ch5:"Chapitre 5", ch6:"Chapitre 6", epilogue:"Épilogue"
+};
+const CHAPTER_TITLES = {
+  intro:"L'ART DE TENIR LA BARRE", preambule:"L'HÉRITAGE DU LARGE",
+  ch1:"LE DON DU CAPITAINE", ch2:"LE CALME SUR LE PONT",
+  ch3:"LE BRUIT DE FOND", ch4:"LES INSTRUMENTS DE BORD",
+  ch5:"LE VENT CONTRAIRE", ch6:"LE LONG COURS", epilogue:"LE PORT"
+};
+const CHAPTER_IMAGES = {
+  intro:"../assets/images/art_barre.jpeg", preambule:"../assets/images/preambule.jpeg",
+  ch1:"../assets/images/ch1.jpeg", ch2:"../assets/images/ch2.jpeg",
+  ch3:"../assets/images/ch3.jpeg", ch4:"../assets/images/ch4.jpeg",
+  ch5:"../assets/images/ch5_vent_contraire.jpeg", ch6:"../assets/images/ch6_long_cours.jpeg",
+  epilogue:"../assets/images/epilogue.jpeg"
+};
+
+// Thèmes de chaque chapitre pour le prompt auto
+const CHAPTER_THEMES = {
+  intro: "Le Capitaine comme fonction intérieure. La cabine comme espace de clarté. Le voyage d'une conscience.",
+  preambule: "L'héritage transmis entre capitaines. L'apprentissage par l'observation. La transmission silencieuse.",
+  ch1: "La préparation avant le départ. Anticiper les problèmes avant qu'ils n'apparaissent. L'attention aux détails.",
+  ch2: "Le calme comme force. Tenir la barre sans agitation. La confiance dans le navire et l'équipage.",
+  ch3: "Le bruit de fond qui parasite le jugement. La différence entre le problème et le bruit autour du problème.",
+  ch4: "Les instruments de navigation comme guides. Faire confiance aux outils et à l'équipage. Ne pas tout contrôler seul.",
+  ch5: "Le vent contraire comme réalité du voyage. S'adapter sans résister. Continuer malgré les obstacles.",
+  ch6: "Le long cours : tenir dans la durée. La patience comme compétence. Lâcher prise sur la surveillance constante.",
+  epilogue: "Le port comme destination et comme repos. Le bilan du voyage. La transmission à la prochaine génération."
+};
+
+// ══════════════════════════════════════════════
+// V1 — TEXTES ORIGINAUX (LECTURE SEULE, IMMUABLES)
+// ══════════════════════════════════════════════
+const V1_TEXTS = {
+  intro: [
+    {type:'p', text:"Bien avant que le navire ne prenne le large, il faut comprendre une chose essentielle : le Capitaine n'est pas un individu seul, mais une fonction."},
+    {type:'p', text:"Sur ce navire, le rôle du Capitaine n'est pas de tout diriger, mais de savoir protéger la « cabine ». C'est cet endroit — réel ou symbolique — où l'on se réfugie pour préserver sa clarté."},
+    {type:'p', text:"Ce livre n'est pas le récit d'une personne en particulier, mais le voyage d'une conscience."},
+    {type:'p', text:'Embarquez. Vous y reconnaîtrez peut-être le Capitaine qui sommeille en vous.'}
+  ],
+  preambule: [
+    {type:'p', text:"Bien avant que notre Capitaine ne tienne la barre, un autre navire ouvrait la route."},
+    {type:'p', text:"C'était un bâtiment imposant, connu de tous les marins de la région."},
+    {type:'p', text:"Puis vint le jour où il prit la direction du large. Sa silhouette s'éloigna peu à peu jusqu'à disparaître derrière l'horizon."},
+    {type:'p', text:"Parmi eux se trouvait un jeune capitaine. Il possédait une qualité particulière : il observait."},
+    {type:'p', text:"Comme un héritage transmis par la mer elle-même."}
+  ],
+  ch1: [
+    {type:'p', text:"Le soleil n'était pas encore levé lorsque le Capitaine monta sur le pont."},
+    {type:'p', text:"Comme avant chaque traversée, il parcourut lentement le navire. Il observa les amarres. Examina les voiles. Inspecta les cales. Vérifia les réserves."},
+    {type:'p', text:"Ce matin-là, une caisse de matériel avait été arrimée du mauvais côté de la cale. L'erreur paraissait insignifiante. Elle fut simplement déplacée."},
+    {type:'p', text:"À bord, chacun savait désormais que certaines difficultés étaient souvent résolues bien avant d'apparaître."}
+  ],
+  ch2: [
+    {type:'p', text:"La mer était si calme que les nuages semblaient flotter à sa surface."},
+    {type:'p', text:"Pourtant, le Capitaine continuait à parcourir le pont. Il vérifiait les amarres. Puis les réserves. Puis les voiles. Puis les lanternes."},
+    {type:'p', text:"Il réalisa que le navire avait parfaitement poursuivi sa route sans qu'il ait eu besoin d'intervenir à chaque instant."},
+    {type:'p', text:"Et la mer semblait savoir exactement ce qu'elle avait à faire."}
+  ],
+  ch3: [
+    {type:'p', text:"Au milieu de la matinée, une voile se coinça légèrement dans un cordage usé."},
+    {type:'p', text:"L'incident était mineur. Pourtant, l'information circula rapidement d'un bout à l'autre du navire."},
+    {type:'p', text:"Seul le bruit qui avait entouré le problème avait été plus important que le problème lui-même."}
+  ],
+  ch4: [
+    {type:'p', text:"Depuis plusieurs jours, le navire naviguait sous un ciel changeant."},
+    {type:'p', text:"Le compas indiquait le cap. Les cartes confirmaient la route. Pourtant, le Capitaine revenait régulièrement consulter les mêmes informations."},
+    {type:'p', text:"Il comprit alors qu'il n'était pas seul à guider le voyage. Les cartes étaient là. Les instruments aussi. L'équipage également."}
+  ],
+  ch5: [
+    {type:'p', text:"La traversée avait été préparée avec soin. Rien n'avait été laissé au hasard."},
+    {type:'p', text:"Puis, un matin, le vent changea. Rien de spectaculaire. Simplement un vent qui décida de souffler autrement."},
+    {type:'p', text:"Préparer parfaitement un voyage ne donne pas le pouvoir de choisir le vent."},
+    {type:'p', text:"Et pourtant, le navire avançait toujours."}
+  ],
+  ch6: [
+    {type:'p', text:"Le voyage durait depuis de nombreuses semaines."},
+    {type:'p', text:"Un océan ne se franchit pas en une journée. Il ne se franchit pas non plus en restant continuellement debout à surveiller chaque vague."},
+    {type:'p', text:"Pour la première fois depuis longtemps, le Capitaine quitta le pont avant la tombée complète de la nuit."},
+    {type:'p', text:"La mer n'avait pas eu besoin de lui pendant chaque minute de la nuit. Et pourtant, le voyage avançait toujours."}
+  ],
+  epilogue: [
+    {type:'p', text:"Le soleil descendait lentement derrière les quais. Le navire était amarré depuis plusieurs heures."},
+    {type:'p', text:"Le Capitaine regarda une dernière fois l'horizon. Puis il quitta le pont."},
+    {type:'p', text:"Derrière lui, le navire demeura immobile. Comme s'il lui rappelait doucement qu'il savait désormais tenir la mer lui aussi."}
+  ]
+};
+      currentLines.push(line);
+    }
+  }
+  flushSection(currentTitle, currentLines);
+
+  return blocks;
+}
+
+// ══════════════════════════════════════════════
+// RENDER PREVIEW
+// ══════════════════════════════════════════════
+function renderBlocksHTML(blocks) {
+  let html = '';
+  blocks.forEach(block => {
+    if (block.type === 'p') {
+      html += `<p>${block.text}</p>`;
+    } else if (block.type === 'part') {
+      html += `<div class="part-tag">${block.text}</div>`;
+    } else if (block.type === 'note') {
+      html += `<div class="note-de-bord"><div class="ndb-label">Note de bord</div><p>${block.text}</p></div>`;
+    } else if (block.type === 'citation') {
+      html += `<div style="border-top:1px solid var(--border);padding:20px 0 4px;margin:24px 0 8px"><div style="font-family:Helvetica Neue,sans-serif;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px">Citation du Capitaine</div><p style="font-style:italic;font-size:16px;color:var(--navy);line-height:1.8">"${block.text}"</p></div>`;
+    } else if (block.type === 'encadre') {
+
+
+let v2data = {};
+function loadState() {
+  try {
+    const s = localStorage.getItem('csp_v2_enrich');
+    if (s) v2data = JSON.parse(s);
+  } catch(e) {}
+}
+
+function renderPreview(chapterId) {
+  const v1 = V1_TEXTS[chapterId] || [];
+  const v2 = v2data[chapterId] || [];
+  const imgSrc = CHAPTER_IMAGES[chapterId];
+
+  let html = `
+    <div class="ch-label">${CHAPTER_LABELS[chapterId]}</div>
+    <div class="ch-title">${CHAPTER_TITLES[chapterId]}</div>
+    <div class="ch-divider"></div>
+  `;
+
+  html += `<div class="v1-zone">${renderBlocksHTML(v1)}</div>`;
+
+  if (v2.length > 0) {
+    html += `<div class="v2-separator">
+      <div class="v2-line"></div>
+      <div class="v2-label">✦ Enrichissements V2</div>
+      <div class="v2-line"></div>
+    </div>`;
+    html += `<div class="v2-zone">${renderBlocksHTML(v2)}</div>`;
+  }
+
+  if (imgSrc) html += `<div class="illus"><img src="${imgSrc}" alt="${CHAPTER_TITLES[chapterId]}"/></div>`;
+
+  document.getElementById('bookPreview').innerHTML = html;
+
+  document.querySelectorAll('.chapter-link').forEach(el => {
+    el.classList.toggle('active', el.dataset.ch === chapterId);
+  });
+
+  const newUrl = new URL(window.location);
+  newUrl.searchParams.set('ch', chapterId);
+  history.replaceState(null, '', newUrl);
+
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function init() {
+  loadState();
+  const list = document.getElementById('chapterList');
+  Object.keys(CHAPTER_NAMES).forEach(ch => {
+    const a = document.createElement('a');
+    a.className = 'chapter-link';
+    a.dataset.ch = ch;
+    a.textContent = CHAPTER_NAMES[ch];
+    a.onclick = (e) => { e.preventDefault(); renderPreview(ch); };
+    list.appendChild(a);
+  });
+
+  const params = new URLSearchParams(window.location.search);
+  let ch = params.get('ch');
+  if (!ch || !CHAPTER_NAMES[ch]) ch = Object.keys(CHAPTER_NAMES)[0];
+  renderPreview(ch);
+}
+
+init();
+</script>
+</body>
+</html>
