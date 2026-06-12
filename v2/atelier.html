@@ -157,19 +157,22 @@
     .preview-body { flex: 1; overflow-y: auto; background: var(--beige); padding: 40px; }
 
     /* BOOK STYLES */
-    .book-preview { max-width: 580px; margin: 0 auto; font-family: Georgia, serif; }
-    .book-preview .ch-label { font-family: 'Helvetica Neue', sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
-    .book-preview .ch-title { font-size: 26px; font-weight: normal; letter-spacing: 1px; margin-bottom: 20px; color: var(--dark); }
-    .book-preview .ch-divider { width: 40px; height: 1px; background: var(--gold); margin-bottom: 24px; }
-    .book-preview p { font-size: 15px; line-height: 1.9; color: var(--dark); margin-bottom: 14px; text-align: justify; }
+    .book-preview { max-width: 600px; margin: 0 auto; font-family: 'Georgia', 'Times New Roman', serif; }
+    .book-preview .ch-label { font-family: 'Helvetica Neue', sans-serif; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; font-weight: 600; }
+    .book-preview .ch-title { font-size: 30px; font-weight: normal; letter-spacing: 1.5px; margin-bottom: 24px; color: #ffffff; line-height: 1.3; }
+    .book-preview .ch-divider { width: 48px; height: 2px; background: var(--gold); margin-bottom: 32px; border-radius: 1px; }
+    .book-preview p { font-size: 16px; line-height: 1.95; color: #d8dde3; margin-bottom: 16px; text-align: justify; hyphens: auto; }
 
-    /* V1 ZONE — lecture seule */
+    /* V1 ZONE — texte original, présenté comme citation littéraire */
     .v1-zone {
-      background: var(--v1bg);
-      border-radius: 6px;
-      padding: 22px 24px;
-      margin-bottom: 28px;
-      border: 1px solid #d5cdc4;
+      background: rgba(255,255,255,0.025);
+      border-radius: 4px;
+      padding: 28px 30px;
+      margin-bottom: 36px;
+      border-left: 3px solid var(--border);
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
       position: relative;
     }
     .v1-zone .v1-badge {
@@ -177,63 +180,68 @@
       font-family: 'Helvetica Neue', sans-serif;
       font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
       color: var(--mid); background: rgba(255,255,255,0.06);
-      padding: 3px 10px; border-radius: 20px;
-      margin-bottom: 16px;
+      padding: 4px 12px; border-radius: 3px;
+      margin-bottom: 18px; font-weight: 600;
     }
-    .v1-zone p { color: var(--dark); }
+    .v1-zone p { color: #c5cbd3; font-style: italic; }
+    .v1-zone p:last-child { margin-bottom: 0; }
     .v1-lock {
-      position: absolute; top: 12px; right: 14px;
-      font-size: 13px; color: var(--mid); user-select: none;
+      position: absolute; top: 16px; right: 18px;
+      font-size: 14px; color: var(--mid); user-select: none; opacity: 0.6;
     }
 
     /* V2 ZONE */
     .v2-zone { margin-top: 8px; }
     .v2-separator {
-      display: flex; align-items: center; gap: 12px;
-      margin: 28px 0 24px;
+      display: flex; align-items: center; gap: 14px;
+      margin: 40px 0 32px;
     }
     .v2-separator .v2-label {
       font-family: 'Helvetica Neue', sans-serif;
-      font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
-      color: var(--gold); white-space: nowrap;
+      font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--gold); white-space: nowrap; font-weight: 600;
     }
-    .v2-separator .v2-line { flex: 1; height: 1px; background: var(--gold); opacity: 0.4; }
+    .v2-separator .v2-line { flex: 1; height: 1px; background: var(--gold); opacity: 0.35; }
 
+    /* Sous-titres de section (anciennement faibles) */
     .book-preview .part-tag {
-      font-family: 'Helvetica Neue', sans-serif;
-      font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
-      color: var(--mid); margin: 28px 0 10px; padding: 8px 12px;
-      background: rgba(255,255,255,0.05); border-left: 3px solid var(--gold);
+      font-family: 'Georgia', serif;
+      font-size: 20px; font-weight: normal; letter-spacing: 0.5px; text-transform: none;
+      color: #ffffff; margin: 36px 0 16px; padding: 0 0 10px 0;
+      background: none; border-left: none; border-bottom: 1px solid rgba(200,164,100,0.3);
     }
     .book-preview .note-de-bord {
       background: var(--navy); color: white;
-      padding: 20px 24px; margin: 28px 0; border-radius: 4px;
+      padding: 22px 26px; margin: 32px 0; border-radius: 4px;
+      border: 1px solid rgba(200,164,100,0.2);
     }
     .book-preview .note-de-bord .ndb-label {
       font-family: 'Helvetica Neue', sans-serif;
-      font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 10px;
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 12px; font-weight: 600;
     }
-    .book-preview .note-de-bord p { color: #c8d8e8; font-size: 14px; margin-bottom: 0; }
+    .book-preview .note-de-bord p { color: #cfe0ee; font-size: 15px; margin-bottom: 0; font-style: italic; }
 
-    /* Blocs V2 — sans fond, séparés par un filet */
+    /* Blocs V2 — sans fond, titres en série littéraire */
     .book-preview .encadre {
       background: transparent;
       border: none;
-      padding: 20px 0 4px;
-      margin: 24px 0 8px;
+      padding: 0 0 4px;
+      margin: 32px 0 8px;
     }
     .book-preview .encadre .enc-label {
-      font-family: 'Helvetica Neue', sans-serif;
-      font-size: 13px; font-weight: 700;
-      color: var(--gold);
-      margin-bottom: 12px;
-      letter-spacing: 0;
+      font-family: 'Georgia', serif;
+      font-size: 20px; font-weight: normal;
+      color: #ffffff;
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
       text-transform: none;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(200,164,100,0.3);
     }
-    .book-preview .encadre p { font-size: 15px; color: var(--dark); line-height: 1.9; }
-    .book-preview .illus { margin: 28px 0; text-align: center; }
-    .book-preview .illus img { width: 100%; max-width: 520px; border: 1px solid var(--border); }
+    .book-preview .encadre p { font-size: 16px; color: #d8dde3; line-height: 1.95; }
+    .book-preview .illus { margin: 36px 0; text-align: center; }
+    .book-preview .illus img { width: 100%; max-width: 520px; border: 1px solid var(--border); border-radius: 3px; }
     .book-preview .empty-state { text-align: center; padding: 60px 20px; color: var(--mid); }
     .book-preview .empty-state .es-icon { font-size: 40px; margin-bottom: 16px; }
     .book-preview .empty-state p { font-size: 13px; font-style: italic; }
@@ -992,15 +1000,15 @@ function renderBlocksHTML(blocks) {
     } else if (block.type === 'note') {
       html += `<div class="note-de-bord"><div class="ndb-label">Note de bord</div><p>${block.text}</p></div>`;
     } else if (block.type === 'citation') {
-      html += `<div style="padding:20px 0 4px;margin:24px 0 8px"><div style="font-family:Helvetica Neue,sans-serif;font-size:13px;font-weight:700;color:var(--gold);margin-bottom:12px">Citation du Capitaine</div><p style="font-style:italic;font-size:16px;color:var(--dark);line-height:1.8">"${block.text}"</p></div>`;
+      html += `<div style="padding:32px 0;margin:32px 0;text-align:center;border-top:1px solid rgba(200,164,100,0.25);border-bottom:1px solid rgba(200,164,100,0.25)"><p style="font-style:italic;font-size:19px;color:#ffffff;line-height:1.7;font-family:Georgia,serif">"${block.text}"</p><div style="font-family:Helvetica Neue,sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-top:14px">— Le Capitaine</div></div>`;
     } else if (block.type === 'encadre') {
       html += `<div class="encadre"><div class="enc-label">${block.title || 'Encadré'}</div><p>${block.text}</p></div>`;
     } else if (block.type === 'question') {
-      const lines = block.text.split('\n').filter(l=>l.trim()).map(l=>`<p style="font-style:italic;color:var(--gold);margin:6px 0">${l.trim()}</p>`).join('');
-      html += `<div style="padding:20px 0 4px;margin:24px 0 8px"><div style="font-family:Helvetica Neue,sans-serif;font-size:13px;font-weight:700;color:var(--gold);margin-bottom:12px">Question au lecteur</div>${lines}</div>`;
+      const lines = block.text.split('\n').filter(l=>l.trim()).map(l=>`<p style="font-style:italic;font-size:17px;color:#ffffff;margin:8px 0;font-family:Georgia,serif">${l.trim()}</p>`).join('');
+      html += `<div style="padding:28px 0;margin:32px 0;border-top:1px solid rgba(200,164,100,0.25)"><div style="font-family:Helvetica Neue,sans-serif;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:14px">Question au lecteur</div>${lines}</div>`;
     } else if (block.type === 'enseignements') {
-      const items = (block.lines || []).map(l=>`<li style="margin-bottom:8px;line-height:1.7">${l.replace(/^[-•*\d.]+\s*/,'')}</li>`).join('');
-      html += `<div style="padding:20px 0 4px;margin:24px 0 8px"><div style="font-family:Helvetica Neue,sans-serif;font-size:13px;font-weight:700;color:var(--gold);margin-bottom:12px">Ce que le voyage nous enseigne</div><ul style="padding-left:18px;font-size:15px;color:var(--dark);line-height:1.9">${items}</ul></div>`;
+      const items = (block.lines || []).map(l=>`<li style="margin-bottom:10px;line-height:1.8;color:#d8dde3">${l.replace(/^[-•*\d.]+\s*/,'')}</li>`).join('');
+      html += `<div style="padding:28px 0;margin:32px 0;border-top:1px solid rgba(200,164,100,0.25)"><div style="font-family:Helvetica Neue,sans-serif;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px">Ce que le voyage nous enseigne</div><ul style="padding-left:20px;font-size:16px;line-height:1.9">${items}</ul></div>`;
     }
   });
   return html;
