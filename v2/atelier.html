@@ -966,6 +966,22 @@ function parseResult(text) {
 // ══════════════════════════════════════════════
 // RENDER PREVIEW
 // ══════════════════════════════════════════════
+function mergeParagraphs(blocks) {
+  // Fusionne tous les blocs 'p' consécutifs en un seul paragraphe continu (texte V1)
+  const merged = [];
+  let buffer = [];
+  blocks.forEach(b => {
+    if (b.type === 'p') {
+      buffer.push(b.text);
+    } else {
+      if (buffer.length) { merged.push({type:'p', text: buffer.join(' ')}); buffer = []; }
+      merged.push(b);
+    }
+  });
+  if (buffer.length) merged.push({type:'p', text: buffer.join(' ')});
+  return merged;
+}
+
 function renderBlocksHTML(blocks) {
   let html = '';
   blocks.forEach(block => {
@@ -1006,7 +1022,7 @@ function renderPreview() {
   html += `<div class="v1-zone">
     <div class="v1-lock" title="Texte V1 verrouillé">🔒</div>
     <span class="v1-badge">VERSION 1 — TEXTE ORIGINAL</span>
-    ${renderBlocksHTML(v1)}
+    ${renderBlocksHTML(mergeParagraphs(v1))}
   </div>`;
 
   // V2 — ENRICHISSEMENTS
