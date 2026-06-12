@@ -770,7 +770,9 @@ function applyReplace() {
   });
 
   if (count === 0) {
-    status.textContent = 'Texte introuvable dans la V2.';
+    const sample = v2.map(b => b.title || b.text || (b.lines && b.lines[0]) || '').filter(Boolean).slice(0,1)[0] || '';
+    console.log('DEBUG v2 blocks:', JSON.parse(JSON.stringify(v2)));
+    status.textContent = 'Texte introuvable dans la V2. (1er bloc: "' + sample.substring(0,40) + '...")';
     status.style.color = '#c0392b';
     return;
   }
