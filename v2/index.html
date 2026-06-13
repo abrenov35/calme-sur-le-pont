@@ -75,7 +75,7 @@
   <div class="progress-block">
     <div class="progress-title">Avancement V2</div>
     <div class="progress-grid">
-      <div class="progress-row" data-ch="intro"><span class="num">INTRODUCTION</span><span class="name">L'Art de tenir la barre</span><span class="badge todo">À faire</span><a class="read-btn" data-ch="intro" href="lire.html?ch=intro" target="_blank" title="Lire ce chapitre">👁</a><a class="edit-btn" data-ch="intro" href="atelier.html?ch=intro" target="_blank" title="Ouvrir dans atelier">✏️</a></div>
+            <div id="chapterList"></div>
       <div class="progress-row" data-ch="preambule"><span class="num">PRÉAMBULE</span><span class="name">L'Héritage du Large</span><span class="badge todo">À faire</span><a class="read-btn" data-ch="preambule" href="lire.html?ch=preambule" target="_blank" title="Lire ce chapitre">👁</a><a class="edit-btn" data-ch="preambule" href="atelier.html?ch=preambule" target="_blank" title="Ouvrir dans atelier">✏️</a></div>
       <div class="progress-row" data-ch="ch1"><span class="num">CHAPITRE 1</span><span class="name">Le Don du Capitaine</span><span class="badge todo">À faire</span><a class="read-btn" data-ch="ch1" href="lire.html?ch=ch1" target="_blank" title="Lire ce chapitre">👁</a><a class="edit-btn" data-ch="ch1" href="atelier.html?ch=ch1" target="_blank" title="Ouvrir dans atelier">✏️</a></div>
       <div class="progress-row" data-ch="ch2"><span class="num">CHAPITRE 2</span><span class="name">Le Calme sur le Pont</span><span class="badge todo">À faire</span><a class="read-btn" data-ch="ch2" href="lire.html?ch=ch2" target="_blank" title="Lire ce chapitre">👁</a><a class="edit-btn" data-ch="ch2" href="atelier.html?ch=ch2" target="_blank" title="Ouvrir dans atelier">✏️</a></div>
@@ -91,32 +91,37 @@
 </div>
 
 <script>
-  // Synchronise les badges avec l'état réel de l'atelier (localStorage)
-  try {
-    const s = localStorage.getItem('csp_v2_enrich');
-    const v2data = s ? JSON.parse(s) : {};
-    document.querySelectorAll('.progress-row').forEach(row => {
-      const ch = row.getAttribute('data-ch');
-      const blocks = v2data[ch];
-      const badge = row.querySelector('.badge');
-      if (blocks && blocks.length > 0) {
-        badge.textContent = '✓ Rédigé';
-        badge.classList.remove('todo');
-        badge.style.background = 'rgba(42,110,58,0.12)';
-        badge.style.color = '#5cb878';
-      }
-    });
-  } catch(e) {}
+  async function initPage() {
+    const url = 'https://raw.githubusercontent.com/abrenov35/calme-sur-le-pont/main/chapters.json?v=' + Date.now();
+    const data = await fetch(url).then(r => r.json());
 
-  // Rend chaque ligne cliquable -> ouvre l'atelier sur ce chapitre
-  document.querySelectorAll('.progress-row').forEach(row => {
-    row.style.cursor = 'pointer';
-    row.addEventListener('click', (e) => {
-      if (e.target.closest('.read-btn') || e.target.closest('.edit-btn')) return;
-      const ch = row.getAttribute('data-ch');
-      window.location.href = 'atelier.html?ch=' + ch;
+    // Build progress rows dynamically
+    const list = document.getElementById('chapterList');
+    const saved = JSON.parse(localStorage.getItem('csp_v2_enrich') || '{}');
+
+    data.order.forEach(id => {
+      const ch = data.chapters[id];
+      const hasContent = saved[id] && saved[id].length > 0;
+      const row = document.createElement('div');
+      row.className = 'progress-row';
+      row.dataset.ch = id;
+      row.style.cursor = 'pointer';
+      row.innerHTML = `
+        <span class="num">${ch.label}</span>
+        <span class="name">${ch.title.charAt(0) + ch.title.slice(1).toLowerCase()}</span>
+        <span class="badge ${hasContent ? '' : 'todo'}" style="${hasContent ? 'background:rgba(42,110,58,0.12);color:#5cb878' : ''}">${hasContent ? '✓ Rédigé' : 'À faire'}</span>
+        <a class="read-btn" href="lire.html?ch=${id}" target="_blank" title="Lire">👁</a>
+        <a class="edit-btn" href="atelier.html?ch=${id}" target="_blank" title="Atelier">✏️</a>
+      `;
+      row.addEventListener('click', (e) => {
+        if (e.target.closest('.read-btn') || e.target.closest('.edit-btn')) return;
+        window.location.href = 'atelier.html?ch=' + id;
+      });
+      list.appendChild(row);
     });
-  });
+  }
+
+  initPage();
 </script>
 </body>
 </html>
