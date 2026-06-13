@@ -438,7 +438,7 @@ const CHAPTER_IMAGES = {
   ch1:"../assets/images/ch1.jpeg", ch2:"../assets/images/ch2.jpeg",
   ch3:"../assets/images/ch3.jpeg", ch4:"../assets/images/ch4.jpeg",
   ch5:"../assets/images/ch5_vent_contraire.jpeg", ch6:"../assets/images/ch6_amarres.png",
-  ch7:"../assets/images/ch7_amarres.jpeg", ch8:"../assets/images/ch8_courants.png", epilogue:"../assets/images/epilogue.jpeg", phare:"", sillage:""
+  ch7:"../assets/images/ch7_amarres.jpeg", ch8:"../assets/images/ch8_courants.png", epilogue:"../assets/images/epilogue.jpeg", phare:"../assets/images/phare.jpeg", sillage:""
 };
 
 
@@ -986,6 +986,7 @@ function renderPreview() {
     const v1 = V1_TEXTS['phare'] || [];
     let html = `<div style="text-align:center;padding:40px 0 28px"><div style="font-family:'Helvetica Neue',sans-serif;font-size:11px;letter-spacing:5px;color:var(--gold);margin-bottom:32px">— — —</div><div style="font-size:26px;letter-spacing:3px;color:#ffffff;font-family:Georgia,serif;margin-bottom:32px">LE PHARE</div><div style="width:40px;height:1px;background:var(--gold);margin:0 auto 32px"></div></div>`;
     html += `<div style="max-width:560px;margin:0 auto">${renderBlocksHTML(mergeParagraphs(v1))}</div>`;
+    html += `<div class="illus"><img src="../assets/images/phare.jpeg" alt="Le Phare"/></div>`;
     document.getElementById('bookPreview').innerHTML = html;
     return;
   }
