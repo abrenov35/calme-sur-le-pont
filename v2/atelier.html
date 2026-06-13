@@ -384,29 +384,55 @@
 // ══════════════════════════════════════════════
 // DONNÉES STATIQUES
 // ══════════════════════════════════════════════
-const CHAPTER_NAMES = {
-  intro: "Introduction — L'Art de tenir la barre",
-  preambule: "Préambule — L'Héritage du Large",
-  ch1: "Chapitre 1 — Le Don du Capitaine",
-  ch2: "Chapitre 2 — Le Calme sur le Pont",
-  ch3: "Chapitre 3 — Le Bruit de Fond",
-  ch4: "Chapitre 4 — Les Instruments de Bord",
-  ch5: "Chapitre 5 — Le Vent Contraire",
-  ch6: "Chapitre 6 — Les Amarres Invisibles",
-  ch7: "Chapitre 7 — Le Long Cours",
-  epilogue: "Épilogue — Le Port"
-};
-const CHAPTER_LABELS = {
-  intro:"Introduction", preambule:"Préambule",
-  ch1:"Chapitre 1", ch2:"Chapitre 2", ch3:"Chapitre 3",
-  ch4:"Chapitre 4", ch5:"Chapitre 5", ch6:"Chapitre 6", epilogue:"Épilogue"
-};
-const CHAPTER_TITLES = {
-  intro:"L'ART DE TENIR LA BARRE", preambule:"L'HÉRITAGE DU LARGE",
-  ch1:"LE DON DU CAPITAINE", ch2:"LE CALME SUR LE PONT",
-  ch3:"LE BRUIT DE FOND", ch4:"LES INSTRUMENTS DE BORD",
-  ch5:"LE VENT CONTRAIRE", ch6:"LE LONG COURS", epilogue:"LE PORT"
-};
+// ══════════════════════════════════════════════
+// DONNÉES DYNAMIQUES — chargées depuis chapters.json
+// ══════════════════════════════════════════════
+let CHAPTER_NAMES = {};
+let CHAPTER_LABELS = {};
+let CHAPTER_TITLES = {};
+let CHAPTER_THEMES = {};
+let V1_TEXTS = {};
+let CHAPTERS_ORDER = [];
+
+async function loadChaptersData() {
+  const url = 'https://raw.githubusercontent.com/abrenov35/calme-sur-le-pont/main/chapters.json?v=' + Date.now();
+  const resp = await fetch(url);
+  const data = await resp.json();
+  CHAPTERS_ORDER = data.order;
+  for (const [id, ch] of Object.entries(data.chapters)) {
+    CHAPTER_NAMES[id] = ch.num + ' — ' + ch.title.charAt(0) + ch.title.slice(1).toLowerCase();
+    CHAPTER_LABELS[id] = ch.label;
+    CHAPTER_TITLES[id] = ch.title;
+    CHAPTER_THEMES[id] = ch.theme;
+    V1_TEXTS[id] = (ch.v1 || []).map(t => ({type:'p', text:t}));
+  }
+  // Rebuild chapter select
+  const sel = document.getElementById('chapterSelect');
+  if (sel) {
+    const prev = sel.value;
+    sel.innerHTML = '<option value="">— Choisir un chapitre —</option>';
+    data.order.forEach(id => {
+      const opt = document.createElement('option');
+      opt.value = id;
+      opt.textContent = CHAPTER_NAMES[id];
+      sel.appendChild(opt);
+    });
+    if (prev && CHAPTER_NAMES[prev]) { sel.value = prev; onChapterChange(); }
+  }
+  // Auto-select from URL param
+  const params = new URLSearchParams(window.location.search);
+  const ch = params.get('ch');
+  if (ch && CHAPTER_NAMES[ch]) {
+    const sel2 = document.getElementById('chapterSelect');
+    if (sel2) { sel2.value = ch; onChapterChange(); }
+  }
+}
+
+function titleCase(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
+    .replace(/\b(le|la|les|l'|du|de|des|un|une|au|aux|sur|par|pour|et|en|du|qu')\b/g, w => w);
+}
+
 const CHAPTER_IMAGES = {
   intro:"../assets/images/art_barre.jpeg", preambule:"../assets/images/preambule.jpeg",
   ch1:"../assets/images/ch1.jpeg", ch2:"../assets/images/ch2.jpeg",
@@ -415,88 +441,10 @@ const CHAPTER_IMAGES = {
   ch7:"../assets/images/ch7_amarres.jpeg", epilogue:"../assets/images/epilogue.jpeg"
 };
 
+
 // Thèmes de chaque chapitre pour le prompt auto
 const CHAPTER_EXTRA_PROMPTS = {
   ch5: `\nPROMPT DE PILOTAGE SPÉCIFIQUE — LE VENT CONTRAIRE :\n\nCe chapitre suit la structure "Essai-Récit" suivante :\n\n1. LA SCÈNE (LE RÉCIT) : Ancrer le chapitre dans une situation maritime sensorielle. Le style doit être immersif — bruit des cordages, état de la mer, ambiance sur le pont. La "gestion des tempêtes matinales (la diversion)" comme point de départ concret.\n\n2. L'INTROSPECTION (LA POSTURE) : Montrer le Capitaine se retirant dans sa cabine pour analyser la situation. Expliquer le mécanisme psychologique en jeu (anxiété, besoin de contrôle, bruit de fond) sans jamais nommer ces concepts directement — les montrer à travers des gestes, des silences, des décisions.\n\n3. L'ACTION (LA DIVERSION BIENVEILLANTE) : Illustrer la technique de gestion — diversion, recentrage, délégation — à travers une scène concrète. Le lecteur doit trouver une solution applicable à sa vie sans qu'elle lui soit jamais expliquée.\n\n4. LA NOTE DE BORD : Résumer la leçon en un encadré court, percutant et actionnable — un "kit de survie" en quelques phrases.\n\nTON POUR CE CHAPITRE :\n- Bienveillant mais ferme : le Capitaine est une figure d'autorité sereine\n- Simple : éviter tout jargon, des mots clairs qui touchent directement\n- Lucide : l'analyse des comportements reste clinique sans être froide\n\nChaque chapitre doit être indépendant mais contribuer à la progression globale. Si le récit devient trop théorique, injecter une émotion ou une interaction humaine concrète.\n`
-};
-const CHAPTER_THEMES = {
-  intro: "Le Capitaine comme fonction intérieure. La cabine comme espace de clarté. Le voyage d'une conscience.",
-  preambule: "L'héritage transmis entre capitaines. L'apprentissage par l'observation. La transmission silencieuse.",
-  ch1: "La préparation avant le départ. Anticiper les problèmes avant qu'ils n'apparaissent. L'attention aux détails.",
-  ch2: "Le calme comme force. Tenir la barre sans agitation. La confiance dans le navire et l'équipage.",
-  ch3: "Le bruit de fond qui parasite le jugement. La différence entre le problème et le bruit autour du problème.",
-  ch4: "Les instruments de navigation comme guides. Faire confiance aux outils et à l'équipage. Ne pas tout contrôler seul.",
-  ch5: "Le vent contraire comme réalité du voyage. S'adapter sans résister. Continuer malgré les obstacles.",
-  ch7: "Le long cours : tenir dans la durée. La patience comme compétence. Lâcher prise sur la surveillance constante.",
-  ch6: "Les liens invisibles qui maintiennent le navire en route. La transmission du savoir. Construire pour que le voyage continue sans soi.",
-  epilogue: "Le port comme destination et comme repos. Le bilan du voyage. La transmission à la prochaine génération."
-};
-
-// ══════════════════════════════════════════════
-// V1 — TEXTES ORIGINAUX (LECTURE SEULE, IMMUABLES)
-// ══════════════════════════════════════════════
-const V1_TEXTS = {
-  intro: [
-    {type:'p', text:"Bien avant que le navire ne prenne le large, il faut comprendre une chose essentielle : le Capitaine n'est pas un individu seul, mais une fonction."},
-    {type:'p', text:"Sur ce navire, le rôle du Capitaine n'est pas de tout diriger, mais de savoir protéger la « cabine ». C'est cet endroit — réel ou symbolique — où l'on se réfugie pour préserver sa clarté."},
-    {type:'p', text:"Ce livre n'est pas le récit d'une personne en particulier, mais le voyage d'une conscience."},
-    {type:'p', text:'Embarquez. Vous y reconnaîtrez peut-être le Capitaine qui sommeille en vous.'}
-  ],
-  preambule: [
-    {type:'p', text:"Bien avant que notre Capitaine ne tienne la barre, un autre navire ouvrait la route."},
-    {type:'p', text:"C'était un bâtiment imposant, connu de tous les marins de la région."},
-    {type:'p', text:"Puis vint le jour où il prit la direction du large. Sa silhouette s'éloigna peu à peu jusqu'à disparaître derrière l'horizon."},
-    {type:'p', text:"Parmi eux se trouvait un jeune capitaine. Il possédait une qualité particulière : il observait."},
-    {type:'p', text:"Comme un héritage transmis par la mer elle-même."}
-  ],
-  ch1: [
-    {type:'p', text:"Le soleil n'était pas encore levé lorsque le Capitaine monta sur le pont."},
-    {type:'p', text:"Comme avant chaque traversée, il parcourut lentement le navire. Il observa les amarres. Examina les voiles. Inspecta les cales. Vérifia les réserves."},
-    {type:'p', text:"Ce matin-là, une caisse de matériel avait été arrimée du mauvais côté de la cale. L'erreur paraissait insignifiante. Elle fut simplement déplacée."},
-    {type:'p', text:"À bord, chacun savait désormais que certaines difficultés étaient souvent résolues bien avant d'apparaître."}
-  ],
-  ch2: [
-    {type:'p', text:"La mer était si calme que les nuages semblaient flotter à sa surface."},
-    {type:'p', text:"Pourtant, le Capitaine continuait à parcourir le pont. Il vérifiait les amarres. Puis les réserves. Puis les voiles. Puis les lanternes."},
-    {type:'p', text:"Il réalisa que le navire avait parfaitement poursuivi sa route sans qu'il ait eu besoin d'intervenir à chaque instant."},
-    {type:'p', text:"Et la mer semblait savoir exactement ce qu'elle avait à faire."}
-  ],
-  ch3: [
-    {type:'p', text:"Au milieu de la matinée, une voile se coinça légèrement dans un cordage usé."},
-    {type:'p', text:"L'incident était mineur. Pourtant, l'information circula rapidement d'un bout à l'autre du navire."},
-    {type:'p', text:"Seul le bruit qui avait entouré le problème avait été plus important que le problème lui-même."}
-  ],
-  ch4: [
-    {type:'p', text:"Depuis plusieurs jours, le navire naviguait sous un ciel changeant."},
-    {type:'p', text:"Le compas indiquait le cap. Les cartes confirmaient la route. Pourtant, le Capitaine revenait régulièrement consulter les mêmes informations."},
-    {type:'p', text:"Il comprit alors qu'il n'était pas seul à guider le voyage. Les cartes étaient là. Les instruments aussi. L'équipage également."}
-  ],
-  ch5: [
-    {type:'p', text:"La traversée avait été préparée avec soin. Rien n'avait été laissé au hasard."},
-    {type:'p', text:"Puis, un matin, le vent changea. Rien de spectaculaire. Simplement un vent qui décida de souffler autrement."},
-    {type:'p', text:"Préparer parfaitement un voyage ne donne pas le pouvoir de choisir le vent."},
-    {type:'p', text:"Et pourtant, le navire avançait toujours."}
-  ],
-  ch6: [
-    {type:'p', text:"Le Capitaine savait qu'un navire ne tient pas la mer grâce à la seule vigilance de son équipage. Il tient grâce à tout ce qui a été préparé avant le départ. Les cartes rangées à leur place. Les réserves vérifiées. Les cordages entretenus. Les habitudes transmises de quart en quart."},
-    {type:'p', text:"Parfois, le second venait le trouver avec un regard soucieux. Il évoquait une absence prochaine. Un marin qui pourrait quitter l'équipage. Une réparation qui prendrait du retard. Un imprévu qui, peut-être, compliquerait la traversée."},
-    {type:'p', text:"Le Capitaine l'écoutait attentivement. Puis son regard retournait vers le navire. Vers les voiles. Vers les haubans. Vers cette multitude de détails invisibles qui reliaient les hommes entre eux."},
-    {type:'p', text:"Il savait qu'aucun marin n'était interchangeable. Chacun apportait son expérience, ses habitudes et sa manière d'accomplir sa tâche. Mais il savait également autre chose. Si un navire devait sombrer parce qu'un seul homme quittait son poste, alors la fragilité se trouvait peut-être ailleurs. Un bâtiment solide ne repose jamais sur une seule pièce. Pas plus qu'une traversée ne dépend d'un seul marin."},
-    {type:'p', text:"Depuis des années, le Capitaine s'efforçait de transmettre ce qu'il savait. De documenter les routes. D'expliquer les manœuvres. De préparer ceux qui prendraient un jour la relève. Non pour remplacer les hommes. Mais pour que le voyage puisse continuer."},
-    {type:'p', text:"Au fil du temps, il avait compris qu'il existait deux manières de naviguer. La première consistait à craindre sans cesse la prochaine difficulté. La seconde consistait à renforcer progressivement le navire. Le Capitaine ne passait pas ses journées à imaginer les tempêtes qui pourraient survenir. Il préférait vérifier les amarres. Entretenir les voiles. Observer l'horizon. Et préparer le lendemain. Car les vents changent. Les équipages évoluent. Les saisons passent. Mais certaines structures demeurent."},
-    {type:'p', text:"Au coucher du soleil, il resta quelques instants appuyé contre le bastingage. Le navire poursuivait sa route avec régularité. Les hommes occupaient leurs postes. Le mousse, devenu officier, dirigeait désormais une partie du quart avec assurance. Le Capitaine esquissa un léger sourire. Les amarres les plus solides ne sont pas toujours celles que l'on voit. Certaines relient simplement les hommes, les savoirs et le temps."}
-  ],
-  ch7: [
-    {type:'p', text:"Le voyage durait depuis de nombreuses semaines."},
-    {type:'p', text:"Un océan ne se franchit pas en une journée. Il ne se franchit pas non plus en restant continuellement debout à surveiller chaque vague."},
-    {type:'p', text:"Pour la première fois depuis longtemps, le Capitaine quitta le pont avant la tombée complète de la nuit."},
-    {type:'p', text:"La mer n'avait pas eu besoin de lui pendant chaque minute de la nuit. Et pourtant, le voyage avançait toujours."}
-  ],
-  epilogue: [
-    {type:'p', text:"Le soleil descendait lentement derrière les quais. Le navire était amarré depuis plusieurs heures."},
-    {type:'p', text:"Le Capitaine regarda une dernière fois l'horizon. Puis il quitta le pont."},
-    {type:'p', text:"Derrière lui, le navire demeura immobile. Comme s'il lui rappelait doucement qu'il savait désormais tenir la mer lui aussi."}
-  ]
 };
 
 // ══════════════════════════════════════════════
@@ -1233,18 +1181,8 @@ window.addEventListener('beforeunload', e => {
 // ══════════════════════════════════════════════
 loadState();
 
-// Sélection auto du chapitre via ?ch=xxx
-(function() {
-  const params = new URLSearchParams(window.location.search);
-  const ch = params.get('ch');
-  if (ch) {
-    const sel = document.getElementById('chapterSelect');
-    if (sel && CHAPTER_NAMES[ch]) {
-      sel.value = ch;
-      onChapterChange();
-    }
-  }
-})();
+// Chargement dynamique depuis chapters.json
+loadChaptersData();
 </script>
 <!-- DRAWER VERSION PRÉCÉDENTE -->
 <div id="version-drawer" style="position:fixed;right:0;top:0;height:100vh;width:420px;max-width:95vw;background:#162D49;box-shadow:-4px 0 24px rgba(0,0,0,.4);z-index:1000;transform:translateX(100%);transition:transform .3s ease;display:flex;flex-direction:column;">
