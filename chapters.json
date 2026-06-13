@@ -10,7 +10,9 @@
     "ch6",
     "ch7",
     "ch8",
-    "epilogue"
+    "epilogue",
+    "phare",
+    "sillage"
   ],
   "chapters": {
     "intro": {
@@ -75,17 +77,6 @@
     "ch4": {
       "label": "CHAPITRE 4",
       "num": "Chapitre 4",
-      "title": "LES INSTRUMENTS DE BORD",
-      "theme": "Les instruments de navigation comme guides. Faire confiance aux outils et à l'équipage. Ne pas tout contrôler seul.",
-      "v1": [
-        "Depuis plusieurs jours, le navire naviguait sous un ciel changeant.",
-        "Le compas indiquait le cap. Les cartes confirmaient la route. Pourtant, le Capitaine revenait régulièrement consulter les mêmes informations.",
-        "Il comprit alors qu'il n'était pas seul à guider le voyage. Les cartes étaient là. Les instruments aussi. L'équipage également."
-      ]
-    },
-    "ch5": {
-      "label": "CHAPITRE 5",
-      "num": "Chapitre 5",
       "title": "LE VENT CONTRAIRE",
       "theme": "Le vent contraire comme réalité du voyage. S'adapter sans résister. Continuer malgré les obstacles.",
       "v1": [
@@ -95,9 +86,32 @@
         "Et pourtant, le navire avançait toujours."
       ]
     },
+    "ch5": {
+      "label": "CHAPITRE 5",
+      "num": "Chapitre 5",
+      "title": "LES INSTRUMENTS DE BORD",
+      "theme": "Les instruments de navigation comme guides. Faire confiance aux outils et à l'équipage. Ne pas tout contrôler seul.",
+      "v1": [
+        "Depuis plusieurs jours, le navire naviguait sous un ciel changeant.",
+        "Le compas indiquait le cap. Les cartes confirmaient la route. Pourtant, le Capitaine revenait régulièrement consulter les mêmes informations.",
+        "Il comprit alors qu'il n'était pas seul à guider le voyage. Les cartes étaient là. Les instruments aussi. L'équipage également."
+      ]
+    },
     "ch6": {
       "label": "CHAPITRE 6",
       "num": "Chapitre 6",
+      "title": "LE LONG COURS",
+      "theme": "Le long cours : tenir dans la durée. La patience comme compétence. Lâcher prise sur la surveillance constante.",
+      "v1": [
+        "Le voyage durait depuis de nombreuses semaines.",
+        "Un océan ne se franchit pas en une journée. Il ne se franchit pas non plus en restant continuellement debout à surveiller chaque vague.",
+        "Pour la première fois depuis longtemps, le Capitaine quitta le pont avant la tombée complète de la nuit.",
+        "La mer n'avait pas eu besoin de lui pendant chaque minute de la nuit. Et pourtant, le voyage avançait toujours."
+      ]
+    },
+    "ch7": {
+      "label": "CHAPITRE 7",
+      "num": "Chapitre 7",
       "title": "LES AMARRES INVISIBLES",
       "theme": "Les liens invisibles qui maintiennent le navire en route. La transmission du savoir. Construire pour que le voyage continue sans soi.",
       "v1": [
@@ -110,18 +124,6 @@
         "Au coucher du soleil, il resta quelques instants appuyé contre le bastingage. Le navire poursuivait sa route avec régularité. Les hommes occupaient leurs postes. Le mousse, devenu officier, dirigeait désormais une partie du quart avec assurance. Le Capitaine esquissa un léger sourire. Les amarres les plus solides ne sont pas toujours celles que l'on voit. Certaines relient simplement les hommes, les savoirs et le temps."
       ],
       "image": "../assets/images/ch6_amarres.png"
-    },
-    "ch7": {
-      "label": "CHAPITRE 7",
-      "num": "Chapitre 7",
-      "title": "LE LONG COURS",
-      "theme": "Le long cours : tenir dans la durée. La patience comme compétence. Lâcher prise sur la surveillance constante.",
-      "v1": [
-        "Le voyage durait depuis de nombreuses semaines.",
-        "Un océan ne se franchit pas en une journée. Il ne se franchit pas non plus en restant continuellement debout à surveiller chaque vague.",
-        "Pour la première fois depuis longtemps, le Capitaine quitta le pont avant la tombée complète de la nuit.",
-        "La mer n'avait pas eu besoin de lui pendant chaque minute de la nuit. Et pourtant, le voyage avançait toujours."
-      ]
     },
     "epilogue": {
       "label": "ÉPILOGUE",
@@ -147,6 +149,30 @@
         "La nuit tomba peu à peu sur la mer. Les étoiles apparurent une à une. Et quelque part, bien au-delà de ce qu'il pouvait voir, d'autres Capitaines poursuivaient eux aussi leur traversée."
       ],
       "image": "../assets/images/ch8_courants.png"
+    },
+    "phare": {
+      "label": "LE PHARE",
+      "num": "",
+      "title": "LE PHARE",
+      "theme": "Méditation finale — la présence qui éclaire sans diriger.",
+      "v1": [
+        "Bien après avoir quitté le pont, le Capitaine continua parfois à marcher le long des côtes. Il observait les navires entrer et sortir du port. Certains appareillaient pour leur première traversée. D'autres revenaient de mers lointaines. Tous semblaient occupés par leur propre voyage.",
+        "Au bout de la jetée se dressait un vieux phare. Depuis des années, il faisait face aux vents, aux marées et aux saisons. Le Capitaine s'y arrêtait parfois. Il regardait sa lumière balayer lentement l'horizon.",
+        "Le phare ne dirigeait aucun navire. Il ne donnait aucun ordre. Il ne corrigeait aucune manœuvre. Il ne choisissait ni la route ni la destination. Et pourtant, des générations de marins s'étaient appuyées sur lui. Par les nuits sans lune. Dans les brumes épaisses. Au milieu des tempêtes. Sa présence suffisait.",
+        "Avec le temps, le Capitaine comprit quelque chose qu'aucune traversée ne lui avait réellement enseigné. Toute sa vie, il avait cru que son rôle consistait à tenir la barre. À préparer. À anticiper. À décider. Puis il avait appris à transmettre. À déléguer. À laisser d'autres prendre le quart.",
+        "Le phare lui révéla une dernière leçon. Il existe une différence entre guider et contrôler. Certaines présences éclairent davantage qu'une multitude d'actions. Certaines lumières n'ont pas besoin de quitter leur place pour aider ceux qui naviguent au loin.",
+        "Le Capitaine resta longtemps à observer le faisceau qui balayait silencieusement la mer. Au large, quelques voiles apparaissaient puis disparaissaient dans la nuit. Chacune poursuivait sa propre route. Le phare, lui, demeurait immobile. Il ne retenait personne. Il n'appelait personne. Il était simplement là. Et cela suffisait.",
+        "Lorsque le Capitaine reprit son chemin, il ne regarda pas derrière lui. La lumière continuait de tourner lentement au-dessus des vagues. Comme elle l'avait toujours fait. Comme elle continuerait longtemps après lui."
+      ]
+    },
+    "sillage": {
+      "label": "",
+      "num": "",
+      "title": "",
+      "theme": "Page finale.",
+      "v1": [
+        "Le sillage était toujours là."
+      ]
     }
   }
 }
