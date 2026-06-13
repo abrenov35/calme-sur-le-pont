@@ -1,0 +1,136 @@
+{
+  "order": [
+    "intro",
+    "preambule",
+    "ch1",
+    "ch2",
+    "ch3",
+    "ch4",
+    "ch5",
+    "ch6",
+    "ch7",
+    "epilogue"
+  ],
+  "chapters": {
+    "intro": {
+      "label": "INTRODUCTION",
+      "num": "Introduction",
+      "title": "L'ART DE TENIR LA BARRE",
+      "theme": "Le Capitaine comme fonction intérieure. La cabine comme espace de clarté. Le voyage d'une conscience.",
+      "v1": [
+        "Bien avant que le navire ne prenne le large, il faut comprendre une chose essentielle : le Capitaine n'est pas un individu seul, mais une fonction.",
+        "Sur ce navire, le rôle du Capitaine n'est pas de tout diriger, mais de savoir protéger la « cabine ». C'est cet endroit — réel ou symbolique — où l'on se réfugie pour préserver sa clarté.",
+        "Ce livre n'est pas le récit d'une personne en particulier, mais le voyage d'une conscience."
+      ]
+    },
+    "preambule": {
+      "label": "PRÉAMBULE",
+      "num": "Préambule",
+      "title": "L'HÉRITAGE DU LARGE",
+      "theme": "L'héritage transmis entre capitaines. L'apprentissage par l'observation. La transmission silencieuse.",
+      "v1": [
+        "Bien avant que notre Capitaine ne tienne la barre, un autre navire ouvrait la route.",
+        "C'était un bâtiment imposant, connu de tous les marins de la région.",
+        "Puis vint le jour où il prit la direction du large. Sa silhouette s'éloigna peu à peu jusqu'à disparaître derrière l'horizon.",
+        "Parmi eux se trouvait un jeune capitaine. Il possédait une qualité particulière : il observait.",
+        "Comme un héritage transmis par la mer elle-même."
+      ]
+    },
+    "ch1": {
+      "label": "CHAPITRE 1",
+      "num": "Chapitre 1",
+      "title": "LE DON DU CAPITAINE",
+      "theme": "La préparation avant le départ. Anticiper les problèmes avant qu'ils n'apparaissent. L'attention aux détails.",
+      "v1": [
+        "Le soleil n'était pas encore levé lorsque le Capitaine monta sur le pont.",
+        "Comme avant chaque traversée, il parcourut lentement le navire. Il observa les amarres. Examina les voiles. Inspecta les cales. Vérifia les réserves.",
+        "Ce matin-là, une caisse de matériel avait été arrimée du mauvais côté de la cale. L'erreur paraissait insignifiante. Elle fut simplement déplacée.",
+        "À bord, chacun savait désormais que certaines difficultés étaient souvent résolues bien avant d'apparaître."
+      ]
+    },
+    "ch2": {
+      "label": "CHAPITRE 2",
+      "num": "Chapitre 2",
+      "title": "LE CALME SUR LE PONT",
+      "theme": "Le calme comme force. Tenir la barre sans agitation. La confiance dans le navire et l'équipage.",
+      "v1": [
+        "La mer était si calme que les nuages semblaient flotter à sa surface.",
+        "Pourtant, le Capitaine continuait à parcourir le pont. Il vérifiait les amarres. Puis les réserves. Puis les voiles. Puis les lanternes.",
+        "Il réalisa que le navire avait parfaitement poursuivi sa route sans qu'il ait eu besoin d'intervenir à chaque instant.",
+        "Et la mer semblait savoir exactement ce qu'elle avait à faire."
+      ]
+    },
+    "ch3": {
+      "label": "CHAPITRE 3",
+      "num": "Chapitre 3",
+      "title": "LE BRUIT DE FOND",
+      "theme": "Le bruit de fond qui parasite le jugement. La différence entre le problème et le bruit autour du problème.",
+      "v1": [
+        "Au milieu de la matinée, une voile se coinça légèrement dans un cordage usé.",
+        "L'incident était mineur. Pourtant, l'information circula rapidement d'un bout à l'autre du navire.",
+        "Seul le bruit qui avait entouré le problème avait été plus important que le problème lui-même."
+      ]
+    },
+    "ch4": {
+      "label": "CHAPITRE 4",
+      "num": "Chapitre 4",
+      "title": "LES INSTRUMENTS DE BORD",
+      "theme": "Les instruments de navigation comme guides. Faire confiance aux outils et à l'équipage. Ne pas tout contrôler seul.",
+      "v1": [
+        "Depuis plusieurs jours, le navire naviguait sous un ciel changeant.",
+        "Le compas indiquait le cap. Les cartes confirmaient la route. Pourtant, le Capitaine revenait régulièrement consulter les mêmes informations.",
+        "Il comprit alors qu'il n'était pas seul à guider le voyage. Les cartes étaient là. Les instruments aussi. L'équipage également."
+      ]
+    },
+    "ch5": {
+      "label": "CHAPITRE 5",
+      "num": "Chapitre 5",
+      "title": "LE VENT CONTRAIRE",
+      "theme": "Le vent contraire comme réalité du voyage. S'adapter sans résister. Continuer malgré les obstacles.",
+      "v1": [
+        "La traversée avait été préparée avec soin. Rien n'avait été laissé au hasard.",
+        "Puis, un matin, le vent changea. Rien de spectaculaire. Simplement un vent qui décida de souffler autrement.",
+        "Préparer parfaitement un voyage ne donne pas le pouvoir de choisir le vent.",
+        "Et pourtant, le navire avançait toujours."
+      ]
+    },
+    "ch6": {
+      "label": "CHAPITRE 6",
+      "num": "Chapitre 6",
+      "title": "LES AMARRES INVISIBLES",
+      "theme": "Les liens invisibles qui maintiennent le navire en route. La transmission du savoir. Construire pour que le voyage continue sans soi.",
+      "v1": [
+        "Le Capitaine savait qu'un navire ne tient pas la mer grâce à la seule vigilance de son équipage. Il tient grâce à tout ce qui a été préparé avant le départ. Les cartes rangées à leur place. Les réserves vérifiées. Les cordages entretenus. Les habitudes transmises de quart en quart.",
+        "Parfois, le second venait le trouver avec un regard soucieux. Il évoquait une absence prochaine. Un marin qui pourrait quitter l'équipage. Une réparation qui prendrait du retard. Un imprévu qui, peut-être, compliquerait la traversée.",
+        "Le Capitaine l'écoutait attentivement. Puis son regard retournait vers le navire. Vers les voiles. Vers les haubans. Vers cette multitude de détails invisibles qui reliaient les hommes entre eux.",
+        "Il savait qu'aucun marin n'était interchangeable. Chacun apportait son expérience, ses habitudes et sa manière d'accomplir sa tâche. Mais il savait également autre chose. Si un navire devait sombrer parce qu'un seul homme quittait son poste, alors la fragilité se trouvait peut-être ailleurs. Un bâtiment solide ne repose jamais sur une seule pièce. Pas plus qu'une traversée ne dépend d'un seul marin.",
+        "Depuis des années, le Capitaine s'efforçait de transmettre ce qu'il savait. De documenter les routes. D'expliquer les manœuvres. De préparer ceux qui prendraient un jour la relève. Non pour remplacer les hommes. Mais pour que le voyage puisse continuer.",
+        "Au fil du temps, il avait compris qu'il existait deux manières de naviguer. La première consistait à craindre sans cesse la prochaine difficulté. La seconde consistait à renforcer progressivement le navire. Le Capitaine ne passait pas ses journées à imaginer les tempêtes qui pourraient survenir. Il préférait vérifier les amarres. Entretenir les voiles. Observer l'horizon. Et préparer le lendemain. Car les vents changent. Les équipages évoluent. Les saisons passent. Mais certaines structures demeurent.",
+        "Au coucher du soleil, il resta quelques instants appuyé contre le bastingage. Le navire poursuivait sa route avec régularité. Les hommes occupaient leurs postes. Le mousse, devenu officier, dirigeait désormais une partie du quart avec assurance. Le Capitaine esquissa un léger sourire. Les amarres les plus solides ne sont pas toujours celles que l'on voit. Certaines relient simplement les hommes, les savoirs et le temps."
+      ]
+    },
+    "ch7": {
+      "label": "CHAPITRE 7",
+      "num": "Chapitre 7",
+      "title": "LE LONG COURS",
+      "theme": "Le long cours : tenir dans la durée. La patience comme compétence. Lâcher prise sur la surveillance constante.",
+      "v1": [
+        "Le voyage durait depuis de nombreuses semaines.",
+        "Un océan ne se franchit pas en une journée. Il ne se franchit pas non plus en restant continuellement debout à surveiller chaque vague.",
+        "Pour la première fois depuis longtemps, le Capitaine quitta le pont avant la tombée complète de la nuit.",
+        "La mer n'avait pas eu besoin de lui pendant chaque minute de la nuit. Et pourtant, le voyage avançait toujours."
+      ]
+    },
+    "epilogue": {
+      "label": "ÉPILOGUE",
+      "num": "Épilogue",
+      "title": "LE PORT",
+      "theme": "Le port comme destination et comme repos. Le bilan du voyage. La transmission à la prochaine génération.",
+      "v1": [
+        "Le soleil descendait lentement derrière les quais. Le navire était amarré depuis plusieurs heures.",
+        "Le Capitaine regarda une dernière fois l'horizon. Puis il quitta le pont.",
+        "Derrière lui, le navire demeura immobile. Comme s'il lui rappelait doucement qu'il savait désormais tenir la mer lui aussi."
+      ]
+    }
+  }
+}
