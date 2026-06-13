@@ -165,6 +165,7 @@
     .audio-btn:hover { background:rgba(200,164,100,0.1); border-color:var(--gold); }
     .audio-btn.playing { background:rgba(200,164,100,0.15); border-color:var(--gold); }
     .book-preview p { font-size: 16px; line-height: 1.95; color: #d8dde3; margin-bottom: 16px; text-align: justify; hyphens: auto; }
+    .book-preview p.reading { background:rgba(200,164,100,0.1); border-left:2px solid var(--gold); padding-left:12px; border-radius:2px; transition:background .3s; }
 
     /* V1 ZONE — texte original, présenté comme citation littéraire */
     .v1-zone {
@@ -1338,43 +1339,74 @@ loadState();
 <div id="drawer-overlay" onclick="closeDrawer()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:999"></div>
 
 <script>
-let _audioUtt = null;
-let _audioBtn = null;
+let _aBtn = null;
+let _aParas = [];
+let _aStopped = false;
+let _aVoice = null;
 
-function toggleAudioPreview(btn) {
-  if (_audioBtn && window.speechSynthesis.speaking) {
-    window.speechSynthesis.cancel();
-    _audioBtn.innerHTML = '<span class="icon">▶</span> Écouter';
-    _audioBtn.classList.remove('playing');
-    if (_audioBtn === btn) { _audioBtn = null; return; }
-  }
-  // collect all p text from book-preview
-  const preview = document.querySelector('.book-preview');
-  if (!preview) return;
-  const text = Array.from(preview.querySelectorAll('p')).map(p => p.textContent.trim()).join(' ');
-  if (!text) return;
-
-  const utt = new SpeechSynthesisUtterance(text);
-  utt.lang = 'fr-FR';
-  utt.rate = 0.88;
+function getVoiceFR() {
+  if (_aVoice) return _aVoice;
   const voices = window.speechSynthesis.getVoices();
-  const frVoice = voices.find(v => v.lang.startsWith('fr') && v.name.toLowerCase().includes('thomas'))
-               || voices.find(v => v.lang.startsWith('fr'));
-  if (frVoice) utt.voice = frVoice;
+  _aVoice = voices.find(v => v.lang === 'fr-FR' && /thomas|amelie|marie/i.test(v.name))
+          || voices.find(v => v.lang === 'fr-FR')
+          || voices.find(v => v.lang.startsWith('fr'));
+  return _aVoice;
+}
 
-  btn.innerHTML = '<span class="icon">⏹</span> Stop';
-  btn.classList.add('playing');
-  _audioBtn = btn;
+function stopAudioAtelier() {
+  _aStopped = true;
+  window.speechSynthesis.cancel();
+  if (_aBtn) {
+    _aBtn.innerHTML = '<span class="icon">▶</span> Écouter';
+    _aBtn.classList.remove('playing');
+    _aBtn = null;
+  }
+  document.querySelectorAll('.book-preview p.reading').forEach(p => p.classList.remove('reading'));
+}
 
-  utt.onend = utt.onerror = () => {
-    btn.innerHTML = '<span class="icon">▶</span> Écouter';
-    btn.classList.remove('playing');
-    _audioBtn = null;
+function speakParaAtelier(index) {
+  if (_aStopped || index >= _aParas.length) {
+    if (!_aStopped) stopAudioAtelier();
+    return;
+  }
+  const {el, text} = _aParas[index];
+  document.querySelectorAll('.book-preview p.reading').forEach(p => p.classList.remove('reading'));
+  if (el) { el.classList.add('reading'); el.scrollIntoView({behavior:'smooth', block:'nearest'}); }
+
+  let spoken = text.replace(/—/g, ', ').trim();
+  const utt = new SpeechSynthesisUtterance(spoken);
+  utt.lang = 'fr-FR';
+  utt.rate = 0.82;
+  utt.pitch = 0.95;
+  const v = getVoiceFR();
+  if (v) utt.voice = v;
+
+  utt.onend = () => {
+    if (_aStopped) return;
+    setTimeout(() => speakParaAtelier(index + 1), text.length < 80 ? 500 : 350);
   };
-  _audioUtt = utt;
+  utt.onerror = (e) => { if (e.error !== 'interrupted') speakParaAtelier(index + 1); };
   window.speechSynthesis.speak(utt);
 }
-window.speechSynthesis.onvoiceschanged = () => {};
+
+function toggleAudioPreview(btn) {
+  if (_aBtn === btn) { stopAudioAtelier(); return; }
+  stopAudioAtelier();
+  _aStopped = false;
+  const preview = document.querySelector('.book-preview');
+  if (!preview) return;
+  _aParas = Array.from(preview.querySelectorAll('p'))
+    .map(el => ({el, text: el.textContent.trim()}))
+    .filter(p => p.text.length > 0);
+  if (!_aParas.length) return;
+  _aBtn = btn;
+  btn.innerHTML = '<span class="icon">⏹</span> Stop';
+  btn.classList.add('playing');
+  window.speechSynthesis.cancel();
+  setTimeout(() => speakParaAtelier(0), 200);
+}
+
+window.speechSynthesis.onvoiceschanged = () => { _aVoice = null; getVoiceFR(); };
 </script>
 </body>
 </html>

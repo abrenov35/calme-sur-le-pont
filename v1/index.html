@@ -37,6 +37,7 @@
     .chapter-title { font-size:clamp(18px,3vw,26px); font-weight:normal; letter-spacing:1px; margin-bottom:24px; }
     .divider { width:40px; height:1px; background:var(--gold); margin-bottom:28px; }
     p { font-size:15px; line-height:1.9; color:var(--dark); margin-bottom:14px; text-align:justify; }
+    p.reading { background:rgba(200,164,100,0.12); border-left:2px solid var(--gold); padding-left:10px; border-radius:2px; transition:background .3s; }
     .closing { font-style:italic; font-size:16px; text-align:center; color:var(--dark); margin:32px 0; }
 
     /* ILLUSTRATION */
@@ -371,64 +372,110 @@
 </div>
 
 <script>
-let currentUtterance = null;
-let currentBtn = null;
+let _currentBtn = null;
+let _paragraphs = [];
+let _paraIndex = 0;
+let _isStopped = false;
+let _frVoice = null;
+
+function getFrVoice() {
+  if (_frVoice) return _frVoice;
+  const voices = window.speechSynthesis.getVoices();
+  _frVoice = voices.find(v => v.lang === 'fr-FR' && /thomas|amelie|marie/i.test(v.name))
+          || voices.find(v => v.lang === 'fr-FR')
+          || voices.find(v => v.lang.startsWith('fr'));
+  return _frVoice;
+}
+
+function stopAudio() {
+  _isStopped = true;
+  window.speechSynthesis.cancel();
+  if (_currentBtn) {
+    _currentBtn.innerHTML = '<span class="icon">▶</span> Écouter';
+    _currentBtn.classList.remove('playing');
+    _currentBtn = null;
+  }
+  // Remove all highlights
+  document.querySelectorAll('p.reading').forEach(p => p.classList.remove('reading'));
+}
+
+function speakParagraph(index) {
+  if (_isStopped || index >= _paragraphs.length) {
+    if (!_isStopped) stopAudio();
+    return;
+  }
+
+  const {el, text} = _paragraphs[index];
+
+  // Highlight current paragraph
+  document.querySelectorAll('p.reading').forEach(p => p.classList.remove('reading'));
+  if (el) {
+    el.classList.add('reading');
+    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // Build utterance with punctuation pauses via SSML-like text tricks
+  // Add natural pauses by inserting silence markers as commas/ellipsis
+  let spokenText = text
+    .replace(/\.\.\./g, '…')      // keep ellipsis
+    .replace(/([.!?])\s+/g, '$1  ') // double space after sentence = slight pause
+    .replace(/—/g, ', ')            // em dash -> comma pause
+    .trim();
+
+  const utt = new SpeechSynthesisUtterance(spokenText);
+  utt.lang = 'fr-FR';
+  utt.rate = 0.82;
+  utt.pitch = 0.95;
+  utt.volume = 1;
+  const v = getFrVoice();
+  if (v) utt.voice = v;
+
+  utt.onend = () => {
+    if (_isStopped) return;
+    // Pause between paragraphs: short sentences get 400ms, longer 600ms
+    const pauseMs = text.length < 80 ? 500 : 350;
+    setTimeout(() => speakParagraph(index + 1), pauseMs);
+  };
+  utt.onerror = (e) => {
+    if (e.error === 'interrupted') return;
+    speakParagraph(index + 1);
+  };
+
+  window.speechSynthesis.speak(utt);
+}
 
 function readChapter(btn, chapterId) {
   const section = document.getElementById(chapterId);
   if (!section) return;
 
-  // Stop if already playing this chapter
-  if (currentBtn === btn && window.speechSynthesis.speaking) {
-    window.speechSynthesis.cancel();
-    btn.innerHTML = '<span class="icon">▶</span> Écouter';
-    btn.classList.remove('playing');
-    currentBtn = null;
+  // Toggle stop
+  if (_currentBtn === btn) {
+    stopAudio();
     return;
   }
 
-  // Stop any current reading
-  if (window.speechSynthesis.speaking) {
-    window.speechSynthesis.cancel();
-    if (currentBtn) { currentBtn.innerHTML = '<span class="icon">▶</span> Écouter'; currentBtn.classList.remove('playing'); }
-  }
+  stopAudio();
+  _isStopped = false;
 
-  // Collect text from all <p> in this chapter
-  const paras = section.querySelectorAll('p');
-  const text = Array.from(paras).map(p => p.textContent.trim()).join(' ');
+  // Collect paragraphs
+  const els = section.querySelectorAll('p');
+  _paragraphs = Array.from(els)
+    .map(el => ({ el, text: el.textContent.trim() }))
+    .filter(p => p.text.length > 0);
 
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'fr-FR';
-  utterance.rate = 0.88;
-  utterance.pitch = 1.0;
+  if (!_paragraphs.length) return;
 
-  // Try to pick a French voice
-  const voices = window.speechSynthesis.getVoices();
-  const frVoice = voices.find(v => v.lang.startsWith('fr') && v.name.toLowerCase().includes('thomas'))
-                || voices.find(v => v.lang.startsWith('fr'));
-  if (frVoice) utterance.voice = frVoice;
-
+  _paraIndex = 0;
+  _currentBtn = btn;
   btn.innerHTML = '<span class="icon">⏹</span> Stop';
   btn.classList.add('playing');
-  currentBtn = btn;
 
-  utterance.onend = () => {
-    btn.innerHTML = '<span class="icon">▶</span> Écouter';
-    btn.classList.remove('playing');
-    currentBtn = null;
-  };
-  utterance.onerror = () => {
-    btn.innerHTML = '<span class="icon">▶</span> Écouter';
-    btn.classList.remove('playing');
-    currentBtn = null;
-  };
-
-  currentUtterance = utterance;
-  window.speechSynthesis.speak(utterance);
+  // Chrome fix: cancel any pending and small delay
+  window.speechSynthesis.cancel();
+  setTimeout(() => speakParagraph(0), 200);
 }
 
-// Reload voices async (Chrome needs this)
-window.speechSynthesis.onvoiceschanged = () => {};
+window.speechSynthesis.onvoiceschanged = () => { _frVoice = null; getFrVoice(); };
 </script>
 </body>
 </html>
