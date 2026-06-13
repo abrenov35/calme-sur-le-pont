@@ -37,7 +37,6 @@
     .chapter-title { font-size:clamp(18px,3vw,26px); font-weight:normal; letter-spacing:1px; margin-bottom:24px; }
     .divider { width:40px; height:1px; background:var(--gold); margin-bottom:28px; }
     p { font-size:15px; line-height:1.9; color:var(--dark); margin-bottom:14px; text-align:justify; }
-    p.reading { background:rgba(200,164,100,0.12); border-left:2px solid var(--gold); padding-left:10px; border-radius:2px; transition:background .3s; }
     .closing { font-style:italic; font-size:16px; text-align:center; color:var(--dark); margin:32px 0; }
 
     /* ILLUSTRATION */
@@ -54,12 +53,6 @@
     .pdf-link { text-align:center; margin-bottom:48px; }
     .pdf-link a { display:inline-block; padding:12px 28px; background:var(--navy); color:white; text-decoration:none; font-family:'Helvetica Neue',sans-serif; font-size:12px; letter-spacing:1px; border-radius:3px; }
     .pdf-link a:hover { background:#1e3d61; }
-
-    /* AUDIO */
-    .audio-btn { display:inline-flex; align-items:center; gap:8px; padding:8px 18px; background:transparent; border:1px solid rgba(200,164,100,0.4); border-radius:20px; color:var(--gold); font-family:'Helvetica Neue',sans-serif; font-size:11px; letter-spacing:1px; cursor:pointer; transition:all .2s; margin-bottom:20px; }
-    .audio-btn:hover { background:rgba(200,164,100,0.1); border-color:var(--gold); }
-    .audio-btn.playing { background:rgba(200,164,100,0.15); border-color:var(--gold); }
-    .audio-btn .icon { font-size:13px; }
   </style>
 </head>
 <body>
@@ -101,11 +94,10 @@
   </div>
 
   <!-- L'ART DE TENIR LA BARRE -->
-  <div class="chapter" id="intro">
+  <div class="chapter">
     <div class="chapter-label">Introduction</div>
     <div class="chapter-title">L'ART DE TENIR LA BARRE</div>
     <div class="divider"></div>
-    <button class="audio-btn" onclick="readChapter(this,'intro')"><span class="icon">▶</span> Écouter</button>
     <p>Bien avant que le navire ne prenne le large, il faut comprendre une chose essentielle : le Capitaine n'est pas un individu seul, mais une fonction. C'est une part de nous-mêmes, un état d'esprit que l'on enfile comme une vareuse lorsque les vents forcent ou, plus difficilement, lorsque la mer devient d'huile.</p>
     <p>Sur ce navire, le rôle du Capitaine n'est pas de tout diriger, mais de savoir protéger la « cabine ». C'est cet endroit — réel ou symbolique — où l'on se réfugie pour préserver sa clarté, pour anticiper les courants plutôt que de subir chaque clapotis, et pour ne pas laisser le tumulte du pont dicter la route.</p>
     <p>Certains d'entre nous sont des Capitaines nés : ils excellent dans l'action brute, là où la tempête exige des décisions immédiates. Ils sont les rois du large, les maîtres des manœuvres complexes. Pourtant, ces mêmes Capitaines se trouvent parfois démunis face au calme plat, là où l'absence d'urgence devient, paradoxalement, une source d'angoisse.</p>
@@ -117,11 +109,10 @@
   </div>
 
   <!-- PRÉAMBULE -->
-  <div class="chapter" id="preambule">
+  <div class="chapter">
     <div class="chapter-label">Préambule</div>
     <div class="chapter-title">L'HÉRITAGE DU LARGE</div>
     <div class="divider"></div>
-    <button class="audio-btn" onclick="readChapter(this,'preambule')"><span class="icon">▶</span> Écouter</button>
     <p>Bien avant que notre Capitaine ne tienne la barre, un autre navire ouvrait la route.</p>
     <p>C'était un bâtiment imposant, connu de tous les marins de la région. Lorsque les vents forçaient ou que les brumes recouvraient la mer, sa simple présence suffisait souvent à rassurer les autres équipages.</p>
     <p>Pendant des années, il traversa les saisons sans jamais quitter sa mission.</p>
@@ -143,11 +134,10 @@
   </div>
 
   <!-- CHAPITRE 1 -->
-  <div class="chapter" id="ch1">
+  <div class="chapter">
     <div class="chapter-label">Chapitre 1</div>
     <div class="chapter-title">LE DON DU CAPITAINE</div>
     <div class="divider"></div>
-    <button class="audio-btn" onclick="readChapter(this,'ch1')"><span class="icon">▶</span> Écouter</button>
     <p>Le soleil n'était pas encore levé lorsque le Capitaine monta sur le pont.</p>
     <p>Une légère brume flottait au-dessus de l'eau. Le port sommeillait encore tandis que les derniers préparatifs du départ s'achevaient dans le calme.</p>
     <p>Comme avant chaque traversée, il parcourut lentement le navire.</p>
@@ -169,11 +159,10 @@
   </div>
 
   <!-- CHAPITRE 2 -->
-  <div class="chapter" id="ch2">
+  <div class="chapter">
     <div class="chapter-label">Chapitre 2</div>
     <div class="chapter-title">LE CALME SUR LE PONT</div>
     <div class="divider"></div>
-    <button class="audio-btn" onclick="readChapter(this,'ch2')"><span class="icon">▶</span> Écouter</button>
     <p>La mer était si calme que les nuages semblaient flotter à sa surface.</p>
     <p>Depuis l'aube, le navire avançait sous un vent régulier. Les voiles étaient parfaitement établies. Les cordages demeuraient immobiles. Rien ne troublait la traversée.</p>
     <p>Pourtant, le Capitaine continuait à parcourir le pont.</p>
@@ -191,11 +180,10 @@
   </div>
 
   <!-- CHAPITRE 3 -->
-  <div class="chapter" id="ch3">
+  <div class="chapter">
     <div class="chapter-label">Chapitre 3</div>
     <div class="chapter-title">LE BRUIT DE FOND</div>
     <div class="divider"></div>
-    <button class="audio-btn" onclick="readChapter(this,'ch3')"><span class="icon">▶</span> Écouter</button>
     <p>La journée avait commencé comme beaucoup d'autres. Un vent léger soufflait du large. Le ciel était dégagé. Le navire avançait régulièrement.</p>
     <p>Au milieu de la matinée, une voile se coinça légèrement dans un cordage usé.</p>
     <p>L'incident était mineur. Le bateau poursuivait sa route. Le vent restait favorable. Le cap ne changeait pas.</p>
@@ -213,39 +201,10 @@
   </div>
 
   <!-- CHAPITRE 4 -->
-  <div class="chapter" id="ch4">
+  <div class="chapter">
     <div class="chapter-label">Chapitre 4</div>
-    <div class="chapter-title">LA CABINE</div>
-    <div class="divider"></div>
-    <button class="audio-btn" onclick="readChapter(this,'ch4')"><span class="icon">▶</span> Écouter</button>
-
-    <p>Avec les années, le Capitaine avait appris à reconnaître un piège discret.</p>
-    <p>Lorsque la mer devenait agitée, beaucoup de marins finissaient par croire qu'ils devaient porter la tempête en eux pour mieux la combattre. Ils surveillaient chaque vague, interprétaient chaque craquement du bois et guettaient le moindre changement de vent. Peu à peu, la mer entrait dans leur esprit avant même de monter sur le pont.</p>
-    <p>Le Capitaine avait découvert une autre manière de naviguer.</p>
-    <p>Derrière la porte de sa cabine, il ne cherchait pas à faire taire la tempête. Il se contentait d'entretenir la lampe.</p>
-    <p>La mer pouvait frapper la coque. Le vent pouvait secouer les haubans. Les embruns pouvaient blanchir les vitres du hublot. Pourtant, sur la table à cartes, la flamme demeurait stable.</p>
-    <p>Un soir d'hiver, alors qu'une houle lourde faisait gémir le navire depuis plusieurs heures, un jeune officier de quart s'acharnait sur la barre. À chaque vague, il corrigeait sa route. À chaque mouvement du bâtiment, il forçait davantage. Ses mains étaient crispées et son regard ne quittait plus les déferlantes.</p>
-    <p>Le vieux second l'observa longtemps sans intervenir. Puis il s'approcha et posa devant lui une tasse encore fumante.</p>
-    <p>Le jeune homme leva les yeux, surpris. Le second ne dit rien. Il regarda simplement la surface du café.</p>
-    <p>Malgré les mouvements du navire, le liquide avait retrouvé son calme.</p>
-    <p>Le jeune officier suivit son regard. Il observa la tasse. Puis l'horizon. Puis la tasse de nouveau.</p>
-    <p>Le vieux marin retourna à son poste sans un mot.</p>
-    <p>Dans l'ombre du gaillard d'avant, un jeune mousse avait assisté à toute la scène. Il regarda le second. Puis l'officier. Puis la tasse.</p>
-    <p>Lui non plus ne comprenait pas vraiment ce qui venait de se passer. Pourtant, quelque chose semblait important.</p>
-    <p>Alors il reprit silencieusement son travail et continua de ranger les cordages mouillés par les embruns.</p>
-    <p>Cette nuit-là, personne ne sut exactement ce que le jeune officier avait compris. Mais ceux qui étaient de quart remarquèrent que, pour la première fois, il ne regardait plus chaque vague comme un ennemi.</p>
-    <p>Quant au mousse, il conserva longtemps dans sa mémoire l'image de cette tasse immobile au milieu de la tempête.</p>
-    <p>Certains enseignements prennent la mer bien avant d'être compris. Et certaines lampes continuent d'éclairer longtemps après que celui qui les a allumées a quitté la pièce.</p>
-    <div class="illus"><img src="../assets/images/ch4.jpeg" alt="La Cabine"/></div>
-  </div>
-
-  <!-- CHAPITRE 5 -->
-  <div class="chapter" id="ch5">
-    <div class="chapter-label">Chapitre 5</div>
     <div class="chapter-title">LES INSTRUMENTS DE BORD</div>
     <div class="divider"></div>
-    <button class="audio-btn" onclick="readChapter(this,'ch5')"><span class="icon">▶</span> Écouter</button>
-
     <p>Depuis plusieurs jours, le navire naviguait sous un ciel changeant.</p>
     <p>Les vents restaient favorables, mais une légère brume apparaissait régulièrement à l'horizon. Rien d'inquiétant. Rien d'exceptionnel. Seulement cette fine couche grise qui effaçait parfois les repères les plus lointains.</p>
     <p>Le Capitaine connaissait bien ces conditions. Dans ce genre de traversée, l'œil seul ne suffisait plus toujours. Il fallait faire confiance aux instruments.</p>
@@ -253,109 +212,108 @@
     <p>Pourtant, le Capitaine revenait régulièrement consulter les mêmes informations. Il vérifiait une première fois. Puis une seconde. Puis encore une autre.</p>
     <p>Chaque contrôle confirmait exactement la même chose. Le navire suivait sa route.</p>
     <p>Les jours passèrent ainsi. Chaque matin, les instruments donnaient les mêmes indications. Chaque soir, le navire se trouvait exactement là où il devait être.</p>
-    <p>Peu à peu, le Capitaine commença à observer autre chose. Il remarqua le calme des marins, la confiance du maître d'équipage, la précision des hommes de quart.</p>
-    <p>Personne ne semblait inquiet. Personne ne remettait constamment en question la direction prise. Tous accomplissaient simplement leur tâche, comme si la route était déjà connue.</p>
-    <p>Un matin, alors que la brume recouvrait encore la mer, le Capitaine resta quelques instants immobile devant le compas. L'aiguille indiquait le nord, comme elle l'avait fait la veille, comme elle le ferait probablement le lendemain.</p>
-    <p>Ce jour-là, il referma la carte un peu plus tôt que d'habitude. Non parce qu'il cessait d'être prudent, non parce qu'il abandonnait sa vigilance, simplement parce que tout ce qui devait être vérifié l'avait déjà été.</p>
+    <p>Peu à peu, le Capitaine commença à observer autre chose. Il remarqua le calme des marins. La confiance du maître d'équipage. La précision des hommes de quart.</p>
+    <p>Personne ne semblait inquiet. Personne ne remettait constamment en question la direction prise. Tous accomplissaient simplement leur tâche. Comme si la route était déjà connue.</p>
+    <p>Un matin, alors que la brume recouvrait encore la mer, le Capitaine resta quelques instants immobile devant le compas.</p>
+    <p>L'aiguille indiquait le nord. Comme elle l'avait fait la veille. Comme elle le ferait probablement le lendemain.</p>
+    <p>Ce jour-là, il referma la carte un peu plus tôt que d'habitude.</p>
+    <p>Non parce qu'il cessait d'être prudent. Non parce qu'il abandonnait sa vigilance. Simplement parce que tout ce qui devait être vérifié l'avait déjà été.</p>
     <p>Le navire poursuivit sa route. Les voiles restèrent bien orientées. Le vent demeura constant. Les instruments continuèrent silencieusement leur travail.</p>
-    <p>Puis, au cœur de la nuit, la brume commença à se déchirer. D'abord lentement, puis davantage. Le ciel apparut par fragments entre les nuages.</p>
-    <p>Une étoile. Puis une autre. Puis des centaines. Puis des milliers. Bientôt, toute la voûte céleste sembla se refléter dans la mer noire.</p>
-    <p>Même les hommes de quart cessèrent quelques instants de parler. Le mousse leva les yeux. Il resta immobile, comme s'il découvrait un océan plus vaste encore que celui qu'il parcourait depuis des semaines.</p>
-    <p>Le Capitaine l'observa discrètement. Il se souvenait encore de la première fois où il avait contemplé un ciel semblable. À cet âge-là, on croit souvent que les cartes expliquent le monde. Puis vient un jour où l'on comprend qu'elles n'en montrent qu'une infime partie.</p>
-    <p>Pendant quelques minutes, personne ne pensa à la destination. Personne ne pensa au lendemain. Il n'y avait plus que le silence, la mer, le ciel, et cette multitude de lumières suspendues au-dessus du navire.</p>
-    <p>À la tombée de l'aube, les étoiles disparurent une à une. La brume s'était totalement dissipée. L'horizon réapparut.</p>
-    <p>Le Capitaine regarda longtemps la ligne claire où le ciel rejoignait la mer. Il comprit alors qu'il n'était pas seul à guider le voyage. Les cartes étaient là. Les instruments aussi. L'équipage également. Tout un ensemble de repères veillait déjà sur la traversée.</p>
-    <p>La nuit avait poursuivi sa course. Le compas continuait de pointer sa direction avec la même discrétion qu'au premier jour. Et le navire avançait toujours.</p>
-    <div class="illus"><img src="../assets/images/ch5.jpeg" alt="Les Instruments de Bord"/></div>
+    <p>À la tombée du jour, la brume se dissipa peu à peu. L'horizon réapparut.</p>
+    <p>Le Capitaine regarda longtemps la ligne claire où le ciel rejoignait la mer.</p>
+    <p>Il comprit alors qu'il n'était pas seul à guider le voyage. Les cartes étaient là. Les instruments aussi. L'équipage également. Tout un ensemble de repères veillait déjà sur la traversée.</p>
+    <p>La nuit tomba lentement sur l'océan. Le compas continuait de pointer sa direction avec la même discrétion qu'au premier jour.</p>
+    <p>Et le navire avançait toujours.</p>
+    <div class="illus"><img src="../assets/images/ch4.jpeg" alt="Les Instruments de Bord"/></div>
   </div>
 
-  <!-- CHAPITRE 6 -->
-  <div class="chapter" id="ch6">
-    <div class="chapter-label">Chapitre 6</div>
+  <!-- CHAPITRE 5 -->
+  <div class="chapter">
+    <div class="chapter-label">Chapitre 5</div>
     <div class="chapter-title">LE VENT CONTRAIRE</div>
     <div class="divider"></div>
-    <button class="audio-btn" onclick="readChapter(this,'ch6')"><span class="icon">▶</span> Écouter</button>
-
     <p>La traversée avait été préparée avec soin.</p>
     <p>Les cartes avaient été vérifiées. Les réserves chargées. Les voiles inspectées. Les cordages remplacés lorsque cela était nécessaire. Rien n'avait été laissé au hasard.</p>
     <p>Le matin du départ, la mer était calme. Le vent soufflait dans la bonne direction. L'horizon était dégagé. Tout semblait promettre une traversée paisible.</p>
     <p>Durant les premiers jours, le navire avança exactement comme prévu. Les milles défilaient. Les quarts s'enchaînaient. Le voyage suivait la route tracée sur les cartes.</p>
-    <p>Puis, un matin, le vent changea. Rien de spectaculaire. Aucun grain à l'horizon. Aucune tempête. Simplement un vent qui décida de souffler autrement.</p>
-    <p>Les voiles furent ajustées. Le navire ralentit. La progression devint moins directe. Il fallut modifier l'allure, rechercher d'autres angles, composer avec la mer.</p>
+    <p>Puis, un matin, le vent changea.</p>
+    <p>Rien de spectaculaire. Aucun grain à l'horizon. Aucune tempête. Simplement un vent qui décida de souffler autrement.</p>
+    <p>Les voiles furent ajustées. Le navire ralentit. La progression devint moins directe. Il fallut modifier l'allure. Rechercher d'autres angles. Composer avec la mer.</p>
     <p>Le Capitaine consulta les cartes. Elles étaient exactes. Il vérifia les instruments. Ils fonctionnaient parfaitement. Il observa les voiles. Elles étaient correctement réglées. Tout était en ordre.</p>
     <p>Et pourtant, le vent demeurait contraire.</p>
-    <p>Pendant plusieurs jours, la situation resta la même. Le navire avançait toujours, mais moins vite. Chaque mille parcouru demandait davantage de patience.</p>
+    <p>Pendant plusieurs jours, la situation resta la même. Le navire avançait toujours. Mais moins vite. Chaque mille parcouru demandait davantage de patience.</p>
     <p>Certains marins regardaient régulièrement l'horizon en espérant voir le vent tourner. D'autres calculaient le retard accumulé. Le Capitaine observait simplement la mer.</p>
-    <p>Depuis plusieurs jours, le mousse surveillait lui aussi l'horizon. Chaque matin, il espérait apercevoir un changement. Chaque matin, les voiles demeuraient tendues dans la même direction. Chaque soir, le navire avançait encore trop lentement à son goût.</p>
-    <p>Un crépuscule, alors que le soleil rougissait la surface de l'eau, il s'approcha du vieux maître d'équipage. Ils restèrent un moment silencieux à regarder la mer.</p>
-    <p>Puis le jeune marin finit par demander : — Comment sais-tu que nous sommes toujours sur la bonne route ?</p>
-    <p>Le vieux marin sourit. Ses yeux restèrent fixés sur l'horizon. — Parce que nous avançons encore.</p>
-    <p>Le mousse attendit la suite. Mais aucune autre explication ne vint. Le silence reprit sa place entre eux.</p>
-    <p>La réponse lui semblait incomplète. Presque décevante. Pourtant, il ne posa aucune autre question.</p>
-    <p>Cette nuit-là, il resta longtemps appuyé au bastingage. Le navire avançait lentement. Mais il avançait.</p>
-    <p>Les jours passèrent encore. Le vent demeura capricieux.</p>
-    <p>Puis, un soir, alors que le soleil disparaissait derrière les vagues, la brise commença enfin à changer. D'abord légèrement, puis davantage. Les voiles retrouvèrent progressivement leur pleine puissance. Le navire reprit de la vitesse. L'étrave fendit de nouveau l'eau avec assurance. L'équipage retrouva le sourire.</p>
-    <p>Le mousse regarda les voiles se gonfler. Puis il repensa à la phrase du vieux marin. Ce n'était pas le retour du vent favorable qu'il retenait. C'était autre chose.</p>
-    <p>Durant tout ce temps, malgré les détours, malgré les ralentissements et malgré les journées plus longues que prévu, le navire n'avait jamais cessé d'avancer.</p>
-    <p>La route avait changé. Le rythme avait changé. Mais le voyage avait continué.</p>
-    <p>Le vent n'avait pas toujours soufflé dans la direction espérée. La route n'avait pas toujours été celle qui figurait sur les cartes. Et pourtant, le navire avançait toujours.</p>
+    <p>Il existe des traversées où rien n'est cassé. Rien n'est perdu. Rien n'est mal préparé. Et pourtant, le voyage devient plus difficile. La mer possède parfois ses propres intentions.</p>
+    <p>Au fil des jours, le Capitaine comprit une chose que les cartes ne mentionnaient jamais.</p>
+    <p>Préparer parfaitement un voyage ne donne pas le pouvoir de choisir le vent.</p>
+    <p>Aucun marin ne commande les courants. Aucun capitaine ne décide de la météo. Tout ce qu'il peut faire est préparer son navire du mieux possible lorsque la mer est calme. Puis poursuivre sa route lorsque les conditions changent.</p>
+    <p>Un soir, alors que le soleil disparaissait derrière les vagues, le vent commença enfin à tourner. D'abord légèrement. Puis davantage. Les voiles retrouvèrent progressivement leur pleine puissance. Le navire reprit de la vitesse. L'équipage retrouva le sourire.</p>
+    <p>Le vent n'avait pas toujours soufflé dans la direction espérée. La route n'avait pas toujours été celle qui figurait sur les cartes.</p>
+    <p>Et pourtant, le navire avançait toujours.</p>
     <p>Devant lui, l'horizon s'ouvrait de nouveau. Comme il l'avait toujours fait.</p>
     <div class="illus"><img src="../assets/images/ch5_vent_contraire.jpeg" alt="Le Vent Contraire"/></div>
   </div>
 
+  <!-- CHAPITRE 6 -->
+  <div class="chapter">
+    <div class="chapter-label">Chapitre 6</div>
+    <div class="chapter-title">LES AMARRES INVISIBLES</div>
+    <div class="divider"></div>
+    <p>Le Capitaine savait qu'un navire ne tient pas la mer grâce à la seule vigilance de son équipage. Il tient grâce à tout ce qui a été préparé avant le départ. Les cartes rangées à leur place. Les réserves vérifiées. Les cordages entretenus. Les habitudes transmises de quart en quart.</p>
+    <p>Parfois, le second venait le trouver avec un regard soucieux. Il évoquait une absence prochaine. Un marin qui pourrait quitter l'équipage. Une réparation qui prendrait du retard. Un imprévu qui, peut-être, compliquerait la traversée.</p>
+    <p>Le Capitaine l'écoutait attentivement. Puis son regard retournait vers le navire. Vers les voiles. Vers les haubans. Vers cette multitude de détails invisibles qui reliaient les hommes entre eux.</p>
+    <p>Il savait qu'aucun marin n'était interchangeable. Chacun apportait son expérience, ses habitudes et sa manière d'accomplir sa tâche. Mais il savait également autre chose. Si un navire devait sombrer parce qu'un seul homme quittait son poste, alors la fragilité se trouvait peut-être ailleurs. Un bâtiment solide ne repose jamais sur une seule pièce. Pas plus qu'une traversée ne dépend d'un seul marin.</p>
+    <p>Depuis des années, le Capitaine s'efforçait de transmettre ce qu'il savait. De documenter les routes. D'expliquer les manœuvres. De préparer ceux qui prendraient un jour la relève. Non pour remplacer les hommes. Mais pour que le voyage puisse continuer.</p>
+    <p>Au fil du temps, il avait compris qu'il existait deux manières de naviguer. La première consistait à craindre sans cesse la prochaine difficulté. La seconde consistait à renforcer progressivement le navire. Le Capitaine ne passait pas ses journées à imaginer les tempêtes qui pourraient survenir. Il préférait vérifier les amarres. Entretenir les voiles. Observer l'horizon. Et préparer le lendemain.</p>
+    <p>Au coucher du soleil, il resta quelques instants appuyé contre le bastingage. Le navire poursuivait sa route avec régularité. Les hommes occupaient leurs postes. Le mousse, devenu officier, dirigeait désormais une partie du quart avec assurance. Le Capitaine esquissa un léger sourire. Les amarres les plus solides ne sont pas toujours celles que l'on voit. Certaines relient simplement les hommes, les savoirs et le temps.</p>
+  </div>
+
   <!-- CHAPITRE 7 -->
-  <div class="chapter" id="ch7">
+  <div class="chapter">
     <div class="chapter-label">Chapitre 7</div>
     <div class="chapter-title">LE LONG COURS</div>
     <div class="divider"></div>
-    <button class="audio-btn" onclick="readChapter(this,'ch7')"><span class="icon">▶</span> Écouter</button>
-
     <p>Le voyage durait depuis de nombreuses semaines.</p>
     <p>Les ports visités commençaient à se mélanger dans les souvenirs. Certaines escales semblaient proches. D'autres appartenaient déjà à une autre saison.</p>
-    <p>Le Capitaine avait connu des mers calmes, des vents contraires, des journées lumineuses, quelques nuits plus difficiles, comme tous les marins qui naviguent longtemps.</p>
+    <p>Le Capitaine avait connu des mers calmes. Des vents contraires. Des journées lumineuses. Quelques nuits plus difficiles. Comme tous les marins qui naviguent longtemps.</p>
     <p>Avec les années, il avait compris une chose que les jeunes capitaines découvrent rarement dès leurs premières traversées.</p>
-    <p>Un océan ne se franchit pas en une journée. Il ne se franchit pas non plus en restant continuellement debout à surveiller chaque vague.</p>
+    <p>Un océan ne se franchit pas en une journée.</p>
+    <p>Il ne se franchit pas non plus en restant continuellement debout à surveiller chaque vague.</p>
     <p>La mer est patiente. Le voyage aussi.</p>
     <p>Certains matins, le vent pousse naturellement le navire. D'autres jours, il faut accepter d'avancer plus lentement. Parfois, il suffit simplement de tenir le cap.</p>
-    <p>Au fil du temps, le Capitaine apprit à respecter ce rythme. Il continua à observer, à préparer, à anticiper. Mais il apprit aussi à s'économiser, à laisser l'équipage prendre le quart, à partager certaines responsabilités, à accepter que chaque instant ne dépende pas uniquement de lui.</p>
-    <p>Un soir d'été, alors que la mer était particulièrement calme, il resta longtemps à regarder le soleil disparaître derrière l'horizon. Les voiles se découpaient en ombres noires sur le ciel rougeoyant. Le navire avançait paisiblement. Les hommes occupaient leurs postes. Tout semblait à sa place.</p>
-    <p>Le mousse n'était plus tout à fait un mousse désormais. Les années de navigation avaient remplacé l'impatience par l'attention. Là où il cherchait autrefois les réponses, il observait désormais les signes. Là où il voulait aller vite, il savait parfois attendre. Le Capitaine l'avait vu changer sans jamais vraiment le lui dire.</p>
+    <p>Au fil du temps, le Capitaine apprit à respecter ce rythme. Il continua à observer. À préparer. À anticiper. Mais il apprit aussi à s'économiser. À laisser l'équipage prendre le quart. À partager certaines responsabilités. À accepter que chaque instant ne dépende pas uniquement de lui.</p>
+    <p>Un soir d'été, alors que la mer était particulièrement calme, il resta longtemps à regarder le soleil disparaître derrière l'horizon.</p>
+    <p>Les voiles se découpaient en ombres noires sur le ciel rougeoyant. Le navire avançait paisiblement. Les hommes occupaient leurs postes. Tout semblait à sa place.</p>
     <p>Pour la première fois depuis longtemps, le Capitaine quitta le pont avant la tombée complète de la nuit.</p>
-    <p>Avant de descendre vers sa cabine, il s'arrêta près du jeune officier qui tenait le quart. Le marin se redressa aussitôt, comme il l'avait toujours fait lorsqu'il croisait son regard.</p>
-    <p>Le Capitaine posa simplement une main sur son épaule. Puis il observa quelques instants l'horizon. Aucune instruction. Aucune recommandation. Aucun rappel. Seulement ce silence partagé entre deux hommes regardant la même mer.</p>
-    <p>Puis le Capitaine descendit l'escalier et disparut vers sa cabine.</p>
-    <p>Longtemps après son départ, le jeune officier resta immobile. Le vent continuait de souffler. Les vagues continuaient de porter le navire. La traversée poursuivait sa route. Pourtant, quelque chose avait changé.</p>
-    <p>Pour la première fois, il comprit que la confiance ressemblait parfois à un silence. Et qu'il existait des responsabilités que l'on ne reçoit pas parce qu'on les réclame, mais parce qu'un jour quelqu'un décide de les déposer entre vos mains.</p>
-    <p>Quelques heures plus tard, lorsque les premières lueurs de l'aube apparurent à l'est, le Capitaine remonta sur le pont. Le navire avait parcouru plusieurs milles. La route était bonne. Le cap était maintenu. L'océan s'étendait toujours devant eux.</p>
-    <p>Le jeune officier était encore à son poste. Leurs regards se croisèrent brièvement. Aucun mot ne fut échangé. Il n'y en avait pas besoin.</p>
-    <p>Le Capitaine observa l'horizon puis esquissa un léger sourire. La mer n'avait pas eu besoin de lui pendant chaque minute de la nuit. Et pourtant, le voyage avançait toujours.</p>
-    <p>Devant l'étrave, les premiers rayons du soleil vinrent éclairer la surface de l'eau. Le navire poursuivait sa route vers le large. Comme il l'avait toujours fait. Comme il continuerait encore longtemps à le faire.</p>
+    <p>Il descendit lentement vers sa cabine.</p>
+    <p>Derrière lui, rien ne s'arrêta. Le vent continua de souffler. Les vagues continuèrent de porter le navire. Les marins poursuivirent leur veille. La traversée continua.</p>
+    <p>Quelques heures plus tard, lorsqu'il remonta sur le pont, les premières lueurs de l'aube apparaissaient déjà à l'est.</p>
+    <p>Le navire avait parcouru plusieurs milles. La route était bonne. Le cap était maintenu. L'océan s'étendait toujours devant eux.</p>
+    <p>Le Capitaine observa l'horizon puis esquissa un léger sourire.</p>
+    <p>La mer n'avait pas eu besoin de lui pendant chaque minute de la nuit.</p>
+    <p>Et pourtant, le voyage avançait toujours.</p>
+    <p>Le navire poursuivait sa route vers le large. Comme il l'avait toujours fait. Comme il continuerait encore longtemps à le faire.</p>
     <div class="illus"><img src="../assets/images/ch6_long_cours.jpeg" alt="Le Long Cours"/></div>
   </div>
 
   <!-- ÉPILOGUE -->
-  <div class="chapter" id="epilogue">
+  <div class="chapter">
     <div class="chapter-label">Épilogue</div>
     <div class="chapter-title">LE PORT</div>
     <div class="divider"></div>
-    <button class="audio-btn" onclick="readChapter(this,'epilogue')"><span class="icon">▶</span> Écouter</button>
-
     <p>Le soleil descendait lentement derrière les quais.</p>
-    <p>Le navire était amarré depuis plusieurs heures. Les voiles avaient été pliées. Les cordages reposaient sans tension. L'équipage avait quitté le pont depuis longtemps. Quelques mouettes tournaient encore au-dessus du port.</p>
+    <p>Le navire était amarré depuis plusieurs heures. Les voiles avaient été pliées. Les cordages reposaient sans tension. L'équipage avait quitté le pont depuis longtemps.</p>
+    <p>Quelques mouettes tournaient encore au-dessus du port.</p>
     <p>Le Capitaine resta seul quelques instants à observer la mer. Au loin, l'horizon se confondait avec le ciel du soir.</p>
     <p>Il repensa aux traversées passées. Aux vents favorables. Aux tempêtes. Aux longues nuits de veille. Aux routes parcourues.</p>
     <p>Le navire avait changé. L'équipage aussi. Et lui également.</p>
-    <p>Il y avait eu un temps où il croyait devoir surveiller chaque corde, chaque voile et chaque mouvement de la mer, comme si l'océan attendait le moindre relâchement pour reprendre ce qu'il avait accordé.</p>
-    <p>Les années lui avaient appris autre chose. Un navire ne devient réellement solide que lorsqu'il peut poursuivre sa route sans dépendre d'une seule personne.</p>
-    <p>Le Capitaine regarda une dernière fois le pont. Les amarres étaient correctement disposées. Les voiles soigneusement rangées. Les réserves inventoriées. Tout semblait en ordre. Comme au premier jour.</p>
-    <p>Et pourtant, ce n'était plus tout à fait le même navire.</p>
-    <p>Au moment de quitter le quai, son regard fut attiré par une silhouette au loin. Sur le pont, un jeune officier observait les installations avec attention. Il vérifiait les amarres, contrôlait les voiles, inspectait les réserves, puis relevait les yeux vers l'horizon.</p>
-    <p>Le Capitaine s'arrêta quelques instants. La scène lui semblait étrangement familière, comme un souvenir revenu du large, comme un reflet d'un autre temps.</p>
-    <p>Le jeune marin ne remarqua même pas sa présence. Il était déjà absorbé par sa tâche.</p>
-    <p>Le Capitaine esquissa un léger sourire. Certaines traversées continuent longtemps après le retour au port. Certaines cartes passent simplement d'une main à une autre.</p>
-    <p>La mer resta silencieuse. Les mouettes poursuivirent leurs cercles au-dessus des quais. Le soleil disparut derrière l'horizon. Puis le Capitaine reprit son chemin.</p>
-    <p>Derrière lui, le navire demeura immobile. Solide. Paisible. Prêt pour d'autres voyages.</p>
-    <p>Et quelque part sur le pont, une nouvelle veille commençait déjà. Le sillage était toujours là.</p>
+    <p>Il y avait eu un temps où il croyait devoir surveiller chaque corde, chaque voile et chaque mouvement de la mer.</p>
+    <p>Aujourd'hui, le bateau reposait paisiblement contre le quai. Solide. Fiable. Prêt pour d'autres voyages.</p>
+    <p>Le Capitaine regarda une dernière fois l'horizon.</p>
+    <p>Puis il quitta le pont.</p>
+    <p>Derrière lui, le navire demeura immobile.</p>
+    <p>Comme s'il lui rappelait doucement qu'il savait désormais tenir la mer lui aussi.</p>
+    <p class="closing">« Le sillage était toujours là. »</p>
     <div class="illus"><img src="../assets/images/epilogue.jpeg" alt="Le Port"/></div>
   </div>
 
@@ -370,112 +328,5 @@
   </div>
 
 </div>
-
-<script>
-let _currentBtn = null;
-let _paragraphs = [];
-let _paraIndex = 0;
-let _isStopped = false;
-let _frVoice = null;
-
-function getFrVoice() {
-  if (_frVoice) return _frVoice;
-  const voices = window.speechSynthesis.getVoices();
-  _frVoice = voices.find(v => v.lang === 'fr-FR' && /thomas|amelie|marie/i.test(v.name))
-          || voices.find(v => v.lang === 'fr-FR')
-          || voices.find(v => v.lang.startsWith('fr'));
-  return _frVoice;
-}
-
-function stopAudio() {
-  _isStopped = true;
-  window.speechSynthesis.cancel();
-  if (_currentBtn) {
-    _currentBtn.innerHTML = '<span class="icon">▶</span> Écouter';
-    _currentBtn.classList.remove('playing');
-    _currentBtn = null;
-  }
-  // Remove all highlights
-  document.querySelectorAll('p.reading').forEach(p => p.classList.remove('reading'));
-}
-
-function speakParagraph(index) {
-  if (_isStopped || index >= _paragraphs.length) {
-    if (!_isStopped) stopAudio();
-    return;
-  }
-
-  const {el, text} = _paragraphs[index];
-
-  // Highlight current paragraph
-  document.querySelectorAll('p.reading').forEach(p => p.classList.remove('reading'));
-  if (el) {
-    el.classList.add('reading');
-    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-
-  // Build utterance with punctuation pauses via SSML-like text tricks
-  // Add natural pauses by inserting silence markers as commas/ellipsis
-  let spokenText = text
-    .replace(/\.\.\./g, '…')      // keep ellipsis
-    .replace(/([.!?])\s+/g, '$1  ') // double space after sentence = slight pause
-    .replace(/—/g, ', ')            // em dash -> comma pause
-    .trim();
-
-  const utt = new SpeechSynthesisUtterance(spokenText);
-  utt.lang = 'fr-FR';
-  utt.rate = 0.82;
-  utt.pitch = 0.95;
-  utt.volume = 1;
-  const v = getFrVoice();
-  if (v) utt.voice = v;
-
-  utt.onend = () => {
-    if (_isStopped) return;
-    // Pause between paragraphs: short sentences get 400ms, longer 600ms
-    const pauseMs = text.length < 80 ? 500 : 350;
-    setTimeout(() => speakParagraph(index + 1), pauseMs);
-  };
-  utt.onerror = (e) => {
-    if (e.error === 'interrupted') return;
-    speakParagraph(index + 1);
-  };
-
-  window.speechSynthesis.speak(utt);
-}
-
-function readChapter(btn, chapterId) {
-  const section = document.getElementById(chapterId);
-  if (!section) return;
-
-  // Toggle stop
-  if (_currentBtn === btn) {
-    stopAudio();
-    return;
-  }
-
-  stopAudio();
-  _isStopped = false;
-
-  // Collect paragraphs
-  const els = section.querySelectorAll('p');
-  _paragraphs = Array.from(els)
-    .map(el => ({ el, text: el.textContent.trim() }))
-    .filter(p => p.text.length > 0);
-
-  if (!_paragraphs.length) return;
-
-  _paraIndex = 0;
-  _currentBtn = btn;
-  btn.innerHTML = '<span class="icon">⏹</span> Stop';
-  btn.classList.add('playing');
-
-  // Chrome fix: cancel any pending and small delay
-  window.speechSynthesis.cancel();
-  setTimeout(() => speakParagraph(0), 200);
-}
-
-window.speechSynthesis.onvoiceschanged = () => { _frVoice = null; getFrVoice(); };
-</script>
 </body>
 </html>
