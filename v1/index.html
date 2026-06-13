@@ -53,6 +53,12 @@
     .pdf-link { text-align:center; margin-bottom:48px; }
     .pdf-link a { display:inline-block; padding:12px 28px; background:var(--navy); color:white; text-decoration:none; font-family:'Helvetica Neue',sans-serif; font-size:12px; letter-spacing:1px; border-radius:3px; }
     .pdf-link a:hover { background:#1e3d61; }
+
+    /* AUDIO */
+    .audio-btn { display:inline-flex; align-items:center; gap:8px; padding:8px 18px; background:transparent; border:1px solid rgba(200,164,100,0.4); border-radius:20px; color:var(--gold); font-family:'Helvetica Neue',sans-serif; font-size:11px; letter-spacing:1px; cursor:pointer; transition:all .2s; margin-bottom:20px; }
+    .audio-btn:hover { background:rgba(200,164,100,0.1); border-color:var(--gold); }
+    .audio-btn.playing { background:rgba(200,164,100,0.15); border-color:var(--gold); }
+    .audio-btn .icon { font-size:13px; }
   </style>
 </head>
 <body>
@@ -94,10 +100,11 @@
   </div>
 
   <!-- L'ART DE TENIR LA BARRE -->
-  <div class="chapter">
+  <div class="chapter" id="intro">
     <div class="chapter-label">Introduction</div>
     <div class="chapter-title">L'ART DE TENIR LA BARRE</div>
     <div class="divider"></div>
+    <button class="audio-btn" onclick="readChapter(this,'intro')"><span class="icon">▶</span> Écouter</button>
     <p>Bien avant que le navire ne prenne le large, il faut comprendre une chose essentielle : le Capitaine n'est pas un individu seul, mais une fonction. C'est une part de nous-mêmes, un état d'esprit que l'on enfile comme une vareuse lorsque les vents forcent ou, plus difficilement, lorsque la mer devient d'huile.</p>
     <p>Sur ce navire, le rôle du Capitaine n'est pas de tout diriger, mais de savoir protéger la « cabine ». C'est cet endroit — réel ou symbolique — où l'on se réfugie pour préserver sa clarté, pour anticiper les courants plutôt que de subir chaque clapotis, et pour ne pas laisser le tumulte du pont dicter la route.</p>
     <p>Certains d'entre nous sont des Capitaines nés : ils excellent dans l'action brute, là où la tempête exige des décisions immédiates. Ils sont les rois du large, les maîtres des manœuvres complexes. Pourtant, ces mêmes Capitaines se trouvent parfois démunis face au calme plat, là où l'absence d'urgence devient, paradoxalement, une source d'angoisse.</p>
@@ -109,10 +116,11 @@
   </div>
 
   <!-- PRÉAMBULE -->
-  <div class="chapter">
+  <div class="chapter" id="preambule">
     <div class="chapter-label">Préambule</div>
     <div class="chapter-title">L'HÉRITAGE DU LARGE</div>
     <div class="divider"></div>
+    <button class="audio-btn" onclick="readChapter(this,'preambule')"><span class="icon">▶</span> Écouter</button>
     <p>Bien avant que notre Capitaine ne tienne la barre, un autre navire ouvrait la route.</p>
     <p>C'était un bâtiment imposant, connu de tous les marins de la région. Lorsque les vents forçaient ou que les brumes recouvraient la mer, sa simple présence suffisait souvent à rassurer les autres équipages.</p>
     <p>Pendant des années, il traversa les saisons sans jamais quitter sa mission.</p>
@@ -134,10 +142,11 @@
   </div>
 
   <!-- CHAPITRE 1 -->
-  <div class="chapter">
+  <div class="chapter" id="ch1">
     <div class="chapter-label">Chapitre 1</div>
     <div class="chapter-title">LE DON DU CAPITAINE</div>
     <div class="divider"></div>
+    <button class="audio-btn" onclick="readChapter(this,'ch1')"><span class="icon">▶</span> Écouter</button>
     <p>Le soleil n'était pas encore levé lorsque le Capitaine monta sur le pont.</p>
     <p>Une légère brume flottait au-dessus de l'eau. Le port sommeillait encore tandis que les derniers préparatifs du départ s'achevaient dans le calme.</p>
     <p>Comme avant chaque traversée, il parcourut lentement le navire.</p>
@@ -159,10 +168,11 @@
   </div>
 
   <!-- CHAPITRE 2 -->
-  <div class="chapter">
+  <div class="chapter" id="ch2">
     <div class="chapter-label">Chapitre 2</div>
     <div class="chapter-title">LE CALME SUR LE PONT</div>
     <div class="divider"></div>
+    <button class="audio-btn" onclick="readChapter(this,'ch2')"><span class="icon">▶</span> Écouter</button>
     <p>La mer était si calme que les nuages semblaient flotter à sa surface.</p>
     <p>Depuis l'aube, le navire avançait sous un vent régulier. Les voiles étaient parfaitement établies. Les cordages demeuraient immobiles. Rien ne troublait la traversée.</p>
     <p>Pourtant, le Capitaine continuait à parcourir le pont.</p>
@@ -180,10 +190,11 @@
   </div>
 
   <!-- CHAPITRE 3 -->
-  <div class="chapter">
+  <div class="chapter" id="ch3">
     <div class="chapter-label">Chapitre 3</div>
     <div class="chapter-title">LE BRUIT DE FOND</div>
     <div class="divider"></div>
+    <button class="audio-btn" onclick="readChapter(this,'ch3')"><span class="icon">▶</span> Écouter</button>
     <p>La journée avait commencé comme beaucoup d'autres. Un vent léger soufflait du large. Le ciel était dégagé. Le navire avançait régulièrement.</p>
     <p>Au milieu de la matinée, une voile se coinça légèrement dans un cordage usé.</p>
     <p>L'incident était mineur. Le bateau poursuivait sa route. Le vent restait favorable. Le cap ne changeait pas.</p>
@@ -201,10 +212,11 @@
   </div>
 
   <!-- CHAPITRE 4 -->
-  <div class="chapter">
+  <div class="chapter" id="ch4">
     <div class="chapter-label">Chapitre 4</div>
     <div class="chapter-title">LA CABINE</div>
     <div class="divider"></div>
+    <button class="audio-btn" onclick="readChapter(this,'ch4')"><span class="icon">▶</span> Écouter</button>
 
     <p>Avec les années, le Capitaine avait appris à reconnaître un piège discret.</p>
     <p>Lorsque la mer devenait agitée, beaucoup de marins finissaient par croire qu'ils devaient porter la tempête en eux pour mieux la combattre. Ils surveillaient chaque vague, interprétaient chaque craquement du bois et guettaient le moindre changement de vent. Peu à peu, la mer entrait dans leur esprit avant même de monter sur le pont.</p>
@@ -227,10 +239,11 @@
   </div>
 
   <!-- CHAPITRE 5 -->
-  <div class="chapter">
+  <div class="chapter" id="ch5">
     <div class="chapter-label">Chapitre 5</div>
     <div class="chapter-title">LES INSTRUMENTS DE BORD</div>
     <div class="divider"></div>
+    <button class="audio-btn" onclick="readChapter(this,'ch5')"><span class="icon">▶</span> Écouter</button>
 
     <p>Depuis plusieurs jours, le navire naviguait sous un ciel changeant.</p>
     <p>Les vents restaient favorables, mais une légère brume apparaissait régulièrement à l'horizon. Rien d'inquiétant. Rien d'exceptionnel. Seulement cette fine couche grise qui effaçait parfois les repères les plus lointains.</p>
@@ -256,10 +269,11 @@
   </div>
 
   <!-- CHAPITRE 6 -->
-  <div class="chapter">
+  <div class="chapter" id="ch6">
     <div class="chapter-label">Chapitre 6</div>
     <div class="chapter-title">LE VENT CONTRAIRE</div>
     <div class="divider"></div>
+    <button class="audio-btn" onclick="readChapter(this,'ch6')"><span class="icon">▶</span> Écouter</button>
 
     <p>La traversée avait été préparée avec soin.</p>
     <p>Les cartes avaient été vérifiées. Les réserves chargées. Les voiles inspectées. Les cordages remplacés lorsque cela était nécessaire. Rien n'avait été laissé au hasard.</p>
@@ -289,10 +303,11 @@
   </div>
 
   <!-- CHAPITRE 7 -->
-  <div class="chapter">
+  <div class="chapter" id="ch7">
     <div class="chapter-label">Chapitre 7</div>
     <div class="chapter-title">LE LONG COURS</div>
     <div class="divider"></div>
+    <button class="audio-btn" onclick="readChapter(this,'ch7')"><span class="icon">▶</span> Écouter</button>
 
     <p>Le voyage durait depuis de nombreuses semaines.</p>
     <p>Les ports visités commençaient à se mélanger dans les souvenirs. Certaines escales semblaient proches. D'autres appartenaient déjà à une autre saison.</p>
@@ -318,10 +333,11 @@
   </div>
 
   <!-- ÉPILOGUE -->
-  <div class="chapter">
+  <div class="chapter" id="epilogue">
     <div class="chapter-label">Épilogue</div>
     <div class="chapter-title">LE PORT</div>
     <div class="divider"></div>
+    <button class="audio-btn" onclick="readChapter(this,'epilogue')"><span class="icon">▶</span> Écouter</button>
 
     <p>Le soleil descendait lentement derrière les quais.</p>
     <p>Le navire était amarré depuis plusieurs heures. Les voiles avaient été pliées. Les cordages reposaient sans tension. L'équipage avait quitté le pont depuis longtemps. Quelques mouettes tournaient encore au-dessus du port.</p>
@@ -353,5 +369,66 @@
   </div>
 
 </div>
+
+<script>
+let currentUtterance = null;
+let currentBtn = null;
+
+function readChapter(btn, chapterId) {
+  const section = document.getElementById(chapterId);
+  if (!section) return;
+
+  // Stop if already playing this chapter
+  if (currentBtn === btn && window.speechSynthesis.speaking) {
+    window.speechSynthesis.cancel();
+    btn.innerHTML = '<span class="icon">▶</span> Écouter';
+    btn.classList.remove('playing');
+    currentBtn = null;
+    return;
+  }
+
+  // Stop any current reading
+  if (window.speechSynthesis.speaking) {
+    window.speechSynthesis.cancel();
+    if (currentBtn) { currentBtn.innerHTML = '<span class="icon">▶</span> Écouter'; currentBtn.classList.remove('playing'); }
+  }
+
+  // Collect text from all <p> in this chapter
+  const paras = section.querySelectorAll('p');
+  const text = Array.from(paras).map(p => p.textContent.trim()).join(' ');
+
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'fr-FR';
+  utterance.rate = 0.88;
+  utterance.pitch = 1.0;
+
+  // Try to pick a French voice
+  const voices = window.speechSynthesis.getVoices();
+  const frVoice = voices.find(v => v.lang.startsWith('fr') && v.name.toLowerCase().includes('thomas'))
+                || voices.find(v => v.lang.startsWith('fr'));
+  if (frVoice) utterance.voice = frVoice;
+
+  btn.innerHTML = '<span class="icon">⏹</span> Stop';
+  btn.classList.add('playing');
+  currentBtn = btn;
+
+  utterance.onend = () => {
+    btn.innerHTML = '<span class="icon">▶</span> Écouter';
+    btn.classList.remove('playing');
+    currentBtn = null;
+  };
+  utterance.onerror = () => {
+    btn.innerHTML = '<span class="icon">▶</span> Écouter';
+    btn.classList.remove('playing');
+    currentBtn = null;
+  };
+
+  currentUtterance = utterance;
+  window.speechSynthesis.speak(utterance);
+}
+
+// Reload voices async (Chrome needs this)
+window.speechSynthesis.onvoiceschanged = () => {};
+</script>
 </body>
 </html>
