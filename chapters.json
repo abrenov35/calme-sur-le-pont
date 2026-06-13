@@ -9,6 +9,7 @@
     "ch5",
     "ch6",
     "ch7",
+    "ch8",
     "epilogue"
   ],
   "chapters": {
@@ -131,6 +132,19 @@
         "Le soleil descendait lentement derrière les quais. Le navire était amarré depuis plusieurs heures.",
         "Le Capitaine regarda une dernière fois l'horizon. Puis il quitta le pont.",
         "Derrière lui, le navire demeura immobile. Comme s'il lui rappelait doucement qu'il savait désormais tenir la mer lui aussi."
+      ]
+    },
+    "ch8": {
+      "label": "CHAPITRE 8",
+      "num": "Chapitre 8",
+      "title": "LES COURANTS DIVERGENTS",
+      "theme": "Les séparations naturelles de la vie. Les liens qui perdurent au-delà de la distance. La gratitude pour les routes partagées.",
+      "v1": [
+        "Parfois, lorsque la mer était calme et que l'horizon semblait s'étendre à l'infini, le Capitaine songeait aux autres navires. Certains avaient partagé une partie de sa route. D'autres étaient partis du même port. D'autres encore avaient navigué à ses côtés pendant plusieurs saisons avant que les courants ne les entraînent ailleurs. Avec les années, leurs silhouettes avaient disparu derrière d'autres horizons.",
+        "Il n'y avait eu ni tempête. Ni conflit. Ni naufrage. Simplement le mouvement naturel de la mer. Les courants ne demandent jamais leur avis aux marins. Ils emmènent certains navires vers des eaux chaudes. D'autres vers des côtes lointaines. Parfois, deux bâtiments quittent le même quai et finissent par naviguer à des milliers de milles l'un de l'autre.",
+        "Le Capitaine avait longtemps cru que les routes devaient rester parallèles pour que les liens demeurent. Puis la mer lui avait appris autre chose. Les navires n'ont pas besoin de se voir pour partager une histoire. Ils n'ont pas besoin d'accoster dans les mêmes ports pour avoir appartenu au même voyage. Le bois garde la mémoire des chantiers qui l'ont vu naître. Les cartes gardent le souvenir des routes parcourues ensemble. Et certains liens continuent d'exister bien après que les horizons se sont séparés.",
+        "Un soir, tandis que le soleil disparaissait lentement derrière les vagues, le Capitaine regarda la ligne où la mer rejoignait le ciel. Au-delà de cet horizon naviguaient peut-être encore d'autres navires qu'il avait connus autrefois. Il n'éprouvait ni regret ni attente. Seulement une forme de gratitude tranquille. Ils avaient partagé un morceau d'océan. C'était déjà beaucoup.",
+        "La nuit tomba peu à peu sur la mer. Les étoiles apparurent une à une. Et quelque part, bien au-delà de ce qu'il pouvait voir, d'autres Capitaines poursuivaient eux aussi leur traversée."
       ]
     }
   }
