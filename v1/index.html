@@ -10,7 +10,8 @@
     body { font-family:Georgia,serif; background:var(--beige); color:var(--dark); }
 
     /* TOP NAV */
-    .topnav { background:var(--navy); padding:12px 24px; display:flex; align-items:center; gap:16px; position:sticky; top:0; z-index:100; }
+    .topnav { background:var(--navy); padding:10px 16px; display:flex; align-items:center; gap:10px; position:sticky; top:0; z-index:100; overflow-x:auto; white-space:nowrap; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+    .topnav::-webkit-scrollbar { display:none; }
     .topnav a { color:#8a9db0; text-decoration:none; font-family:'Helvetica Neue',sans-serif; font-size:11px; letter-spacing:1px; }
     .topnav a:hover { color:var(--gold); }
     .topnav .sep { color:#2a4060; }
@@ -54,6 +55,16 @@
     .pdf-link { text-align:center; margin-bottom:48px; }
     .pdf-link a { display:inline-block; padding:12px 28px; background:var(--navy); color:white; text-decoration:none; font-family:'Helvetica Neue',sans-serif; font-size:12px; letter-spacing:1px; border-radius:3px; }
     .pdf-link a:hover { background:#1e3d61; }
+    @media (max-width: 600px) {
+      .book { padding:40px 20px 60px; }
+      .chapter { margin-bottom:52px; padding-bottom:52px; }
+      p { font-size:15px; line-height:1.75; margin-bottom:16px; text-align:left; }
+      .chapter-title { font-size:20px; margin-bottom:18px; }
+      .cover h1 { font-size:24px; letter-spacing:2px; }
+      .cover { padding:40px 0 32px; margin-bottom:40px; }
+      .illus { margin:0 0 28px 0; }
+      .back { padding:24px 16px; }
+    }
   </style>
 </head>
 <body>
